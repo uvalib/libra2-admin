@@ -8,7 +8,7 @@ echo "building on $DOCKER_HOST"
 echo "*****************************************"
 
 # set the definitions
-INSTANCE=libra2-administration
+INSTANCE=libra2-admin
 NAMESPACE=uvadave
 
 # build the image

@@ -4,7 +4,7 @@ if [ -z "$DOCKER_HOST" ]; then
 fi
 
 # set the definitions
-INSTANCE=libra2-administration
+INSTANCE=libra2-admin
 
 CID=$(docker ps -f name=$INSTANCE|grep -v jetty|tail -1|awk '{print $1}')
 if [ -n "$CID" ]; then
