@@ -1,4 +1,23 @@
 class Libra2
+	def self.api(method, address, data = {})
+		url = "#{LIBRA2_URL}/api/v1/#{address}?auth=#{API_TOKEN}"
+		if method == "GET"
+			arr = data.to_a
+			arr = arr.map { |pair| "#{pair[0]}=#{pair[1]}"}
+			arr = arr.join("&")
+			url = "#{url}&#{arr}" if arr.length > 0
+			puts "API: #{url}"
+			response = HTTParty.get(url, headers: { 'Content-Type' => 'application/json' })
+		elsif method == "POST"
+			puts "API: #{url}"
+			response = HTTParty.post(url, body: JSON.dump(data), headers: { 'Content-Type' => 'application/json' })
+		else
+			return false, "Unrecognized method"
+		end
+		return true, response if response.code == 200
+		return false, response.message
+
+	end
 
 	def self.options()
 

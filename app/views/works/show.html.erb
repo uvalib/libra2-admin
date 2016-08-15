@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<% @work.each { |key, value| %>
+<p>
+  <strong><%= key %>:</strong>
+  <%= value %>
+</p>
+<% } %>
+
+<%= link_to 'Back', works_path %>
