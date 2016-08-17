@@ -1,7 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Libra 2 Administrator Dashboard</h1>
+<h1>Dashboard</h1>
 
-<%= link_to("All Works", "/works") %><br>
-<%= link_to("Submitted Works", "/works/submitted") %><br>
-<%= link_to("Draft Works", "/works/draft") %><br>
+<div class="dashboard-panel">
+	<h4>Works</h4>
+	<div class="section">
+		<%= link_to("All Works", "/works") %><br>
+		<%= link_to("Submitted Works", "/works/submitted") %><br>
+		<%= link_to("Draft Works", "/works/draft") %><br>
+		<div class="find-by-id">
+		<span class="label">Work ID:</span><input type="text" name="work-id" /><button id="show-work" data-id="work-id">Find</button>
+		</div>
+	</div>
+</div>

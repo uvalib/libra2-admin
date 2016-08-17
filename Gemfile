@@ -50,3 +50,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # for alpine Linux
 gem 'json'
 gem 'bigdecimal'
+
+gem 'normalize-rails'

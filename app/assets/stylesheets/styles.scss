@@ -1,0 +1,24 @@
+.dashboard-panel {
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+	border: none;
+	padding-top: 1px;
+	margin-bottom: 20px;
+	background-color: #fff;
+	border-radius: 4px;
+	padding-left: 20px;
+	max-width: 300px;
+	min-height: 400px;
+	padding-bottom: 20px;
+
+	h4 {
+		margin-bottom: 0;
+	}
+	.section {
+		padding-left: 10px;
+	}
+
+	.find-by-id input {
+		margin: 0 8px;
+		width: 100px;
+	}
+}
