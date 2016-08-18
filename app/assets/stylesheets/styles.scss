@@ -22,3 +22,60 @@
 		width: 100px;
 	}
 }
+
+.breadcrumbs {
+	background-color: rgba(0,0,0,0.05);
+	padding: 10px 0;
+	margin: 0;
+
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	li {
+		display: inline-block;
+		padding-right: 16px;
+
+		&:before {
+			content: "»";
+			padding-right: 4px;
+		}
+
+		a {
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+table.work {
+	th {
+		text-align: left;
+	}
+	tr:nth-child(even) {
+		background-color: rgba(0,0,0,0.05);
+	}
+	td {
+		padding: 4px;
+	}
+}
+
+#user-text-input {
+	width: 100%;
+	margin-top: 20px;
+}
+
+#dialog-text-input {
+	label {
+		font-weight: bold;
+	}
+	.message {
+		border: 2px solid #cc2312;
+		padding: 4px;
+		margin-bottom: 10px;
+	}
+}

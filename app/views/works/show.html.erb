@@ -1,10 +1,38 @@
+<div class="breadcrumbs">
+	<ul>
+		<li><a href="/">Dashboard</a></li>
+		<li><a href="/works">All Works</a></li>
+	</ul>
+</div>
+
+<h1>Work "<%= @work['id'] %>"</h1>
 <p id="notice"><%= notice %></p>
 
-<% @work.each { |key, value| %>
-<p>
-  <strong><%= key %>:</strong>
-  <%= value %>
-</p>
-<% } %>
+<table class="work">
+	<tr>
+		<th>Field</th>
+		<th>Value</th>
+		<th></th>
+	</tr>
+	<% @work.each { |key, value| %>
+		<tr>
+			<td><strong><%= key.humanize.titlecase %></strong></td>
+			<td class="value"><%= value %></td>
+			<td>
+				<% if Work::EDITABLE.include?(key) %>
+				<button class="edit btn btn-primary" data-id="<%= @work['id'] %>" data-label="<%= key.humanize.titlecase %>" data-field="<%= key %>">Edit</button>
+				<% end %>
+			</td>
+		</tr>
+	<% } %>
+</table>
 
-<%= link_to 'Back', works_path %>
+<div id="dialog-text-input" title="Edit Field" style="display: none;">
+<%= form_tag() do %>
+		<div class="message"></div>
+	<div><label for="user-text-input"></label>:</div>
+	<input id="user-text-input" type="text" />
+	<!-- Allow form submission with keyboard without duplicating the dialog button -->
+	<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+<% end %>
+</div>

@@ -12,6 +12,7 @@
  *
  *= require normalize-rails
  *= require global
+ *= require jquery-ui
  *= require_tree .
  *= require_self
  */

@@ -1,4 +1,7 @@
 class Work
+	EDITABLE = [
+		'title'
+	]
 	def self.all
 		status, response = Libra2::api("GET", 'works')
 		if status
@@ -36,6 +39,20 @@ class Work
 			puts "**** Error in Work.search: #{response}"
 			puts "****"
 			return {}
+		end
+	end
+
+	def self.update(user, id, params)
+		if params['title']
+			p = { user: user, title: params['title']}
+			status, response = Libra2::api("POST", "works/#{id}/title", params)
+			if status
+				return nil
+			else
+				return response
+			end
+		else
+			return "Title is the only supported field to modify."
 		end
 	end
 end

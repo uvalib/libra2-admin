@@ -1,5 +1,5 @@
 class WorksController < ApplicationController
-  before_action :set_work, only: [:show, :edit, :update, :destroy]
+  before_action :set_work, only: [:show, :destroy]
 
   # GET /works
   # GET /works.json
@@ -58,12 +58,11 @@ class WorksController < ApplicationController
   # PATCH/PUT /works/1.json
   def update
     respond_to do |format|
-      if @work.update(work_params)
-        format.html { redirect_to @work, notice: 'Work was successfully updated.' }
-        format.json { render :show, status: :ok, location: @work }
+      errors = Work.update(current_user, params[:id], work_params)
+      if !errors
+        format.json { render  json: {}, status: :ok }
       else
-        format.html { render :edit }
-        format.json { render json: @work.errors, status: :unprocessable_entity }
+        format.json { render json: { error: errors }, status: :unprocessable_entity }
       end
     end
   end
