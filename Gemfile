@@ -53,3 +53,4 @@ gem 'bigdecimal'
 
 gem 'normalize-rails'
 gem 'jquery-ui-rails'
+gem 'jquery-datatables-rails'

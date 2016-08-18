@@ -79,3 +79,16 @@ table.work {
 		margin-bottom: 10px;
 	}
 }
+
+.dataTables_wrapper {
+	margin-top: 16px;
+	border: 1px solid #aaa;
+	padding: 8px;
+	box-shadow: 1px 1px 5px #ccc;
+}
+
+.works-index {
+	td:first-child {
+		white-space: nowrap;
+	}
+}
