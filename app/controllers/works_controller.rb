@@ -11,7 +11,7 @@ class WorksController < ApplicationController
   # GET /works/draft
   # GET /works/draft.json
   def draft
-    @works = Work.search({ state: 'pending' })
+    @works = Work.search({ status: 'pending' })
     @title = "All Drafts"
       render :index
   end
@@ -19,7 +19,7 @@ class WorksController < ApplicationController
   # GET /works/submitted
   # GET /works/submitted.json
   def submitted
-    @works = Work.search({ state: 'submitted' })
+    @works = Work.search({ status: 'submitted' })
     @title = "All Published Works"
     render :index
   end
