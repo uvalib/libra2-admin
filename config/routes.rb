@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :works, only: [:index, :show, :update] do
+  resources :works, only: [:index, :show, :update, :destroy] do
 	  collection do
 		  get 'draft'
 		  get 'submitted'

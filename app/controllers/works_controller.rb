@@ -1,5 +1,5 @@
 class WorksController < ApplicationController
-  before_action :set_work, only: [:show, :destroy]
+  before_action :set_work, only: [:show]
 
   # GET /works
   # GET /works.json
@@ -70,7 +70,7 @@ class WorksController < ApplicationController
   # DELETE /works/1
   # DELETE /works/1.json
   def destroy
-    @work.destroy
+    Work.destroy(current_user, params[:id])
     respond_to do |format|
       format.html { redirect_to works_url, notice: 'Work was successfully destroyed.' }
       format.json { head :no_content }
