@@ -5,11 +5,15 @@ class Libra2
 		arr = arr.map { |pair| "#{pair[0]}=#{pair[1]}"}
 		arr = arr.join("&")
 		url = "#{url}&#{arr}" if arr.length > 0
-		puts "API: #{url} #{payload.inspect}"
+		puts "API: #{method} #{url} #{payload.inspect}"
 		if method == "GET"
 			response = HTTParty.get(url, headers: { 'Content-Type' => 'application/json' })
-		elsif method == "POST" || method == "PUT"
+		elsif method == "POST"
 			response = HTTParty.post(url, body: JSON.dump(payload), headers: { 'Content-Type' => 'application/json' })
+		elsif method == "PUT"
+			response = HTTParty.put(url, body: JSON.dump(payload), headers: { 'Content-Type' => 'application/json' })
+		elsif method == "DELETE"
+			response = HTTParty.delete(url, headers: { 'Content-Type' => 'application/json' })
 		else
 			return false, "Unrecognized method"
 		end

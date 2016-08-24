@@ -13,6 +13,12 @@ class Work
 		"abstract" => "textarea",
 		"embargo_state" => "state"
 	}
+	RIGHTS = [
+		"CC-BY (permitting free use with proper attribution)",
+		"CC0 (permitting unconditional free use, with or without attribution)",
+		"None (users must comply with ordinary copyright law)"
+	]
+
 	def self.all
 		status, response = Libra2::api("GET", 'works')
 		if status
