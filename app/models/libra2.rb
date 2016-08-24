@@ -1,16 +1,15 @@
 class Libra2
-	def self.api(method, address, data = {})
+	def self.api(method, address, data = {}, payload = {})
 		url = "#{LIBRA2_URL}/api/v1/#{address}?auth=#{API_TOKEN}"
+		arr = data.to_a
+		arr = arr.map { |pair| "#{pair[0]}=#{pair[1]}"}
+		arr = arr.join("&")
+		url = "#{url}&#{arr}" if arr.length > 0
+		puts "API: #{url} #{payload.inspect}"
 		if method == "GET"
-			arr = data.to_a
-			arr = arr.map { |pair| "#{pair[0]}=#{pair[1]}"}
-			arr = arr.join("&")
-			url = "#{url}&#{arr}" if arr.length > 0
-			puts "API: #{url}"
 			response = HTTParty.get(url, headers: { 'Content-Type' => 'application/json' })
-		elsif method == "POST"
-			puts "API: #{url}"
-			response = HTTParty.post(url, body: JSON.dump(data), headers: { 'Content-Type' => 'application/json' })
+		elsif method == "POST" || method == "PUT"
+			response = HTTParty.post(url, body: JSON.dump(payload), headers: { 'Content-Type' => 'application/json' })
 		else
 			return false, "Unrecognized method"
 		end

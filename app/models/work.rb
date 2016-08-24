@@ -1,7 +1,18 @@
 class Work
 	EDITABLE = [
-		'title'
+		'title',
+		"author_email",
+		"author_first_name",
+		"author_last_name",
+		"abstract",
+		"embargo_state",
+		"embargo_end_date",
+		"admin_notes"
 	]
+	EDITABLE_TYPE = {
+		"abstract" => "textarea",
+		"embargo_state" => "state"
+	}
 	def self.all
 		status, response = Libra2::api("GET", 'works')
 		if status
@@ -43,16 +54,19 @@ class Work
 	end
 
 	def self.update(user, id, params)
-		if params['title']
-			p = { user: user, title: params['title']}
-			status, response = Libra2::api("POST", "works/#{id}/title", params)
-			if status
-				return nil
-			else
-				return response
+		# PUT: http://service.endpoint/api/v1/works/:id?auth=token&user=user
+		p = { "work" => {} }
+		Work::EDITABLE.each { |field|
+			if params[field]
+				p["work"][field] = params[field]
 			end
+		}
+		status, response = Libra2::api("PUT", "works/#{id}", { user: user }, p)
+
+		if status
+			return nil
 		else
-			return "Title is the only supported field to modify."
+			return response
 		end
 	end
 end

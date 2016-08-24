@@ -19,19 +19,41 @@
 			<td><strong><%= key.humanize.titlecase %></strong></td>
 			<td class="value"><%= value %></td>
 			<td>
-				<% if Work::EDITABLE.include?(key) %>
-				<button class="edit btn btn-primary" data-id="<%= @work['id'] %>" data-label="<%= key.humanize.titlecase %>" data-field="<%= key %>">Edit</button>
-				<% end %>
+				<%= edit_button(key, @work['id']) %>
 			</td>
 		</tr>
 	<% } %>
 </table>
 
-<div id="dialog-text-input" title="Edit Field" style="display: none;">
+<div id="dialog-text-input" title="Edit Field" class="edit-dialog" style="display: none;">
 <%= form_tag() do %>
 		<div class="message"></div>
 	<div><label for="user-text-input"></label>:</div>
-	<input id="user-text-input" type="text" />
+	<input id="user-text-input" type="text" class="input-field" />
+	<!-- Allow form submission with keyboard without duplicating the dialog button -->
+	<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+<% end %>
+</div>
+
+<div id="dialog-textarea-input" title="Edit Field" class="edit-dialog" style="display: none;">
+<%= form_tag() do %>
+		<div class="message"></div>
+	<div><label for="user-textarea-input"></label>:</div>
+	<textarea id="user-textarea-input" class="input-field"></textarea>
+	<!-- Allow form submission with keyboard without duplicating the dialog button -->
+	<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+<% end %>
+</div>
+
+<div id="dialog-state-input" title="Edit Field" class="edit-dialog" style="display: none;">
+<%= form_tag() do %>
+		<div class="message"></div>
+	<div><label for="user-state-input"></label>:</div>
+	<select id="user-state-input" class="input-field">
+		<option value="open">No Embargo</option>
+		<option value="authenticated">UVA only</option>
+		<option value="restricted">No Access</option>
+	</select>
 	<!-- Allow form submission with keyboard without duplicating the dialog button -->
 	<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 <% end %>

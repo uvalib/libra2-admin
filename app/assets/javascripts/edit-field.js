@@ -7,6 +7,7 @@
 		var input;
 		var key;
 		var message;
+		var dialog;
 
 		function onError(jqXHR, textStatus, errorThrown) {
 			message.text("Error updating server: " + jqXHR.responseJSON.error);
@@ -30,26 +31,36 @@
 			});
 		}
 
-		var dialog = $( "#dialog-text-input" ).dialog({
-			autoOpen: false,
-			height: 350,
-			width: 350,
-			modal: true,
-			buttons: {
-				Apply: submitChange,
-				Cancel: function() {
-					dialog.dialog( "close" );
+		function initDialog(selector, width, height) {
+			var dlg = $(selector).dialog({
+				autoOpen: false,
+				height: height,
+				width: width,
+				modal: true,
+				buttons: {
+					Apply: submitChange,
+					Cancel: function() {
+						dialog.dialog("close");
+					}
+				},
+				close: function() {
+					dialog.find( "form" )[0].reset();
 				}
-			},
-			close: function() {
-				form[ 0 ].reset();
-			}
-		});
+			});
 
-		var form = dialog.find( "form" ).on( "submit", function( event ) {
-			event.preventDefault();
-			submitChange();
-		});
+			dlg.find( "form" ).on( "submit", function( event ) {
+				event.preventDefault();
+				submitChange();
+			});
+			return dlg;
+		}
+
+		var dialogs = {
+			"text": initDialog("#dialog-text-input", 350, 350),
+			"textarea": initDialog("#dialog-textarea-input", 450, 700),
+			"state": initDialog("#dialog-state-input", 350, 350),
+			"period": initDialog("#dialog-period-input", 350, 350)
+		};
 
 		$("table.work .edit").on("click", function(ev) {
 			ev.preventDefault();
@@ -57,18 +68,22 @@
 			workId = button.data("id");
 			key = button.data("field");
 			var labelText = button.data("label");
+			var type = button.data("type");
+			if (!type) type = "text";
 			var parent = button.closest("tr");
 			field = parent.find(".value");
 			var val = field.text();
 
-			var dlg = $("#dialog-text-input");
-			var label = dlg.find('label[for="user-text-input"]');
+			var dlg = $("#dialog-" + type + "-input");
+			var label = dlg.find('label[for="user-' + type + '-input"]');
 			label.text(labelText);
-			input = dlg.find("#user-text-input");
+			input = dlg.find("#user-" + type + "-input");
 			input.val(val);
 			message = dlg.find(".message");
 			message.text("");
 			message.hide();
+			dialog = dialogs[type];
+			dialog.find(".input-field").attr("name", key);
 			dialog.dialog( "open" );
 		});
 	}

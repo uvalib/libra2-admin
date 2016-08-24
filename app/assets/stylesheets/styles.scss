@@ -72,7 +72,7 @@ table.work {
 	margin-top: 20px;
 }
 
-#dialog-text-input {
+.edit-dialog {
 	label {
 		font-weight: bold;
 	}
@@ -80,6 +80,10 @@ table.work {
 		border: 2px solid #cc2312;
 		padding: 4px;
 		margin-bottom: 10px;
+	}
+	textarea {
+		width: 400px;
+		height: 400px;
 	}
 }
 

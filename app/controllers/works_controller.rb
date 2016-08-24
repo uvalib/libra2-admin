@@ -85,6 +85,6 @@ class WorksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def work_params
-      params.require(:work).permit(:title)
+      params.require(:work).permit(Work::EDITABLE)
     end
 end
