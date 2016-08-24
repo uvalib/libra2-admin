@@ -8,4 +8,24 @@ module ApplicationHelper
 			return ""
 		end
 	end
+
+	def format_value(key, value)
+		if key == "admin_notes"
+			return raw(value.join("<br>---<br>"))
+		elsif key == "filesets"
+			html = ""
+			value.each { |file|
+				left = content_tag(:img, "", { src: file["thumb_url"]+"?auth=#{API_TOKEN}", class: "left"})
+
+				right = content_tag(:div, content_tag(:div, "File: #{file["source_name"]}") +
+					content_tag(:div, "Display: #{file["file_name"]}") +
+					link_to("Download", file["file_url"]+"?auth=#{API_TOKEN}"), { class: "right" })
+
+				html += content_tag(:div, raw(left+right), { class: "media-box"})
+			}
+			return raw(html)
+		else
+			return value
+		end
+	end
 end

@@ -112,3 +112,14 @@ table.work {
 #notice {
 	clear: both;
 }
+
+.media-box {
+	width: 400px;
+	.left {
+		float: left;
+		max-width: 90px;
+	}
+	.right {
+		margin-left: 100px;
+	}
+}
