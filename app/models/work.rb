@@ -1,22 +1,36 @@
 class Work
 	EDITABLE = [
-		'title',
 		"author_email",
 		"author_first_name",
 		"author_last_name",
+		'title',
 		"abstract",
 		"embargo_state",
 		"embargo_end_date",
-		"admin_notes"
+		"notes",
+		"admin_notes",
+		"rights",
+#		"advisors"
 	]
+	# 	"advisers:["dpg3k\r\nDavid\r\nGoldstein\r\nUniversity of Virginia Library\r\nUniversity of Virginia"]
+# advisers         - An array of advisers, each being a CRLF separated list of computingId, first name, last name, department, institution (optional)
+
 	EDITABLE_TYPE = {
 		"abstract" => "textarea",
-		"embargo_state" => "state"
+		"notes" => "textarea",
+		"admin_notes" => "textarea",
+		"embargo_state" => "combo",
+		"rights" => "combo"
 	}
 	RIGHTS = [
 		"CC-BY (permitting free use with proper attribution)",
 		"CC0 (permitting unconditional free use, with or without attribution)",
 		"None (users must comply with ordinary copyright law)"
+	]
+	EMBARGO_STATE = [
+		{ text: "No Embargo", value: "open" },
+		{ text: "UVA Only Embargo", value: "authenticated" },
+		{ text: "Metadata Only Embargo", value: "restricted" }
 	]
 
 	def self.all
@@ -65,6 +79,7 @@ class Work
 		Work::EDITABLE.each { |field|
 			if params[field]
 				p["work"][field] = params[field]
+				p["work"][field] = [ p["work"][field] ] if field == "admin_notes" # this item requires an array passed to it.
 			end
 		}
 		status, response = Libra2::api("PUT", "works/#{id}", { user: user }, p)

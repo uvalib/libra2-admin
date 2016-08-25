@@ -46,16 +46,20 @@
 <% end %>
 </div>
 
-<div id="dialog-state-input" title="Edit Field" class="edit-dialog" style="display: none;">
+<div id="dialog-combo-input" title="Edit Field" class="edit-dialog" style="display: none;">
 <%= form_tag() do %>
 		<div class="message"></div>
-	<div><label for="user-state-input"></label>:</div>
-	<select id="user-state-input" class="input-field">
-		<option value="open">No Embargo</option>
-		<option value="authenticated">UVA only</option>
-		<option value="restricted">No Access</option>
+	<div><label for="user-combo-input"></label>:</div>
+	<select id="user-combo-input" class="input-field">
 	</select>
 	<!-- Allow form submission with keyboard without duplicating the dialog button -->
 	<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 <% end %>
 </div>
+
+<%= javascript_tag { %>
+	window.selectOptions = {
+		embargo_state: <%= raw(Work::EMBARGO_STATE.to_json) %>,
+		rights: <%= raw(Work::RIGHTS.to_json) %>
+	};
+<% } %>

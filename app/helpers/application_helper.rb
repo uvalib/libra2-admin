@@ -24,6 +24,12 @@ module ApplicationHelper
 				html += content_tag(:div, raw(left+right), { class: "media-box"})
 			}
 			return raw(html)
+		elsif key == "advisers"
+			advisers = []
+			value.each { |adviser|
+				advisers.push(adviser.gsub("\n", "<br>"))
+			}
+			return raw(advisers.join("<br>---<br>"))
 		else
 			return value
 		end

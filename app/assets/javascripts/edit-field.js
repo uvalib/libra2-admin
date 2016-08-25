@@ -59,8 +59,7 @@
 		var dialogs = {
 			"text": initDialog("#dialog-text-input", 350, 350),
 			"textarea": initDialog("#dialog-textarea-input", 450, 650),
-			"state": initDialog("#dialog-state-input", 350, 350),
-			"period": initDialog("#dialog-period-input", 350, 350)
+			"combo": initDialog("#dialog-combo-input", 550, 350)
 		};
 
 		$("table.work .edit").on("click", function(ev) {
@@ -79,6 +78,21 @@
 			var label = dlg.find('label[for="user-' + type + '-input"]');
 			label.text(labelText);
 			input = dlg.find("#user-" + type + "-input");
+			if (type === "combo") {
+				// remove the old options and replace them with the new options.
+				input.html("");
+				var options = window.selectOptions[key];
+				if (options) {
+					for (var i = 0; i < options.length; i++) {
+						var option = options[i];
+						if( Object.prototype.toString.call(option) == '[object String]' ) {
+							input.append("<option>" + option + "</option>");
+						} else {
+							input.append('<option value="' + option.value + '">' + option.text + "</option>");
+						}
+					}
+				}
+			}
 			input.val(val);
 			message = dlg.find(".message");
 			message.text("");
