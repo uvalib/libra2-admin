@@ -10,7 +10,8 @@
 		var dialog;
 
 		function onError(jqXHR, textStatus, errorThrown) {
-			message.text("Error updating server: " + jqXHR.responseJSON.error);
+			var message = jqXHR.responseJSON ? jqXHR.responseJSON.error : jqXHR.responseText.substring(0, 60);
+			message.text("Error \"" + errorThrown + "\" updating server: " + message);
 			message.show();
 		}
 
