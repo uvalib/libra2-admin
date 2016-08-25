@@ -58,7 +58,7 @@
 
 		var dialogs = {
 			"text": initDialog("#dialog-text-input", 350, 350),
-			"textarea": initDialog("#dialog-textarea-input", 450, 700),
+			"textarea": initDialog("#dialog-textarea-input", 450, 650),
 			"state": initDialog("#dialog-state-input", 350, 350),
 			"period": initDialog("#dialog-period-input", 350, 350)
 		};
