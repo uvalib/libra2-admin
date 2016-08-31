@@ -11,7 +11,7 @@ ENV TZ=EST5EDT
 RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Specify home 
-ENV APP_HOME /deposit-register
+ENV APP_HOME /libra2-admin
 WORKDIR $APP_HOME
 
 # Add necessary assets and gems that require native extensions
