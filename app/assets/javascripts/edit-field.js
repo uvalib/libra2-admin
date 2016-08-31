@@ -70,6 +70,11 @@
 			var labelText = button.data("label");
 			var type = button.data("type");
 			if (!type) type = "text";
+			var isDate = false;
+			if (type === 'date') {
+				type = "text";
+				isDate = true;
+			}
 			var parent = button.closest("tr");
 			field = parent.find(".value");
 			var val = field.text();
@@ -85,7 +90,7 @@
 				if (options) {
 					for (var i = 0; i < options.length; i++) {
 						var option = options[i];
-						if( Object.prototype.toString.call(option) == '[object String]' ) {
+						if( Object.prototype.toString.call(option) === '[object String]' ) {
 							input.append("<option>" + option + "</option>");
 						} else {
 							input.append('<option value="' + option.value + '">' + option.text + "</option>");
@@ -99,6 +104,11 @@
 			message.hide();
 			dialog = dialogs[type];
 			dialog.find(".input-field").attr("name", key);
+			if (isDate) {
+				$( '#user-text-input' ).datepicker({
+					dateFormat: "yy-mm-dd"
+				});
+			}
 			dialog.dialog( "open" );
 		});
 	}

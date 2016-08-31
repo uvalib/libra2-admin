@@ -20,7 +20,8 @@ class Work
 		"notes" => "textarea",
 		"admin_notes" => "textarea",
 		"embargo_state" => "combo",
-		"rights" => "combo"
+		"rights" => "combo",
+		"embargo_end_date" => "date"
 	}
 	RIGHTS = [
 		"CC-BY (permitting free use with proper attribution)",
@@ -49,7 +50,11 @@ class Work
 		status, response = Libra2::api("GET", "works/#{id}")
 		if status
 			if response['works'] && response['works'].length > 0
-				return response['works'][0]
+				work = response['works'][0]
+				# The date is received as a full date and time, instead of just a day.
+				work['embargo_end_date'] = work['embargo_end_date'].split("T")[0] if work['embargo_end_date'].present?
+
+				return work
 			else
 				return {}
 			end
