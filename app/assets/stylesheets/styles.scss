@@ -116,11 +116,12 @@ table.work {
 
 .media-box {
 	width: 400px;
+	clear: both;
 	.left {
-		float: left;
 		max-width: 90px;
+		box-shadow: 2px 2px 5px #aaa;
 	}
 	.right {
-		margin-left: 100px;
+		float: right;
 	}
 }

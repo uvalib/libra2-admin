@@ -21,7 +21,7 @@ module ApplicationHelper
 					content_tag(:div, "Display: #{file["file_name"]}") +
 					link_to("Download", file["file_url"]+"?auth=#{API_TOKEN}"), { class: "right" })
 
-				html += content_tag(:div, raw(left+right), { class: "media-box"})
+				html += content_tag(:div, raw(right+left), { class: "media-box"})
 			}
 			return raw(html)
 		elsif key == "advisers"
