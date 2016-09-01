@@ -26,6 +26,16 @@
 	<% } %>
 </table>
 
+<div id="dialog-file-input" title="Upload File" class="edit-dialog" style="display: none;">
+<%= form_tag() do %>
+		<div class="message"></div>
+	<input id="file-to-upload" type="file" name="files[]" data-url="<%= @file_upload_url %>" multiple class="input-field" />
+		<div class="file-names"></div>
+	<!-- Allow form submission with keyboard without duplicating the dialog button -->
+	<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+<% end %>
+</div>
+
 <div id="dialog-text-input" title="Edit Field" class="edit-dialog" style="display: none;">
 <%= form_tag() do %>
 		<div class="message"></div>

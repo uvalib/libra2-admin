@@ -61,6 +61,7 @@ table.work {
 	}
 	td {
 		padding: 4px;
+		vertical-align: top;
 	}
 	td:nth-child(1) {
 		white-space: nowrap;
@@ -112,6 +113,11 @@ table.work {
 
 .file-delete {
 	text-decoration: none;
+}
+
+.file-upload {
+	float: right;
+	margin-bottom: 20px;
 }
 
 #notice {

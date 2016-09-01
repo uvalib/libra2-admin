@@ -27,6 +27,7 @@ class WorksController < ApplicationController
   # GET /works/1
   # GET /works/1.json
   def show
+    @file_upload_url = Libra2.file_upload_url(current_user)
   end
 
   # GET /works/new
