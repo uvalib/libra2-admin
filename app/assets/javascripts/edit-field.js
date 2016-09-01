@@ -8,6 +8,7 @@
 		var key;
 		var message;
 		var dialog;
+		var append;
 
 		function onError(jqXHR, textStatus, errorThrown) {
 			var msg = jqXHR.responseJSON ? jqXHR.responseJSON.error : jqXHR.responseText.substring(0, 60);
@@ -16,7 +17,12 @@
 		}
 
 		function onSuccess() {
-			field.text(input.val());
+			var val = input.val();
+			if (append) {
+				val = field.html() + "<br>---<br>" + val;
+				field.html(val);
+			} else
+				field.text(val);
 			dialog.dialog( "close" );
 		}
 
@@ -75,6 +81,11 @@
 				type = "text";
 				isDate = true;
 			}
+			append = false;
+			if (type === 'textarea-append') {
+				type = "textarea";
+				append = true;
+			}
 			var parent = button.closest("tr");
 			field = parent.find(".value");
 			var val = field.text();
@@ -98,7 +109,8 @@
 					}
 				}
 			}
-			input.val(val);
+			if (!append)
+				input.val(val);
 			message = dlg.find(".message");
 			message.text("");
 			message.hide();

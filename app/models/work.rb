@@ -18,7 +18,7 @@ class Work
 	EDITABLE_TYPE = {
 		"abstract" => "textarea",
 		"notes" => "textarea",
-		"admin_notes" => "textarea",
+		"admin_notes" => "textarea-append",
 		"embargo_state" => "combo",
 		"rights" => "combo",
 		"embargo_end_date" => "date"
