@@ -17,9 +17,11 @@ module ApplicationHelper
 			value.each { |file|
 				left = content_tag(:img, "", { src: file["thumb_url"]+"?auth=#{API_TOKEN}", class: "left"})
 
-				right = content_tag(:div, content_tag(:div, "File: #{file["source_name"]}") +
-					content_tag(:div, "Display: #{file["file_name"]}") +
-					link_to("Download", file["file_url"]+"?auth=#{API_TOKEN}"), { class: "right" })
+				name = content_tag(:div, "File: #{file["source_name"]}")
+				label = content_tag(:div, "Display: #{file["file_name"]}")
+				download = link_to("Download", file["file_url"]+"?auth=#{API_TOKEN}")
+				delete = content_tag(:div, link_to('Delete', "/work_files/#{file["id"]}?work=#{@work['id']}", method: :delete, data: { confirm: 'Are you sure you really want to permanently remove this file?' }, class: "btn btn-primary file-delete"), {})
+				right = content_tag(:div, name + label + download + delete, { class: "right" })
 
 				html += content_tag(:div, raw(right+left), { class: "media-box"})
 			}

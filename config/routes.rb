@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+	resources :work_files, only: [:create, :update, :destroy]
   resources :works, only: [:index, :show, :update, :destroy] do
 	  collection do
 		  get 'draft'
