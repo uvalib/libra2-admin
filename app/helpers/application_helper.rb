@@ -13,9 +13,11 @@ module ApplicationHelper
 	end
 
 	def format_value(key, value)
-		if key == "admin_notes"
-			return raw(value.join("<br>---<br>"))
-		elsif key == "filesets"
+
+		case key
+		when 'admin_notes', 'keywords', 'related_links', 'sponsoring_agency'
+			return raw(value.join( '<br>---<br>' ))
+		when 'filesets'
 			html = ""
 			value.each { |file|
 				left = content_tag(:img, "", { src: file["thumb_url"]+"?auth=#{API_TOKEN}", class: "left"})
@@ -29,12 +31,12 @@ module ApplicationHelper
 				html += content_tag(:div, raw(right+left), { class: "media-box"})
 			}
 			return raw(html)
-		elsif key == "advisers"
+		when 'advisers'
 			advisers = []
 			value.each { |adviser|
 				advisers.push(adviser.gsub("\n", "<br>"))
 			}
-			return raw(advisers.join("<br>---<br>"))
+			return raw(advisers.join( '<br>---<br>' ))
 		else
 			return value
 		end

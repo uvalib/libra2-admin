@@ -1,16 +1,17 @@
 class Work
 	EDITABLE = [
-		"author_email",
-		"author_first_name",
-		"author_last_name",
+		'author_email',
+		'author_first_name',
+		'author_last_name',
 		'title',
-		"abstract",
-		"embargo_state",
-		"embargo_end_date",
-		"notes",
-		"admin_notes",
-		"rights",
-#		"advisors"
+		'abstract',
+		'embargo_state',
+		'embargo_end_date',
+		'notes',
+		'admin_notes',
+		'rights',
+    'language'
+#		'advisors'
 	]
 	# 	"advisers:["dpg3k\r\nDavid\r\nGoldstein\r\nUniversity of Virginia Library\r\nUniversity of Virginia"]
 # advisers         - An array of advisers, each being a CRLF separated list of computingId, first name, last name, department, institution (optional)

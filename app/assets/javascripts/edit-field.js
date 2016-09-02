@@ -68,7 +68,7 @@
 			"combo": initDialog("#dialog-combo-input", 550, 350)
 		};
 
-		$("table.work .edit").on("click", function(ev) {
+		$("table.work .edit, table.work .add").on("click", function(ev) {
 			ev.preventDefault();
 			var button = $(this);
 			workId = button.data("id");
