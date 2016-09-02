@@ -3,7 +3,8 @@ module ApplicationHelper
 		if Work::EDITABLE.include?(key)
 			data = { id: work_id, label: key.humanize.titlecase, field: key }
 			data[:type] = Work::EDITABLE_TYPE[key] if Work::EDITABLE_TYPE[key].present?
-			return content_tag(:button, "Edit", { class: "edit btn btn-primary", data: data })
+			return content_tag(:button, "Edit", { class: "edit btn btn-primary", data: data }) unless key == 'admin_notes'
+			return content_tag(:button, "Add", { class: "add btn btn-primary", data: data })
 		elsif key == "filesets"
 			return content_tag(:button, "Upload File", class: "btn btn-primary file-upload")
 		else
