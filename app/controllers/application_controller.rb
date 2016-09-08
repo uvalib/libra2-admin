@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 	#protect_from_forgery with: :exception
 	protect_from_forgery unless: -> { request.format.json? }
 
-	# Adds Libra2 authentication behavior
+	# Adds authentication behavior
 	include AuthenticationBehavior
 
 	rescue_from ActionController::RoutingError, :with => :render401
