@@ -51,9 +51,12 @@
 			var url = fileInput.data("url");
 
 			var data = new FormData();
-			$.each(fileInput[0].files, function(i, file) {
-				data.append('file-'+i, file);
-			});
+
+            // only support a single file in the form
+            data.append('file', fileInput[0].files[0]);
+			//$.each(fileInput[0].files, function(i, file) {
+			//	data.append('file-'+i, file);
+			//});
 
 			var xhr = new XMLHttpRequest();
 
