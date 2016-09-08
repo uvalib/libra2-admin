@@ -23,7 +23,7 @@ class Libra2
 	end
 
 	def self.file_upload_url(user)
-		return "#{LIBRA2_URL}/api/v1/filesets?user=#{user}"
+		return "#{LIBRA2_URL}/api/v1/files?user=#{user}"
 	end
 
 	def self.options()
