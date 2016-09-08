@@ -1,12 +1,13 @@
 (function() {
 	"use strict";
 	function initPage() {
-		$('.data-table.five-col').DataTable({
+		$('.data-table.six-col').DataTable({
 			"aoColumns": [
 				null,
 				null,
 				null,
 				null,
+                null,
 				{"bSortable": false}
 			]
 

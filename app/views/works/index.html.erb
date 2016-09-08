@@ -6,9 +6,10 @@
 <%= link_to("Published Works", "/works/submitted") %><br>
 <%= link_to("Draft Works", "/works/draft") %><br>
 
-<table class="works-index data-table five-col">
+<table class="works-index data-table six-col">
   <thead>
     <tr>
+      <th>Modified</th>
       <th>Created</th>
       <th>ID</th>
       <th>Email</th>
@@ -20,7 +21,8 @@
   <tbody>
     <% @works.each do |work| %>
       <tr>
-        <td><%= work['create_date'] %></td>
+        <td><%= formatted_date( work['modified_date'] ) %></td>
+        <td><%= formatted_date( work['create_date'] ) %></td>
         <td><%= work['id'] %></td>
         <td><%= work['author_email'] %></td>
         <td><%= work['title'] %></td>
@@ -31,5 +33,3 @@
 </table>
 
 <br>
-
-<%#= link_to 'New Work', new_work_path %>
