@@ -7,7 +7,7 @@ class Libra2
 		arr = arr.map { |pair| "#{pair[0]}=#{pair[1]}"}
 		arr = arr.join("&")
 		url = "#{url}&#{arr}" if arr.length > 0
-		puts "API: #{method} #{url} #{payload.inspect}"
+    Rails.logger.info "==> #{method} #{url} #{payload.inspect}"
 		case method
 		when 'GET'
 			response = HTTParty.get(url, headers: content_type_header )
@@ -18,10 +18,10 @@ class Libra2
 		when 'DELETE'
 			response = HTTParty.delete(url, headers: content_type_header )
 		else
-			return false, 'Unrecognized method'
+			return :internal_error, 'Unrecognized method'
 		end
-		return true, response if response.code == 200
-		return false, response.message
+		return response.code, response if status_ok?( response.code )
+		return response.code, response.message
 
 	end
 
@@ -37,6 +37,10 @@ class Libra2
 		return healthcheck( USERINFO_URL )
 	end
 
+  def self.status_ok?( status )
+    return status == 200
+  end
+
   private
 
   def self.api_namespace
@@ -51,7 +55,7 @@ class Libra2
 
 		begin
 			response = HTTParty.get( "#{endpoint}/healthcheck" )
-			if response.code == 200
+			if status_ok?( response.code )
 				return true, ''
 			else
 				return false, "Endpoint returns #{response.code}"

@@ -44,19 +44,17 @@ class Work
 
 	def self.all
 		status, response = Libra2::api("GET", 'works')
-		if status
+		if Libra2::status_ok? status
 			return response['works']
 		else
-			puts "****"
-			puts "**** Error in Work.all: #{response}"
-			puts "****"
+			Rails.logger.error "==> Work.all: returns #{status} (#{response})"
 			return []
 		end
 	end
 
 	def self.find(id)
 		status, response = Libra2::api("GET", "works/#{id}")
-		if status
+		if Libra2::status_ok? status
 			if response['works'] && response['works'].length > 0
 				work = response['works'][0]
 				# The date is received as a full date and time, instead of just a day.
@@ -67,21 +65,17 @@ class Work
 				return {}
 			end
 		else
-			puts "****"
-			puts "**** Error in Work.find: #{response}"
-			puts "****"
+			Rails.logger.error "==> Work.find: returns #{status} (#{response})"
 			return {}
 		end
 	end
 
 	def self.search(params)
 		status, response = Libra2::api("GET", "works/search", params)
-		if status
+		if Libra2::status_ok? status
 			return response['works']
 		else
-			puts "****"
-			puts "**** Error in Work.search: #{response}"
-			puts "****"
+			Rails.logger.error "==> Work.search: returns #{status} (#{response})"
 			return {}
 		end
 	end
@@ -97,7 +91,8 @@ class Work
 		}
 		status, response = Libra2::api("PUT", "works/#{id}", { user: user }, p)
 
-		if status
+		if Libra2::status_ok? status
+			Rails.logger.error "==> Work.update: returns #{status} (#{response})"
 			return nil
 		else
 			return response
@@ -108,10 +103,12 @@ class Work
 		# DELETE: http://service.endpoint/api/v1/works/:id?auth=token&user=user
 		status, response = Libra2::api("DELETE", "works/#{id}", { user: user })
 
-		if status
+		if Libra2::status_ok? status
+			Rails.logger.error "==> Work.destroy: returns #{status} (#{response})"
 			return nil
 		else
 			return response
 		end
 	end
+
 end
