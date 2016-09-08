@@ -10,29 +10,36 @@ class Work
 		'notes',
 		'admin_notes',
 		'rights',
-    'language'
-#		'advisors'
+    'language',
+    'keywords',
+    'related_links',
+    'sponsoring_agency',
+#		'advisers',
 	]
 	# 	"advisers:["dpg3k\r\nDavid\r\nGoldstein\r\nUniversity of Virginia Library\r\nUniversity of Virginia"]
 # advisers         - An array of advisers, each being a CRLF separated list of computingId, first name, last name, department, institution (optional)
 
 	EDITABLE_TYPE = {
-		"abstract" => "textarea",
-		"notes" => "textarea",
-		"admin_notes" => "textarea-append",
-		"embargo_state" => "combo",
-		"rights" => "combo",
-		"embargo_end_date" => "date"
+		'abstract' => 'textarea',
+		'notes' => 'textarea',
+		'admin_notes' => 'textarea-append',
+		'embargo_state' => 'combo',
+		'rights' => 'combo',
+		'embargo_end_date' => 'date',
+  	'keywords' => 'textarea-split',
+		'related_links' => 'textarea-split',
+		'sponsoring_agency' => 'textarea-split',
+#		'advisers' => 'textarea-split',
 	}
 	RIGHTS = [
-		"CC-BY (permitting free use with proper attribution)",
-		"CC0 (permitting unconditional free use, with or without attribution)",
-		"None (users must comply with ordinary copyright law)"
+		'CC-BY (permitting free use with proper attribution)',
+		'CC0 (permitting unconditional free use, with or without attribution)',
+		'None (users must comply with ordinary copyright law)'
 	]
 	EMBARGO_STATE = [
-		{ text: "No Embargo", value: "open" },
-		{ text: "UVA Only Embargo", value: "authenticated" },
-		{ text: "Metadata Only Embargo", value: "restricted" }
+		{ text: 'No Embargo', value: 'open' },
+		{ text: 'UVA Only Embargo', value: 'authenticated' },
+		{ text: 'Metadata Only Embargo', value: 'restricted' }
 	]
 
 	def self.all

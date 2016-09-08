@@ -9,6 +9,7 @@
 		var message;
 		var dialog;
 		var append;
+        var split;
 
 		function onError(jqXHR, textStatus, errorThrown) {
 			var msg = jqXHR.responseJSON ? jqXHR.responseJSON.error : jqXHR.responseText.substring(0, 60);
@@ -86,6 +87,12 @@
 				type = "textarea";
 				append = true;
 			}
+
+            if (type === 'textarea-split') {
+                type = "textarea";
+                split = true;
+            }
+
 			var parent = button.closest("tr");
 			field = parent.find(".value");
 			var val = field.text();
