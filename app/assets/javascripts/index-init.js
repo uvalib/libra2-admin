@@ -9,8 +9,8 @@
 				null,
                 null,
 				{"bSortable": false}
-			]
-
+			],
+            "aaSorting": [ [ 0, "desc" ], [ 1, "desc" ] ]
 		});
 
 	}
