@@ -1,26 +1,36 @@
 class WorksController < ApplicationController
+
   before_action :set_work, only: [:show]
 
   # GET /works
   # GET /works.json
-  def index
+  def all
     @works = Work.all
-      @title = "All Works"
+    @title = "All Works"
+    render :index
+  end
+
+  # GET /works/latest
+  # GET /works/latest.json
+  def latest
+    @works = Work.latest
+    @title = "Latest Works"
+    render :index
   end
 
   # GET /works/draft
   # GET /works/draft.json
   def draft
-    @works = Work.search({ status: 'pending' })
-    @title = "All Drafts"
-      render :index
+    @works = Work.draft
+    @title = "Draft Works"
+    render :index
   end
 
   # GET /works/submitted
   # GET /works/submitted.json
   def submitted
-    @works = Work.search({ status: 'submitted' })
-    @title = "All Published Works"
+    @works = Work.submitted
+    @title = "Published Works"
     render :index
   end
 
@@ -31,29 +41,29 @@ class WorksController < ApplicationController
   end
 
   # GET /works/new
-  def new
-    @work = Work.new
-  end
+  #def new
+  #  @work = Work.new
+  #end
 
   # GET /works/1/edit
-  def edit
-  end
+  #def edit
+  #end
 
   # POST /works
   # POST /works.json
-  def create
-    @work = Work.new(work_params)
+  #def create
+  #  @work = Work.new(work_params)
 
-    respond_to do |format|
-      if @work.save
-        format.html { redirect_to @work, notice: 'Work was successfully created.' }
-        format.json { render :show, status: :created, location: @work }
-      else
-        format.html { render :new }
-        format.json { render json: @work.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #  respond_to do |format|
+  #    if @work.save
+  #      format.html { redirect_to @work, notice: 'Work was successfully created.' }
+  #      format.json { render :show, status: :created, location: @work }
+  #    else
+  #      format.html { render :new }
+  #      format.json { render json: @work.errors, status: :unprocessable_entity }
+  #    end
+  #  end
+  #end
 
   # PATCH/PUT /works/1
   # PATCH/PUT /works/1.json
@@ -79,13 +89,14 @@ class WorksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_work
-      @work = Work.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def work_params
-      params.require(:work).permit(Work::EDITABLE)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_work
+     @work = Work.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def work_params
+     params.require(:work).permit(Work::EDITABLE)
+  end
 end

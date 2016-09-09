@@ -70,6 +70,18 @@ class Work
 		end
 	end
 
+  def self.latest
+		return search( { status: 'pending', limit: 100 } )
+	end
+
+  def self.draft
+		return search( { status: 'pending' } )
+	end
+
+	def self.submitted
+		return search( { status: 'submitted' } )
+	end
+
 	def self.search(params)
 		status, response = Libra2::api("GET", "works/search", params)
 		if Libra2::status_ok? status

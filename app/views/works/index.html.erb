@@ -2,33 +2,21 @@
 
 <h1><%= @title %></h1>
 
-<%= link_to("All Works", "/works") %><br>
-<%= link_to("Published Works", "/works/submitted") %><br>
+<%= link_to("Latest Works", "/works/latest") %><br>
 <%= link_to("Draft Works", "/works/draft") %><br>
+<%= link_to("Published Works", "/works/submitted") %><br>
+<%= link_to("All Works", "/works/all") %><br>
 
 <table class="works-index data-table six-col">
-  <thead>
-    <tr>
-      <th>Modified</th>
-      <th>Created</th>
-      <th>ID</th>
-      <th>Email</th>
-      <th>Title</th>
-      <th></th>
-    </tr>
-  </thead>
+
+  <%= render "header" %>
 
   <tbody>
+
     <% @works.each do |work| %>
-      <tr>
-        <td><%= formatted_date( work['modified_date'] ) %></td>
-        <td><%= formatted_date( work['create_date'] ) %></td>
-        <td><%= work['id'] %></td>
-        <td><%= work['author_email'] %></td>
-        <td><%= work['title'] %></td>
-        <td><%= link_to 'Show', "/works/#{work['id']}" %></td>
-      </tr>
+      <%= render "work", work: work %>
     <% end %>
+
   </tbody>
 </table>
 
