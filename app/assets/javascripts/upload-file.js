@@ -21,7 +21,7 @@
 			console.log("complete: " + evt.currentTarget.status + ", response: " + this.response );
             var jobj = JSON.parse( this.response )
             if( jobj.status == 200 ) {
-                $.ajax("/work_files.json", {
+                $.ajax("/work_files", {
                     type: "POST",
                     data: { work: work_id, file: jobj.id },
                     success: onSuccess,
