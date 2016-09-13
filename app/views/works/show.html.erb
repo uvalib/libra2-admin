@@ -66,6 +66,67 @@
 <% end %>
 </div>
 
+<div id="dialog-advisers-input" title="Edit Advisers" class="edit-dialog" style="display: none;">
+<%= form_tag() do %>
+		<div class="message"></div>
+	<div><label for="user-advisers-input"></label>:</div>
+		<div id="user-advisers-input">
+
+		</div>
+
+		<div class="adviser-template">
+			<div class="input-group" style="display:none;">
+				<div class="person-input">
+					<div class="group-row">
+						<div class="computing_id">
+							<label for="contributor_computing_id_2">Computing ID</label>
+							<br>
+							<input class="form-control contributor_computing_id" name="computing_id[]">
+							<div class="field_help">Enter a UVA Computing ID to automatically fill the remaining fields
+								for
+								this person.
+							</div>
+						</div>
+						<div class="group-row">
+							<div class="name_first"><label>First Name</label>
+								<br>
+								<input class="form-control contributor_first_name" name="first_name[]">
+							</div>
+							<div class="name_last">
+								<label>Last Name</label>
+								<br>
+								<input class="form-control contributor_last_name" name="last_name[]">
+							</div>
+						</div>
+						<div class="group-row">
+							<div class="department">
+								<label>Department</label>
+								<br>
+								<input class="form-control contributor_department" name="department[]">
+							</div>
+							<div class="affiliation">
+								<label>Institution</label>
+								<br>
+								<input class="form-control contributor_institution" name="institution[]">
+							</div>
+						</div>
+						<div style="clear: both;">
+
+						</div>
+					</div>
+					<span class="input-group-btn field-controls">
+						<button class="btn btn-success add"><i class="icon-white glyphicon-plus"></i><span>More</span></button>
+						<button class="btn btn-danger remove"><i class="icon-white glyphicon-minus"></i><span>Remove</span></button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Allow form submission with keyboard without duplicating the dialog button -->
+	<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+<% end %>
+</div>
+
 <%= javascript_tag { %>
 	window.selectOptions = {
 		embargo_state: <%= raw(Work::EMBARGO_STATE.to_json) %>,

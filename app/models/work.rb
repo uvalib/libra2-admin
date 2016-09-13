@@ -26,7 +26,7 @@ class Work
    EDITABLE_TYPE = {
       'abstract' => 'textarea',
       'admin_notes' => 'textarea-append',
-      'advisers' => 'textarea-split',
+      'advisers' => 'advisers',
       'embargo_end_date' => 'date',
       'embargo_state' => 'combo',
       'keywords' => 'textarea-split',
