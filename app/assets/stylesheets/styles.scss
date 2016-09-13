@@ -70,6 +70,44 @@ table.work {
 
 .adviser-label {
 	color: #999999;
+	width: 110px;
+	display: inline-block;
+}
+
+.person-input {
+	font-size: 14px;
+	margin-bottom: 16px;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+	padding: 10px;
+}
+
+.field-controls {
+	margin-left: 2em;
+}
+
+.group-row {
+	display: flex;
+	margin-bottom: 10px;
+
+	&> div {
+		margin-right: 10px;
+
+		input {
+			width: 210px;
+		}
+	}
+}
+
+.field_help {
+	width: 220px;
+	font-style: italic;
+	color: #aaaaaa;
+}
+
+button.remove-advisor {
+	float: right;
+	font-size: 12px;
 }
 
 #user-text-input {

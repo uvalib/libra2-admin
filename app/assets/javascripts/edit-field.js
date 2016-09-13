@@ -43,7 +43,16 @@
 		}
 
 		function setInitialAdviserData(input, val) {
-			input.text(val);
+			var adviserTemplate = $(".adviser-template");
+			var advisers = val.split("\t");
+			var html = "";
+			for (var i = 0; i < advisers.length; i++) {
+				var advisor = advisers[i].split("\n");
+				var block = adviserTemplate.html();
+				block = block.replace("$id$",advisor[0]).replace("$first_name$",advisor[1]).replace("$last_name$",advisor[2]).replace("$department$",advisor[3]).replace("$institution$",advisor[4]);
+				html += block;
+			}
+			input.html(html);
 		}
 
 		function initDialog(selector, width, height) {
@@ -73,7 +82,7 @@
 		var dialogs = {
 			"text": initDialog("#dialog-text-input", 350, 350),
 			"textarea": initDialog("#dialog-textarea-input", 450, 650),
-			"advisers": initDialog("#dialog-advisers-input", 450, 650),
+			"advisers": initDialog("#dialog-advisers-input", 550, 650),
 			"combo": initDialog("#dialog-combo-input", 550, 350)
 		};
 

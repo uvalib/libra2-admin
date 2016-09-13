@@ -44,7 +44,7 @@ module ApplicationHelper
             advisers.push(adviser.gsub("\n", "<br>"))
 				end
          }
-			hidden = content_tag(:input, "", { value: value, type: "hidden", class: "inner-value"})
+			hidden = content_tag(:input, "", { value: value.join("\t"), type: "hidden", class: "inner-value"})
 			return hidden + raw(advisers.join( '<br>---<br>' ))
       else
          return value
