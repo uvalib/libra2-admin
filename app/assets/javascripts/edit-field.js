@@ -19,11 +19,14 @@
 
 		function onSuccess() {
 			var val = input.val();
-			if (append) {
-				val = field.html() + "<br>---<br>" + val;
-				field.html(val);
-			} else
-				field.text(val);
+			if( append == true ) {
+                val = field.html() + "<br>---<br>" + val;
+                field.html(val);
+            } else if( split == true ) {
+                field.text(val.split( "," ).join( "," ) );
+			} else {
+                field.text(val);
+            }
 			dialog.dialog( "close" );
 		}
 
@@ -37,10 +40,6 @@
 				success: onSuccess,
 				error: onError
 			});
-		}
-
-		function setInitialAdviserData(input, val) {
-			input.text(val);
 		}
 
 		function initDialog(selector, width, height) {
@@ -70,11 +69,11 @@
 		var dialogs = {
 			"text": initDialog("#dialog-text-input", 350, 350),
 			"textarea": initDialog("#dialog-textarea-input", 450, 650),
-			"advisers": initDialog("#dialog-advisers-input", 450, 650),
 			"combo": initDialog("#dialog-combo-input", 550, 350)
 		};
 
 		$("table.work .edit, table.work .add").on("click", function(ev) {
+
 			ev.preventDefault();
 			var button = $(this);
 			workId = button.data("id");
@@ -87,25 +86,24 @@
 				type = "text";
 				isDate = true;
 			}
+
+			// special case where we append new data instead of replacing it
 			append = false;
 			if (type === 'textarea-append') {
 				type = "textarea";
 				append = true;
 			}
 
+			// special case where we split into fields and submit as an array
+            split = false;
             if (type === 'textarea-split') {
                 type = "textarea";
                 split = true;
             }
 
 			var parent = button.closest("tr");
-			// Get the existing value for this field. If it is a simple field, then the value is what is visible. If the field needs
-			// formatting, the raw value is placed in a hidden input, so use that instead.
 			field = parent.find(".value");
 			var val = field.text();
-			var hiddenField = field.find('input[type="hidden"]');
-			if (hiddenField.length > 0)
-				val = hiddenField.val();
 
 			var dlg = $("#dialog-" + type + "-input");
 			var label = dlg.find('label[for="user-' + type + '-input"]');
@@ -126,10 +124,11 @@
 					}
 				}
 			}
-			if (type === 'advisers') {
-				setInitialAdviserData(input, val);
-			} else if (!append)
-				input.val(val);
+
+			if ( append == false ) {
+                input.val(val);
+            }
+
 			message = dlg.find(".message");
 			message.text("");
 			message.hide();
