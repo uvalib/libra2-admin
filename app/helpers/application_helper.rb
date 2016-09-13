@@ -28,7 +28,7 @@ module ApplicationHelper
 				delete = content_tag(:div, link_to('Delete', "/work_files/#{file["id"]}?work=#{@work['id']}", method: :delete, data: { confirm: 'Are you sure you really want to permanently remove this file?' }, class: "btn btn-primary file-delete"), {})
 				right = content_tag(:div, download + name + label + delete, { class: "right" })
 
-				html += content_tag(:div, raw(right+left), { class: "media-box"})
+				html += content_tag(:div, raw(left+right), { class: "media-box"})
 			}
 			return raw(html)
 		when 'advisers'
