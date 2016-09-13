@@ -5,6 +5,7 @@
 		var message;
 		var dialog;
 		var fileInput = $("#file-to-upload");
+        var work_id = $( "#work_id" ).text( );
 
 		function uploadProgress(evt) {
 			var m;
@@ -17,14 +18,16 @@
 		}
 
 		function uploadComplete(evt) {
-			console.log("complete" + evt.currentTarget.status);
-			// TODO-PER: now get the guid that was passed in here and send it to the admin server so it can make the call to associate this file with a work.
-			$.ajax("/work_files.json", {
-				type: "POST",
-				data: { file_id: evt.guid },
-				success: onSuccess,
-				error: onError
-			})
+			console.log("complete: " + evt.currentTarget.status + ", response: " + this.response );
+            var jobj = JSON.parse( this.response )
+            if( jobj.status == 200 ) {
+                $.ajax("/work_files.json", {
+                    type: "POST",
+                    data: { work: work_id, file: jobj.id },
+                    success: onSuccess,
+                    error: onError
+                });
+            }
 		}
 
 		function uploadFailed() {

@@ -47,7 +47,7 @@ class Work
    ]
 
    def self.all
-      status, response = Libra2::api("GET", 'works')
+      status, response = Libra2::api('GET', 'works')
       if Libra2::status_ok? status
          return response['works']
       else
@@ -57,7 +57,7 @@ class Work
    end
 
    def self.find(id)
-      status, response = Libra2::api("GET", "works/#{id}")
+      status, response = Libra2::api('GET', "works/#{id}")
       if Libra2::status_ok? status
          if response['works'] && response['works'].length > 0
             work = response['works'][0]
@@ -87,7 +87,7 @@ class Work
    end
 
    def self.search(params)
-      status, response = Libra2::api("GET", "works/search", params)
+      status, response = Libra2::api('GET', "works/search", params)
       if Libra2::status_ok? status
          return response['works']
       else
@@ -105,7 +105,7 @@ class Work
             p["work"][field] = [ p["work"][field] ] if field == "admin_notes" # this item requires an array passed to it.
          end
       }
-      status, response = Libra2::api("PUT", "works/#{id}", { user: user }, p)
+      status, response = Libra2::api('PUT', "works/#{id}", { user: user }, p)
 
       if Libra2::status_ok? status
          Rails.logger.error "==> Work.update: returns #{status} (#{response})"
@@ -117,7 +117,7 @@ class Work
 
    def self.destroy(user, id)
       # DELETE: http://service.endpoint/api/v1/works/:id?auth=token&user=user
-      status, response = Libra2::api("DELETE", "works/#{id}", { user: user })
+      status, response = Libra2::api('DELETE', "works/#{id}", { user: user })
 
       if Libra2::status_ok? status
          Rails.logger.error "==> Work.destroy: returns #{status} (#{response})"

@@ -17,7 +17,7 @@
 	<% @work.each { |key, value| %>
 		<tr>
 			<td><strong><%= key.humanize.titlecase %></strong></td>
-			<td class="value"><%= format_value(key,value) %></td>
+			<td class="value" id="<%= "work_#{key.underscore}" %>"><%= format_value(key,value) %></td>
 			<td>
 				<%= edit_button(key, @work['id']) %>
 			</td>

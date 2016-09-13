@@ -6,7 +6,7 @@ class WorksController < ApplicationController
   # GET /works.json
   def all
     @works = Work.all
-    @title = "All Works"
+    @title = 'All Works'
     render :index
   end
 
@@ -14,7 +14,7 @@ class WorksController < ApplicationController
   # GET /works/latest.json
   def latest
     @works = Work.latest
-    @title = "Latest Works"
+    @title = 'Latest Works'
     render :index
   end
 
@@ -22,7 +22,7 @@ class WorksController < ApplicationController
   # GET /works/draft.json
   def draft
     @works = Work.draft
-    @title = "Draft Works"
+    @title = 'Draft Works'
     render :index
   end
 
@@ -30,7 +30,7 @@ class WorksController < ApplicationController
   # GET /works/submitted.json
   def submitted
     @works = Work.submitted
-    @title = "Published Works"
+    @title = 'Published Works'
     render :index
   end
 
@@ -40,38 +40,14 @@ class WorksController < ApplicationController
     @file_upload_url = Libra2.file_upload_url(current_user)
   end
 
-  # GET /works/new
-  #def new
-  #  @work = Work.new
-  #end
-
-  # GET /works/1/edit
-  #def edit
-  #end
-
-  # POST /works
-  # POST /works.json
-  #def create
-  #  @work = Work.new(work_params)
-
-  #  respond_to do |format|
-  #    if @work.save
-  #      format.html { redirect_to @work, notice: 'Work was successfully created.' }
-  #      format.json { render :show, status: :created, location: @work }
-  #    else
-  #      format.html { render :new }
-  #      format.json { render json: @work.errors, status: :unprocessable_entity }
-  #    end
-  #  end
-  #end
-
   # PATCH/PUT /works/1
   # PATCH/PUT /works/1.json
   def update
+
     respond_to do |format|
       errors = Work.update(current_user, params[:id], work_params)
       if !errors
-        format.json { render  json: {}, status: :ok }
+        format.json { render json: {}, status: :ok }
       else
         format.json { render json: { error: errors }, status: :unprocessable_entity }
       end
@@ -81,11 +57,18 @@ class WorksController < ApplicationController
   # DELETE /works/1
   # DELETE /works/1.json
   def destroy
-    Work.destroy(current_user, params[:id])
+
     respond_to do |format|
-      format.html { redirect_to works_url, notice: 'Work was successfully destroyed.' }
-      format.json { head :no_content }
+      errors = Work.destroy(current_user, params[:id])
+      if !errors
+        format.html { redirect_to works_url, notice: 'Work was successfully destroyed.' }
+        format.json { render json: {}, status: :ok }
+      else
+        format.html { redirect_to works_url, notice: 'Error destroying work.' }
+        format.json { render json: { error: errors }, status: :unprocessable_entity }
+      end
     end
+
   end
 
   private

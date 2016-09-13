@@ -3,40 +3,37 @@ class WorkFilesController < ApplicationController
   # POST /work_files
   # POST /work_files.json
   def create
-    # @work = WorkFile.new(work_file_params)
-	#
-    # respond_to do |format|
-    #   if @work.save
-    #     format.html { redirect_to @work, notice: 'Work was successfully created.' }
-    #     format.json { render :show, status: :created, location: @work }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @work.errors, status: :unprocessable_entity }
-    #   end
-    # end
-  end
 
-  # PATCH/PUT /work_files/1
-  # PATCH/PUT /work_files/1.json
-  def update
-    # respond_to do |format|
-    #   errors = WorkFile.update(current_user, params[:id], work_file_params)
-    #   if !errors
-    #     format.json { render  json: {}, status: :ok }
-    #   else
-    #     format.json { render json: { error: errors }, status: :unprocessable_entity }
-    #   end
-    # end
+    work_id = params[:work]
+    file_id = params[:file]
+
+    label = 'bla'
+    respond_to do |format|
+      errors = WorkFile.create( current_user, file_id, work_id, label )
+      if !errors
+         format.html { redirect_to "/works/#{work_id}", notice: 'File was successfully added.' }
+         format.json { render json: {}, status: :ok }
+      else
+        format.html { redirect_to "/works/#{work_id}", notice: 'Error adding file.' }
+        format.json { render json: { error: errors }, status: :unprocessable_entity }
+      end
+    end
+
   end
 
   # DELETE /work_files/1
   # DELETE /work_files/1.json
   def destroy
-    work = params[:work]
-    WorkFile.destroy(current_user, params[:id])
+    work_id = params[:work]
     respond_to do |format|
-      format.html { redirect_to "/works/#{work}", notice: 'File was successfully removed.' }
-      format.json { head :no_content }
+      errors = WorkFile.destroy( current_user, params[:id] )
+      if !errors
+         format.html { redirect_to "/works/#{work_id}", notice: 'File was successfully removed.' }
+         format.json { render json: {}, status: :ok }
+      else
+        format.html { redirect_to "/works/#{work_id}", notice: 'Error removing file.' }
+        format.json { render json: { error: errors }, status: :unprocessable_entity }
+      end
     end
   end
 
