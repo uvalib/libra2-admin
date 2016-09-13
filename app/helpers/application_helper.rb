@@ -36,9 +36,16 @@ module ApplicationHelper
       when 'advisers'
          advisers = []
          value.each { |adviser|
+				fields = adviser.split("\n")
+				if fields.length == 5
+					advisers.push("<span class='adviser-label'>Computing ID:</span> #{fields[0]}<br><span class='adviser-label'>First Name:</span> #{fields[1]}<br><span class='adviser-label'>Last Name:</span> #{fields[2]}<br><span class='adviser-label'>Department:</span> #{fields[3]}<br><span class='adviser-label'>Institution:</span> #{fields[4]}")
+				else
+					# this should only happen if there were an error somewhere in saving an adviser.
             advisers.push(adviser.gsub("\n", "<br>"))
+				end
          }
-         return raw(advisers.join( '<br>---<br>' ))
+			hidden = content_tag(:input, "", { value: value, type: "hidden", class: "inner-value"})
+			return hidden + raw(advisers.join( '<br>---<br>' ))
       else
          return value
       end
