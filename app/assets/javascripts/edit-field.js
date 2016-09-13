@@ -19,11 +19,14 @@
 
 		function onSuccess() {
 			var val = input.val();
-			if (append) {
-				val = field.html() + "<br>---<br>" + val;
-				field.html(val);
-			} else
-				field.text(val);
+			if( append == true ) {
+                val = field.html() + "<br>---<br>" + val;
+                field.html(val);
+            } else if( split == true ) {
+                field.text(val.split( "," ).join( "," ) );
+			} else {
+                field.text(val);
+            }
 			dialog.dialog( "close" );
 		}
 
@@ -70,6 +73,7 @@
 		};
 
 		$("table.work .edit, table.work .add").on("click", function(ev) {
+
 			ev.preventDefault();
 			var button = $(this);
 			workId = button.data("id");
@@ -82,12 +86,16 @@
 				type = "text";
 				isDate = true;
 			}
+
+			// special case where we append new data instead of replacing it
 			append = false;
 			if (type === 'textarea-append') {
 				type = "textarea";
 				append = true;
 			}
 
+			// special case where we split into fields and submit as an array
+            split = false;
             if (type === 'textarea-split') {
                 type = "textarea";
                 split = true;
@@ -116,8 +124,11 @@
 					}
 				}
 			}
-			if (!append)
-				input.val(val);
+
+			if ( append == false ) {
+                input.val(val);
+            }
+
 			message = dlg.find(".message");
 			message.text("");
 			message.hide();
