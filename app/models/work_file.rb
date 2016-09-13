@@ -6,6 +6,7 @@ class WorkFile
 		if Libra2::status_ok? status
 			return nil
 		else
+			Rails.logger.error "==> WorkFile.create: returns #{status} (#{response})"
 			return response
 		end
 
@@ -17,6 +18,7 @@ class WorkFile
 		if Libra2::status_ok? status
 			return nil
 		else
+			Rails.logger.error "==> WorkFile.destroy: returns #{status} (#{response})"
 			return response
 		end
 	end
