@@ -1,7 +1,7 @@
 <div class="breadcrumbs">
-	<ul>
-		<li><a href="/">Dashboard</a></li>
-	</ul>
+   <ul>
+      <li><a href="/">Dashboard</a></li>
+   </ul>
 </div>
 
 <h1 class="work-title">Work "<%= @work['id'] %>"</h1>
@@ -9,82 +9,84 @@
 <p id="notice"><%= notice %></p>
 
 <table class="work">
-	<tr>
-		<th>Field</th>
-		<th>Value</th>
-		<th></th>
-	</tr>
-	<% @work.each { |key, value| %>
-		<tr>
-			<td><strong><%= key.humanize.titlecase %></strong></td>
-			<td class="value" id="<%= "work_#{key.underscore}" %>"><%= format_value(key,value) %></td>
-			<td>
-				<%= edit_button(key, @work['id']) %>
-			</td>
-		</tr>
-	<% } %>
+   <tr>
+      <th>Field</th>
+      <th>Value</th>
+      <th></th>
+   </tr>
+   <% @work.each { |key, value| %>
+      <tr>
+         <td><strong><%= key.humanize.titlecase %></strong></td>
+         <td class="value" id="<%= "work_#{key.underscore}" %>"><%= format_value(key,value) %></td>
+         <td>
+            <%= edit_button(key, @work['id']) %>
+         </td>
+      </tr>
+   <% } %>
 </table>
 
 <div id="dialog-file-input" title="Upload File" class="edit-dialog" style="display: none;">
 <%= form_tag() do %>
-		<div class="message"></div>
-	<input id="file-to-upload" type="file" name="files[]" data-url="<%= @file_upload_url %>" multiple class="input-field" />
-		<div class="file-names"></div>
-	<!-- Allow form submission with keyboard without duplicating the dialog button -->
-	<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+      <div class="message"></div>
+   <input id="file-to-upload" type="file" name="files[]" data-url="<%= @file_upload_url %>" multiple class="input-field" />
+      <div class="file-names"></div>
+   <!-- Allow form submission with keyboard without duplicating the dialog button -->
+   <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 <% end %>
 </div>
 
 <div id="dialog-text-input" title="Edit Field" class="edit-dialog" style="display: none;">
 <%= form_tag() do %>
-		<div class="message"></div>
-	<div><label for="user-text-input"></label>:</div>
-	<input id="user-text-input" type="text" class="input-field" />
-	<!-- Allow form submission with keyboard without duplicating the dialog button -->
-	<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+   <div class="message"></div>
+   <div><label for="user-text-input"></label>:</div>
+   <input id="user-text-input" type="text" class="input-field" />
+   <div class="field_help"></div>
+   <!-- Allow form submission with keyboard without duplicating the dialog button -->
+   <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 <% end %>
 </div>
 
 <div id="dialog-textarea-input" title="Edit Field" class="edit-dialog" style="display: none;">
 <%= form_tag() do %>
-		<div class="message"></div>
-	<div><label for="user-textarea-input"></label>:</div>
-	<textarea id="user-textarea-input" class="input-field"></textarea>
-	<!-- Allow form submission with keyboard without duplicating the dialog button -->
-	<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+   <div class="message"></div>
+   <div><label for="user-textarea-input"></label>:</div>
+   <textarea id="user-textarea-input" class="input-field"></textarea>
+   <div class="field_help"></div>
+   <!-- Allow form submission with keyboard without duplicating the dialog button -->
+   <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 <% end %>
 </div>
 
 <div id="dialog-combo-input" title="Edit Field" class="edit-dialog" style="display: none;">
 <%= form_tag() do %>
-		<div class="message"></div>
-	<div><label for="user-combo-input"></label>:</div>
-	<select id="user-combo-input" class="input-field">
-	</select>
-	<!-- Allow form submission with keyboard without duplicating the dialog button -->
-	<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+   <div class="message"></div>
+   <div><label for="user-combo-input"></label>:</div>
+   <select id="user-combo-input" class="input-field">
+   </select>
+   <div class="field_help"></div>
+   <!-- Allow form submission with keyboard without duplicating the dialog button -->
+   <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 <% end %>
 </div>
 
 <div id="dialog-advisers-input" title="Edit Advisers" class="edit-dialog" style="display: none;">
 <%= form_tag() do %>
-		<div class="message"></div>
-	<div><label for="user-advisers-input"></label>:</div>
-		<div id="user-advisers-input">
+   <div class="message"></div>
+   <div><label for="user-advisers-input"></label>:</div>
+   <div id="user-advisers-input">
+      </div>
+      <%= render 'adviser_template' %>
+      <button class="btn btn-success add">+</button>
 
-		</div>
-
-		<%= render 'adviser_template' %>
-		<button class="btn btn-success add">+</button>
-
-		<!-- Allow form submission with keyboard without duplicating the dialog button -->
-	<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+      <div class="field_help"></div>
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+   <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 <% end %>
 </div>
 
 <%= javascript_tag { %>
-	window.selectOptions = {
-		embargo_state: <%= raw(Work::EMBARGO_STATE.to_json) %>,
-		rights: <%= raw(Work::RIGHTS.to_json) %>
-	};
+   window.selectOptions = {
+      embargo_state: <%= raw(Work::EMBARGO_STATE.to_json) %>,
+      rights: <%= raw(Work::RIGHTS.to_json) %>
+   };
 <% } %>

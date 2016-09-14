@@ -78,10 +78,10 @@
 				width: width,
 				modal: true,
 				buttons: {
-					Apply: submitChange,
 					Cancel: function() {
 						dialog.dialog("close");
-					}
+					},
+                    Apply: submitChange,
 				},
 				close: function() {
 					dialog.find( "form" )[0].reset();
