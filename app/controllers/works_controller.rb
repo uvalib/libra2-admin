@@ -1,4 +1,5 @@
 class WorksController < ApplicationController
+  require_dependency 'user_info_client'
 
   before_action :set_work, only: [:show]
 
@@ -69,6 +70,22 @@ class WorksController < ApplicationController
       end
     end
 
+  end
+
+  # GET /computing_id
+  def computing_id
+    respond_to do |wants|
+      wants.json {
+        status, resp = ServiceClient::UserInfoClient.instance.get_by_id( params[:id] )
+        if status == 404
+          resp = { }
+        else
+          resp[:institution] = "University of Virginia"
+          resp[:index] = params[:index]
+        end
+        render json: resp, status: :ok
+      }
+    end
   end
 
   private
