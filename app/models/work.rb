@@ -111,14 +111,20 @@ class Work
       p = { "work" => {} }
       Work::EDITABLE.each { |field|
          next if params[field].nil?
+         #puts "==> #{field} == '#{params[field]}'"
          case field
             when 'admin_notes'
                # these fields requires an array passed to it.
                p["work"][field] = [ params[field] ]
 
             when 'keywords', 'related_links', 'sponsoring_agency'
-               # these fields are received as a comma separated string and split to an array
-               p["work"][field] = params[field].split( ',' ).map { |s| s.strip }
+               # special case where we are clearing the field
+               if params[field] == ''
+                  p["work"][field] = ['']
+               else
+                  # these fields are received as a comma separated string and split to an array
+                  p["work"][field] = params[field].split( ',' ).map { |s| s.strip }
+               end
             else
                # everything else...
                p["work"][field] = params[field]
