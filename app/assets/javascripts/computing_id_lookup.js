@@ -7,7 +7,7 @@
 			var id = self.val();
 
 			function onSuccess(resp) {
-				console.log(resp);
+				//console.log(resp);
 				var outerForm = self.closest(".person-input");
 				var elFirstName = outerForm.find(".contributor_first_name");
 				var elLastName = outerForm.find(".contributor_last_name");

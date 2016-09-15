@@ -19,11 +19,14 @@
 
 		function onSuccess() {
 			var val = input.val();
-			if( append == true ) {
+			if( append === true ) {
                 val = field.html() + "<br>---<br>" + val;
                 field.html(val);
-            } else if( split == true ) {
-                field.text(val.split( "," ).join( "," ) );
+            } else if( split === true ) {
+				field.text(val.split(",").join(","));
+			} else if (key === 'advisers') {
+				val = window.getAdviserDataFormatted();
+				field.html(val);
 			} else {
                 field.text(val);
             }
@@ -33,26 +36,17 @@
 		function submitChange() {
 			message.hide();
 			var data = {};
-			data["work["+key+"]"] = input.val();
+			if (key === 'advisers')
+				data["work["+key+"]"] = window.getAdviserData();
+			else
+				data["work["+key+"]"] = input.val();
+
 			$.ajax("/works/"+workId+".json", {
 				method: "PATCH",
 				data: data,
 				success: onSuccess,
 				error: onError
 			});
-		}
-
-		function setInitialAdviserData(input, val) {
-			var adviserTemplate = $(".adviser-template");
-			var advisers = val.split("\t");
-			var html = "";
-			for (var i = 0; i < advisers.length; i++) {
-				var advisor = advisers[i].split("\n");
-				var block = adviserTemplate.html();
-				block = block.replace("$id$",advisor[0]).replace("$first_name$",advisor[1]).replace("$last_name$",advisor[2]).replace("$department$",advisor[3]).replace("$institution$",advisor[4]);
-				html += block;
-			}
-			input.html(html);
 		}
 
 		function initDialog(selector, width, height) {
@@ -151,7 +145,7 @@
 				}
 			}
 			if (type === 'advisers') {
-				setInitialAdviserData(input, val);
+				window.setInitialAdviserData(input, val);
 			} else if (!append)
 				input.val(val);
 
