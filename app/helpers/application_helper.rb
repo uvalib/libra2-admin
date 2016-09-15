@@ -47,8 +47,10 @@ module ApplicationHelper
             advisers.push(adviser.gsub("\n", "<br>"))
 				end
          }
-			hidden = content_tag(:input, "", { value: value.join("\t"), type: "hidden", class: "inner-value"})
-			return hidden + raw(advisers.join( '<br>---<br>' ))
+			   hidden = content_tag(:input, "", { value: value.join("\t"), type: "hidden", class: "inner-value"})
+			   return hidden + raw(advisers.join( '<br>---<br>' ))
+      when 'create_date', 'modified_date'
+         return( formatted_date( value ) )
       else
          return value
       end
