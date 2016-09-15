@@ -35,7 +35,7 @@ module ApplicationHelper
 
             html += content_tag(:div, raw(left+right), { class: "media-box"})
          }
-         return raw(html)
+         return content_tag(:div, raw(html), { class: "file-sets" })
       when 'advisers'
          advisers = []
          value.each { |adviser|
