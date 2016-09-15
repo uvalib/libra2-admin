@@ -35,6 +35,16 @@ class Work
       'rights' => 'combo',
       'sponsoring_agency' => 'textarea-split',
    }
+
+   HELP_BY_TYPE = {
+      'default' => 'Enter the value of the field or clear it and hit "Apply"',
+      'textarea-append' => 'Enter the value to be added to the field and hit "Apply"',
+      'textarea-split' => 'Enter the value(s) of the field, separated by commas or clear it and hit "Apply"',
+      'advisers' => 'Advisers help',
+      'date' => 'Select the appropriate date and hit "Apply"',
+      'combo' => 'Select the appropriate value and hit "Apply"'
+   }
+
    RIGHTS = [
       'CC-BY (permitting free use with proper attribution)',
       'CC0 (permitting unconditional free use, with or without attribution)',
@@ -101,14 +111,20 @@ class Work
       p = { "work" => {} }
       Work::EDITABLE.each { |field|
          next if params[field].nil?
+         #puts "==> #{field} == '#{params[field]}'"
          case field
             when 'admin_notes'
                # these fields requires an array passed to it.
                p["work"][field] = [ params[field] ]
 
             when 'keywords', 'related_links', 'sponsoring_agency'
-               # these fields are received as a comma separated string and split to an array
-               p["work"][field] = params[field].split( ',' ).map { |s| s.strip }
+               # special case where we are clearing the field
+               if params[field] == ''
+                  p["work"][field] = ['']
+               else
+                  # these fields are received as a comma separated string and split to an array
+                  p["work"][field] = params[field].split( ',' ).map { |s| s.strip }
+               end
             else
                # everything else...
                p["work"][field] = params[field]

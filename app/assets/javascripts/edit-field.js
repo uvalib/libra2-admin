@@ -62,10 +62,10 @@
 				width: width,
 				modal: true,
 				buttons: {
-					Apply: submitChange,
 					Cancel: function() {
 						dialog.dialog("close");
-					}
+					},
+                    Apply: submitChange
 				},
 				close: function() {
 					dialog.find( "form" )[0].reset();
@@ -92,9 +92,11 @@
 			var button = $(this);
 			workId = button.data("id");
 			key = button.data("field");
-			var labelText = button.data("label");
+            var helpText = button.data("help");
+            var labelText = button.data("label");
 			var type = button.data("type");
 			if (!type) type = "text";
+
 			var isDate = false;
 			if (type === 'date') {
 				type = "text";
@@ -125,8 +127,13 @@
 				val = hiddenField.val();
 
 			var dlg = $("#dialog-" + type + "-input");
-			var label = dlg.find('label[for="user-' + type + '-input"]');
+
+            var label = dlg.find('label[for="user-' + type + '-input"]');
 			label.text(labelText);
+
+            var help = dlg.find('.field_help');
+            help.text( helpText );
+
 			input = dlg.find("#user-" + type + "-input");
 			if (type === "combo") {
 				// remove the old options and replace them with the new options.
