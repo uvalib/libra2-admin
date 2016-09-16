@@ -110,7 +110,7 @@ table.work {
   font-size: small;
 }
 
-button.remove-advisor {
+button.remove-adviser {
 	float: right;
 	font-size: 12px;
 }
@@ -172,14 +172,21 @@ button.remove-advisor {
 	clear: both;
 }
 
+.file-sets {
+	display: flex;
+	flex-direction: column;
+}
+
 .media-box {
-	clear: both;
-    padding-top: 5px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	padding-bottom: 10px;
+	padding-top: 5px;
 	.left {
 		max-width: 90px;
 		box-shadow: 2px 2px 5px #aaa;
+		float: left;
 	}
 	.right {
-		float: right;
+		margin-left: 100px;
 	}
 }

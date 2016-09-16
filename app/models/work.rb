@@ -43,7 +43,7 @@ class Work
       'default' => 'Enter the value of the field or clear it and hit "Apply"',
       'textarea-append' => 'Enter the value to be added to the field and hit "Apply"',
       'textarea-split' => 'Enter the value(s) of the field, separated by commas or clear it and hit "Apply"',
-      'advisers' => 'Advisers help',
+      'advisers' => 'Enter a UVA Computing ID to automatically fill the remaining fields for this person.',
       'date' => 'Select the appropriate date and hit "Apply"',
       'combo' => 'Select the appropriate value and hit "Apply"'
    }
@@ -111,6 +111,8 @@ class Work
          next if params[field].nil?
          #puts "==> #{field} == '#{params[field]}'"
          case field
+            when 'advisers'
+               p["work"][field] = params[field].split("\t")
             when 'admin_notes'
                # these fields requires an array passed to it.
                p["work"][field] = [ params[field] ]
