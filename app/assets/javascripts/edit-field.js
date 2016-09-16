@@ -77,7 +77,7 @@
 			"text": initDialog("#dialog-text-input", 350, 350),
 			"textarea": initDialog("#dialog-textarea-input", 450, 650),
 			"advisers": initDialog("#dialog-advisers-input", 550, 650),
-			"combo": initDialog("#dialog-combo-input", 550, 350)
+			"combo": initDialog("#dialog-combo-input", 650, 300)
 		};
 
 		$("table.work .edit, table.work .add").on("click", function(ev) {

@@ -108,6 +108,7 @@ table.work {
 .edit-dialog .field_help {
   padding-top: 15px;
   font-size: small;
+  width: 300px;
 }
 
 button.remove-adviser {
@@ -134,6 +135,10 @@ button.remove-adviser {
 		width: 400px;
 		height: 350px;
 	}
+}
+
+#user-combo-input {
+  min-width: 600px;
 }
 
 .dataTables_wrapper {
