@@ -27,10 +27,13 @@ class Work
       'abstract' => 'textarea',
       'admin_notes' => 'textarea-append',
       'advisers' => 'advisers',
+      'author_department' => 'combo',
+      'degree' => 'combo',
       'embargo_end_date' => 'date',
       'embargo_state' => 'combo',
       'keywords' => 'textarea-split',
       'notes' => 'textarea',
+      'language' => 'combo',
       'related_links' => 'textarea-split',
       'rights' => 'combo',
       'sponsoring_agency' => 'textarea-split',
@@ -45,11 +48,6 @@ class Work
       'combo' => 'Select the appropriate value and hit "Apply"'
    }
 
-   RIGHTS = [
-      'CC-BY (permitting free use with proper attribution)',
-      'CC0 (permitting unconditional free use, with or without attribution)',
-      'None (users must comply with ordinary copyright law)'
-   ]
    EMBARGO_STATE = [
       { text: 'No Embargo', value: 'open' },
       { text: 'UVA Only Embargo', value: 'authenticated' },
@@ -152,4 +150,31 @@ class Work
       end
    end
 
+   def self.degree_options
+      return( get_options( 'degrees' ) )
+   end
+
+   def self.department_options
+      return( get_options( 'departments' ) )
+   end
+
+   def self.language_options
+      return( get_options( 'languages' ) )
+   end
+
+   def self.rights_options
+      return( get_options( 'rights' ) )
+   end
+
+  private
+
+  def self.get_options( which )
+     status, response = Libra2::api( 'GET', "options/#{which}" )
+     if Libra2::status_ok? status
+        return response['options']
+     else
+        Rails.logger.error "==> Work.#{which}_options: returns #{status} (#{response})"
+        return []
+     end
+  end
 end
