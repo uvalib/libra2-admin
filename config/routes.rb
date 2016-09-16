@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   resources :version, only: [ :index ]
 
   # You can have the root of your site routed with "root"
-  root 'works#latest'
+  root 'works#draft'
 end

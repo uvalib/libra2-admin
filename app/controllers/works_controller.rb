@@ -15,7 +15,7 @@ class WorksController < ApplicationController
   # GET /works/latest.json
   def latest
     @works = Work.latest
-    @title = 'Latest Works'
+    @title = 'Latest Works (last 7 days)'
     render :index
   end
 
@@ -62,10 +62,10 @@ class WorksController < ApplicationController
     respond_to do |format|
       errors = Work.destroy(current_user, params[:id])
       if !errors
-        format.html { redirect_to works_url, notice: 'Work was successfully destroyed.' }
+        format.html { redirect_to root_path, notice: 'Work was successfully destroyed.' }
         format.json { render json: {}, status: :ok }
       else
-        format.html { redirect_to works_url, notice: 'Error destroying work.' }
+        format.html { redirect_to root_path, notice: 'Error destroying work.' }
         format.json { render json: { error: errors }, status: :unprocessable_entity }
       end
     end
