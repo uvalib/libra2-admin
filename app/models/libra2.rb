@@ -8,6 +8,7 @@ class Libra2
 		arr = arr.join("&")
 		url = "#{url}&#{arr}" if arr.length > 0
     Rails.logger.info "==> #{method} #{url} #{payload.inspect}"
+    timer = TimingBehavior.new( url ).start
 		case method
 		when 'GET'
 			response = HTTParty.get(url, headers: content_type_header )
@@ -19,7 +20,9 @@ class Libra2
 			response = HTTParty.delete(url, headers: content_type_header )
 		else
 			return :internal_error, 'Unrecognized method'
-		end
+    end
+    timer.log_completed( "(status #{response.code})")
+
 		return response.code, response if status_ok?( response.code )
 		return response.code, response.message
 
@@ -54,7 +57,11 @@ class Libra2
   def self.healthcheck( endpoint )
 
 		begin
-			response = HTTParty.get( "#{endpoint}/healthcheck" )
+      url = "#{endpoint}/healthcheck"
+      timer = TimingBehavior.new( url ).start
+			response = HTTParty.get( url )
+      timer.log_completed( "(status #{response.code})")
+
 			if status_ok?( response.code )
 				return true, ''
 			else
