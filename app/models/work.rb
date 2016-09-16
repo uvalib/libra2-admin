@@ -83,7 +83,7 @@ class Work
    end
 
   def self.latest
-      return search( { status: 'pending', limit: 100 } )
+      return search( { create_date: "#{Date.today - 7}:#{Date.today}" } )
    end
 
   def self.draft
