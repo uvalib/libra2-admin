@@ -5,6 +5,7 @@
 		var message;
 		var dialog;
 		var fileInput = $("#file-to-upload");
+        var fileLabel = $("#file-label");
         var work_id = $( "#work_id" ).text( );
 
 		function uploadProgress(evt) {
@@ -21,9 +22,10 @@
 			console.log("complete: " + evt.currentTarget.status + ", response: " + this.response );
             var jobj = JSON.parse( this.response )
             if( jobj.status == 200 ) {
+                var label = fileLabel.val( );
                 $.ajax("/work_files", {
                     type: "POST",
-                    data: { work: work_id, file: jobj.id },
+                    data: { work: work_id, file: jobj.id, label: label },
                     success: onSuccess,
                     error: onError
                 });
@@ -57,9 +59,6 @@
 
             // only support a single file in the form
             data.append('file', fileInput[0].files[0]);
-			//$.each(fileInput[0].files, function(i, file) {
-			//	data.append('file-'+i, file);
-			//});
 
 			var xhr = new XMLHttpRequest();
 
@@ -98,12 +97,38 @@
 			return dlg;
 		}
 
-		dialog = initDialog("#dialog-file-input", 550, 250);
-		$(".file-upload").on("click", function(ev) {
+		dialog = initDialog("#dialog-file-input", 550, 350);
+
+        $(".file-upload").on("click", function(ev) {
+
 			ev.preventDefault();
 
-			dialog.dialog( "open" );
+            var button = $(this);
+            var helpText = button.data("help");
+            var labelBase = button.data("label");
 
+            // set the help text
+            var help = dialog.find('.field_help');
+            help.text( helpText );
+
+            // and install a change handler
+            $("#file-to-upload").change( function( ) {
+
+                var labelText = labelBase;
+
+                // the filename selected
+                var filename = $( this ).val();
+                if( filename.lastIndexOf( '.' ) >= 0 ) {
+                    var suffix = filename.substring( filename.lastIndexOf( '.' ) + 1 );
+                    labelText = labelText + '.' + suffix;
+                }
+
+                // set the display label
+                var fileLabel = dialog.find('#file-label');
+                fileLabel.val( labelText );
+            });
+
+            dialog.dialog( "open" );
 		});
 	}
 

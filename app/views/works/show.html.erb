@@ -19,7 +19,7 @@
          <td><strong><%= key.humanize.titlecase %></strong></td>
          <td class="value" id="<%= "work_#{key.underscore}" %>"><%= format_value(key,value) %></td>
          <td>
-            <%= edit_button(key, @work['id']) %>
+            <%= edit_button(key, @work ) %>
          </td>
       </tr>
    <% } %>
@@ -27,9 +27,13 @@
 
 <div id="dialog-file-input" title="Upload File" class="edit-dialog" style="display: none;">
 <%= form_tag() do %>
-      <div class="message"></div>
+   <div class="message"></div>
+   <div class="label-div"><label for="file-name"></label>Select File:</div>
    <input id="file-to-upload" type="file" name="files[]" data-url="<%= @file_upload_url %>" multiple class="input-field" />
-      <div class="file-names"></div>
+   <div class="file-name"></div>
+   <div class="label-div"><label for="file-label"></label>Display Label:</div>
+   <input id="file-label" type="text" name="label" class="input-field" />
+   <div class="field_help"></div>
    <!-- Allow form submission with keyboard without duplicating the dialog button -->
    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 <% end %>

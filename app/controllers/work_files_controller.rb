@@ -6,8 +6,8 @@ class WorkFilesController < ApplicationController
 
     work_id = params[:work]
     file_id = params[:file]
+    label = params[:label]
 
-    label = 'bla'
     respond_to do |format|
       errors = WorkFile.create( current_user, file_id, work_id, label )
       if !errors

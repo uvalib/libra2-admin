@@ -46,7 +46,8 @@ class Work
       'textarea-split' => 'Enter the value(s) of the field, separated by commas or clear it and hit "Apply"',
       'advisers' => 'Enter a UVA Computing ID to automatically fill the remaining fields for this person.',
       'date' => 'Select the appropriate date and hit "Apply"',
-      'combo' => 'Select the appropriate value and hit "Apply"'
+      'combo' => 'Select the appropriate value and hit "Apply"',
+      'file-upload' => 'Select a file, update the file label as necessary and hit "Apply"'
    }
 
    EMBARGO_STATE = [
@@ -69,11 +70,7 @@ class Work
       status, response = Libra2::api('GET', "works/#{id}")
       if Libra2::status_ok? status
          if response['works'] && response['works'].length > 0
-            work = response['works'][0]
-            # The date is received as a full date and time, instead of just a day.
-            work['embargo_end_date'] = work['embargo_end_date'].split("T")[0] if work['embargo_end_date'].present?
-
-            return work
+            return response['works'][0]
          else
             return {}
          end
@@ -169,6 +166,24 @@ class Work
       return( get_options( 'rights' ) )
    end
 
+   def self.suggested_file_label_base( work )
+
+     # set the defaults
+     next_ix = work['filesets'].length + 1
+     last_name = 'last'
+     first_name = 'first'
+     year = Time.now.year
+     degree = 'degree'
+
+     # update if we can
+     last_name = work['author_last_name'].split( ' ' )[ 0 ] unless work['author_last_name'].blank?
+     first_name = work['author_first_name'].split( ' ' )[ 0 ] unless work['author_first_name'].blank?
+     degree = work['degree'].split( ' ' )[ 0 ] unless work['degree'].blank?
+
+     # construct the template
+     return "#{next_ix}_#{last_name}_#{first_name}_#{year}_#{degree}"
+   end
+
   private
 
   def self.get_options( which )
@@ -180,4 +195,5 @@ class Work
         return []
      end
   end
+
 end

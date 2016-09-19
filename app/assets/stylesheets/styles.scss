@@ -105,10 +105,19 @@ table.work {
 	color: #aaaaaa;
 }
 
+.edit-dialog .label-div {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 .edit-dialog .field_help {
   padding-top: 15px;
   font-size: small;
-  width: 300px;
+  width: 400px;
+}
+
+.edit-dialog #file-label {
+  width: 500px;
 }
 
 button.remove-adviser {

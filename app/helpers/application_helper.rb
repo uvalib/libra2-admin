@@ -1,7 +1,7 @@
 module ApplicationHelper
-   def edit_button(key, work_id)
+   def edit_button( key, work )
+      data = { id: work['id'], label: key.humanize.titlecase, field: key }
       if Work::EDITABLE.include?(key)
-         data = { id: work_id, label: key.humanize.titlecase, field: key }
          data[:type] = Work::EDITABLE_TYPE[ key ] if Work::EDITABLE_TYPE[ key ].present?
 
          data[:help] = Work::HELP_BY_TYPE[ 'default' ]
@@ -9,7 +9,9 @@ module ApplicationHelper
          return content_tag(:button, "Edit", { class: "edit btn btn-primary", data: data }) unless key == 'admin_notes'
          return content_tag(:button, "Add", { class: "add btn btn-primary", data: data })
       elsif key == "filesets"
-         return content_tag(:button, "Upload File", class: "btn btn-primary file-upload")
+         data[:label] = Work.suggested_file_label_base( work )
+         data[:help] = Work::HELP_BY_TYPE[ 'file-upload' ]
+         return content_tag(:button, "Upload File", { class: "btn btn-primary file-upload", data: data })
       else
          return ""
       end
@@ -49,7 +51,7 @@ module ApplicationHelper
          }
 			   hidden = content_tag(:input, "", { value: value.join("\t"), type: "hidden", class: "inner-value"})
 			   return hidden + raw(advisers.join( '<br>---<br>' ))
-      when 'create_date', 'modified_date'
+      when 'create_date', 'modified_date', 'embargo_end_date'
          return( formatted_date( value ) )
       else
          return value
