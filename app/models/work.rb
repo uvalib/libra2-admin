@@ -19,6 +19,7 @@ class Work
          'language',
          'related_links',
          'sponsoring_agency',
+         'published_date',
    ]
    #    "advisers:["dpg3k\r\nDavid\r\nGoldstein\r\nUniversity of Virginia Library\r\nUniversity of Virginia"]
 # advisers         - An array of advisers, each being a CRLF separated list of computingId, first name, last name, department, institution (optional)
