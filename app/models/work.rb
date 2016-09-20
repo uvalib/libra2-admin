@@ -73,6 +73,7 @@ class Work
       'keywords' => 'textarea-split',
       'notes' => 'textarea',
       'language' => 'combo',
+      'published_date' => 'date',
       'related_links' => 'textarea-split',
       'rights' => 'combo',
       'sponsoring_agency' => 'textarea-split',
