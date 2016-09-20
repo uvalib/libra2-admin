@@ -137,7 +137,7 @@ class Work
          return response['works']
       else
          Rails.logger.error "==> Work.search: returns #{status} (#{response})"
-         return {}
+         return []
       end
    end
 
