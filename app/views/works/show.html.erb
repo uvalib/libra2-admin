@@ -4,8 +4,11 @@
    </ul>
 </div>
 
-<h1 class="work-title">Work "<%= @work['id'] %>"</h1>
-<%= link_to 'Delete', @work, method: :delete, data: { confirm: 'Are you sure you really want to permanently remove this work?' }, class: "btn btn-primary work-delete" %>
+<h1 class="work-title">Work: <%= @work['id'] %> (title "<%= @work['title'] %>")</h1>
+<% if is_published( @work ) == false %>
+   <%= link_to 'Delete', @work, method: :delete, data: { confirm: 'Are you sure you really want to permanently remove this work?' }, class: "btn btn-primary work-delete" %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <table class="work">
@@ -14,12 +17,12 @@
       <th>Value</th>
       <th></th>
    </tr>
-   <% @work.each { |key, value| %>
+   <% Work::DISPLAYABLE.each { |field| %>
       <tr>
-         <td><strong><%= key.humanize.titlecase %></strong></td>
-         <td class="value" id="<%= "work_#{key.underscore}" %>"><%= format_value(key,value) %></td>
+         <td><strong><%= field.humanize.titlecase %></strong></td>
+         <td class="value" id="<%= "work_#{field.underscore}" %>"><%= format_value( field, @work[field]) %></td>
          <td>
-            <%= edit_button(key, @work ) %>
+            <%= edit_button( field, @work ) %>
          </td>
       </tr>
    <% } %>

@@ -1,4 +1,44 @@
 class Work
+
+   #
+   # specify which fields are displayable
+   #
+   DISPLAYABLE = [
+      'id',
+      'status',
+      'identifier',
+      'create_date',
+      'modified_date',
+      'published_date',
+
+      # can be edited by depositor
+      'title',
+      'author_email',
+      'author_first_name',
+      'author_last_name',
+      'author_department',
+      'author_institution',
+      'advisers',
+      'abstract',
+      'rights',
+      'keywords',
+      'language',
+      'related_links',
+      'sponsoring_agency',
+      'notes',
+      'degree',
+
+      # can only be edited by admin
+      'depositor_email',
+      'embargo_state',
+      'embargo_end_date',
+      'admin_notes',
+      'filesets'
+   ]
+
+   #
+   # specify which fields are editable
+   #
    EDITABLE = [
          'abstract',
          'admin_notes',
@@ -21,8 +61,6 @@ class Work
          'sponsoring_agency',
          'published_date',
    ]
-   #    "advisers:["dpg3k\r\nDavid\r\nGoldstein\r\nUniversity of Virginia Library\r\nUniversity of Virginia"]
-# advisers         - An array of advisers, each being a CRLF separated list of computingId, first name, last name, department, institution (optional)
 
    EDITABLE_TYPE = {
       'abstract' => 'textarea',

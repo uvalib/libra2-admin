@@ -1,5 +1,10 @@
 module WorksHelper
 
+  def is_published( work )
+    return false if work['status'].nil?
+    return work['status'] == 'submitted'
+  end
+
   def formatted_date( date )
      return '' if date.blank?
      d = ''

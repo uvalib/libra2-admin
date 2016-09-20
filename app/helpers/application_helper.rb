@@ -1,4 +1,5 @@
 module ApplicationHelper
+
    def edit_button( key, work )
       data = { id: work['id'], label: key.humanize.titlecase, field: key }
       if Work::EDITABLE.include?(key)
