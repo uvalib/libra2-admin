@@ -1,7 +1,7 @@
 FROM alpine:3.4
 
 # Add necessary packages
-RUN apk --update add bash tzdata ruby ruby-dev build-base nodejs sqlite-dev zlib-dev libxml2-dev libxslt-dev libffi-dev openssl
+RUN apk --update add bash tzdata ruby ruby-dev build-base nodejs sqlite-dev zlib-dev libxml2-dev libxslt-dev libffi-dev ca-certificates
 
 # Create the run user and group
 RUN addgroup webservice && adduser webservice -G webservice -D
