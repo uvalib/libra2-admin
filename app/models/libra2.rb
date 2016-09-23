@@ -9,22 +9,26 @@ class Libra2
 		url = "#{url}&#{arr}" if arr.length > 0
     Rails.logger.info "==> #{method} #{url} #{payload.inspect}"
     timer = TimingBehavior.new( url ).start
-		case method
-		when 'GET'
-			response = HTTParty.get(url, headers: content_type_header )
-		when 'POST'
-			response = HTTParty.post(url, body: JSON.dump(payload), headers: content_type_header )
-		when 'PUT'
-			response = HTTParty.put(url, body: JSON.dump(payload), headers: content_type_header )
-		when 'DELETE'
-			response = HTTParty.delete(url, headers: content_type_header )
-		else
-			return :internal_error, 'Unrecognized method'
-    end
-    timer.log_completed( "(status #{response.code})")
+		begin
+			case method
+			when 'GET'
+				response = HTTParty.get(url, headers: content_type_header )
+			when 'POST'
+				response = HTTParty.post(url, body: JSON.dump(payload), headers: content_type_header )
+			when 'PUT'
+				response = HTTParty.put(url, body: JSON.dump(payload), headers: content_type_header )
+			when 'DELETE'
+				response = HTTParty.delete(url, headers: content_type_header )
+			else
+				return :internal_error, 'Unrecognized method'
+			end
 
-		return response.code, response if status_ok?( response.code )
-		return response.code, response.message
+      timer.log_completed( "(status #{response.code})")
+		  return response.code, response if status_ok?( response.code )
+		  return response.code, response.message
+		rescue => ex
+			return :internal_error, "Endpoint returns #{ex}"
+		end
 
 	end
 
