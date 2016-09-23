@@ -89,12 +89,6 @@ class Work
       'file-upload' => 'Select a file, update the file label as necessary and hit "Apply"'
    }
 
-   EMBARGO_STATE = [
-      { text: 'No Embargo', value: 'open' },
-      { text: 'UVA Only Embargo', value: 'authenticated' },
-      { text: 'Metadata Only Embargo', value: 'restricted' }
-   ]
-
    def self.all
       status, response = Libra2::api('GET', 'works')
       if Libra2::status_ok? status
@@ -190,19 +184,33 @@ class Work
    end
 
    def self.degree_options
-      return( get_options( 'degrees' ) )
+     Rails.cache.fetch( "options/degree_options", expires_in: 30.minutes ) do
+       get_options( 'degrees' )
+     end
    end
 
    def self.department_options
-      return( get_options( 'departments' ) )
+     Rails.cache.fetch( "options/department_options", expires_in: 30.minutes ) do
+       get_options( 'departments' )
+     end
    end
 
    def self.language_options
-      return( get_options( 'languages' ) )
+     Rails.cache.fetch( "options/language_options", expires_in: 30.minutes ) do
+       get_options( 'languages' )
+     end
    end
 
    def self.rights_options
-      return( get_options( 'rights' ) )
+     Rails.cache.fetch( "options/rights_options", expires_in: 30.minutes ) do
+       get_options( 'rights' )
+     end
+   end
+
+   def self.embargo_options
+     Rails.cache.fetch( "options/embargo_options", expires_in: 30.minutes ) do
+       get_options( 'embargos' )
+     end
    end
 
    def self.suggested_file_label_base( work )
