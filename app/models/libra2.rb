@@ -33,7 +33,7 @@ class Libra2
 	end
 
 	def self.file_upload_url(user)
-		return "#{LIBRA2API_URL}/#{api_namespace}/files?user=#{user}"
+		return "#{LIBRA2UPLOAD_URL}/#{api_namespace}/files?user=#{user}"
 	end
 
 	def self.check_libra2_endpoint
