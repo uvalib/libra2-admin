@@ -2,7 +2,7 @@ class Libra2
 
 	def self.api(method, address, data = {}, payload = {})
 
-		url = "#{LIBRA2_URL}/#{api_namespace}/#{address}?auth=#{API_TOKEN}"
+		url = "#{LIBRA2API_URL}/#{api_namespace}/#{address}?auth=#{API_TOKEN}"
 		arr = data.to_a
 		arr = arr.map { |pair| "#{pair[0]}=#{pair[1]}"}
 		arr = arr.join("&")
@@ -33,11 +33,11 @@ class Libra2
 	end
 
 	def self.file_upload_url(user)
-		return "#{LIBRA2_URL}/#{api_namespace}/files?user=#{user}"
+		return "#{LIBRA2API_URL}/#{api_namespace}/files?user=#{user}"
 	end
 
 	def self.check_libra2_endpoint
-		return healthcheck( LIBRA2_URL )
+		return healthcheck( LIBRA2API_URL )
 	end
 
 	def self.check_userinfo_endpoint
