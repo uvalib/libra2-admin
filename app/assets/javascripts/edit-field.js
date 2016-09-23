@@ -24,7 +24,7 @@
                 field.html(val);
             } else if( split === true ) {
 				field.text(val.split(",").join(","));
-			} else if (key === 'advisers') {
+			} else if (key === 'advisors') {
 				val = window.getAdviserDataFormatted();
 				field.html(val);
 			} else {
@@ -36,7 +36,7 @@
 		function submitChange() {
 			message.hide();
 			var data = {};
-			if (key === 'advisers')
+			if (key === 'advisors')
 				data["work["+key+"]"] = window.getAdviserData();
 			else
 				data["work["+key+"]"] = input.val();
@@ -76,7 +76,7 @@
 		var dialogs = {
 			"text": initDialog("#dialog-text-input", 450, 350),
 			"textarea": initDialog("#dialog-textarea-input", 450, 650),
-			"advisers": initDialog("#dialog-advisers-input", 550, 650),
+			"advisors": initDialog("#dialog-advisors-input", 550, 650),
 			"combo": initDialog("#dialog-combo-input", 650, 300),
             "date": initDialog("#dialog-date-input", 450, 350)
 		};
@@ -139,7 +139,7 @@
 					}
 				}
 			}
-			if (type === 'advisers') {
+			if (type === 'advisors') {
 				window.setInitialAdviserData(input, val);
 			} else if (!append)
 				input.val(val);

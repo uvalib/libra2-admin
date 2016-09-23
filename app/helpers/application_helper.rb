@@ -44,7 +44,7 @@ module ApplicationHelper
             html += content_tag(:div, raw(left+right), { class: "media-box"})
          }
          return content_tag(:div, raw(html), { class: "file-sets" })
-      when 'advisers'
+      when 'advisors'
          advisers = []
          value.each { |adviser|
 				fields = adviser.split("\n")

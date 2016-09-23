@@ -18,7 +18,7 @@ class Work
       'author_last_name',
       'author_department',
       'author_institution',
-      'advisers',
+      'advisors',
       'abstract',
       'rights',
       'keywords',
@@ -42,7 +42,7 @@ class Work
    EDITABLE = [
          'abstract',
          'admin_notes',
-         'advisers',
+         'advisors',
          'author_email',
          'author_first_name',
          'author_last_name',
@@ -66,7 +66,7 @@ class Work
    EDITABLE_TYPE = {
       'abstract' => 'textarea',
       'admin_notes' => 'textarea-append',
-      'advisers' => 'advisers',
+      'advisors' => 'advisors',
       'author_department' => 'combo',
       'degree' => 'combo',
       'embargo_end_date' => 'date',
@@ -84,7 +84,7 @@ class Work
       'default' => 'Enter the value of the field or clear it and hit "Apply"',
       'textarea-append' => 'Enter the value to be added to the field and hit "Apply"',
       'textarea-split' => 'Enter the value(s) of the field, separated by commas or clear it and hit "Apply"',
-      'advisers' => 'Enter a UVA Computing ID to automatically fill the remaining fields for this person.',
+      'advisors' => 'Enter a UVA Computing ID to automatically fill the remaining fields for this person.',
       'date' => 'Select the appropriate date and hit "Apply"',
       'combo' => 'Select the appropriate value and hit "Apply"',
       'file-upload' => 'Select a file, update the file label as necessary and hit "Apply"'
@@ -145,7 +145,7 @@ class Work
          next if params[field].nil?
          #puts "==> #{field} == '#{params[field]}'"
          case field
-            when 'advisers'
+            when 'advisors'
                p["work"][field] = params[field].split("\t")
             when 'admin_notes'
                # these fields requires an array passed to it.
