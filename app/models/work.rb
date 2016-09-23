@@ -49,6 +49,7 @@ class Work
          'embargo_end_date',
          'embargo_state',
          'degree',
+         'filesets',
          'notes',
          'rights',
          'title',

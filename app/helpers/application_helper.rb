@@ -2,19 +2,24 @@ module ApplicationHelper
 
    def edit_button( key, work )
       data = { id: work['id'], label: key.humanize.titlecase, field: key }
-      if Work::EDITABLE.include?(key)
-         data[:type] = Work::EDITABLE_TYPE[ key ] if Work::EDITABLE_TYPE[ key ].present?
+      if can_edit_field?( key, work )
 
-         data[:help] = Work::HELP_BY_TYPE[ 'default' ]
-         data[:help] = Work::HELP_BY_TYPE[ data[:type] ] if Work::HELP_BY_TYPE[ data[:type] ].present?
-         return content_tag(:button, "Edit", { class: "edit btn btn-primary", data: data }) unless key == 'admin_notes'
-         return content_tag(:button, "Add", { class: "add btn btn-primary", data: data })
-      elsif key == "filesets"
-         data[:label] = Work.suggested_file_label_base( work )
-         data[:help] = Work::HELP_BY_TYPE[ 'file-upload' ]
-         return content_tag(:button, "Upload File", { class: "btn btn-primary file-upload", data: data })
+         # handle a special case...
+         if key == 'filesets'
+           data[:label] = Work.suggested_file_label_base( work )
+           data[:help] = Work::HELP_BY_TYPE[ 'file-upload' ]
+           return content_tag(:button, "Upload File", { class: "btn btn-primary file-upload", data: data })
+         else
+            data[:type] = Work::EDITABLE_TYPE[ key ] if Work::EDITABLE_TYPE[ key ].present?
+
+            data[:help] = Work::HELP_BY_TYPE[ 'default' ]
+            data[:help] = Work::HELP_BY_TYPE[ data[:type] ] if Work::HELP_BY_TYPE[ data[:type] ].present?
+            return content_tag(:button, "Edit", { class: "edit btn btn-primary", data: data }) unless key == 'admin_notes'
+            return content_tag(:button, "Add", { class: "add btn btn-primary", data: data })
+         end
       else
-         return ""
+        # cant edit field, no edit button
+        return ''
       end
    end
 
@@ -58,4 +63,23 @@ module ApplicationHelper
          return value
       end
    end
+
+  private
+
+  #
+  # determine conditions for being able to edit specific fields
+  #
+  def can_edit_field?( field, work )
+
+    # not if they are not defined as editable
+    return false if Work::EDITABLE.include?( field ) == false
+
+    # if we are not published them some fields cannot be edited
+    if is_published( work ) == false
+       return false if [ 'embargo_end_date', 'embargo_state', 'published_date' ].include?( field )
+    end
+
+    return true
+  end
+
 end
