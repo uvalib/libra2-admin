@@ -76,6 +76,17 @@
 <% end %>
 </div>
 
+<div id="dialog-date-input" title="Edit Field" class="edit-dialog" style="display: none;">
+  <%= form_tag() do %>
+      <div class="message"></div>
+      <div><label for="user-date-input"></label>:</div>
+      <input id="user-date-input" type="text" class="input-field" />
+      <div class="field_help"></div>
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+  <% end %>
+</div>
+
 <div id="dialog-advisers-input" title="Edit Advisers" class="edit-dialog" style="display: none;">
 <%= form_tag() do %>
    <div class="message"></div>

@@ -77,7 +77,8 @@
 			"text": initDialog("#dialog-text-input", 450, 350),
 			"textarea": initDialog("#dialog-textarea-input", 450, 650),
 			"advisers": initDialog("#dialog-advisers-input", 550, 650),
-			"combo": initDialog("#dialog-combo-input", 650, 300)
+			"combo": initDialog("#dialog-combo-input", 650, 300),
+            "date": initDialog("#dialog-date-input", 450, 350)
 		};
 
 		$("table.work .edit, table.work .add").on("click", function(ev) {
@@ -90,12 +91,6 @@
             var labelText = button.data("label");
 			var type = button.data("type");
 			if (!type) type = "text";
-
-			var isDate = false;
-			if (type === 'date') {
-				type = "text";
-				isDate = true;
-			}
 
 			// special case where we append new data instead of replacing it
 			append = false;
@@ -154,8 +149,8 @@
 			message.hide();
 			dialog = dialogs[type];
 			dialog.find(".input-field").attr("name", key);
-			if (isDate) {
-				$( '#user-text-input' ).datepicker({
+			if( type === 'date' ) {
+				$( '#user-date-input' ).datepicker({
 					dateFormat: "yy-mm-dd"
 				});
 			}
