@@ -93,7 +93,9 @@ class Work
    def self.all
       status, response = Libra2::api('GET', 'works')
       if Libra2::status_ok? status
-         return response['works']
+         return response['works'] if response['works']
+         Rails.logger.error "==> Work.all: returns empty response (#{response})"
+         return []
       else
          Rails.logger.error "==> Work.all: returns #{status} (#{response})"
          return []
