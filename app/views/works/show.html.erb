@@ -5,8 +5,11 @@
 </div>
 
 <h1 class="work-title">Work: <%= @work['id'] %> (title "<%= @work['title'] %>")</h1>
-<% if is_published( @work ) == false %>
-   <%= link_to 'Delete', @work, method: :delete, data: { confirm: 'Are you sure you really want to permanently remove this work?' }, class: "btn btn-primary work-delete" %>
+<% if is_published( @work ) %>
+   <%#= link_to 'Un-Publish', @work, method: :get, data: { confirm: 'Are you sure you want to un-publish this work?' }, class: "btn btn-warning work-unpublish" %>
+<% else %>
+   <%#= link_to 'Publish', @work, method: :get, data: { confirm: 'Are you sure you want to publish this work?' }, class: "btn btn-warning work-publish" %>
+   <%= link_to 'Delete', @work, method: :delete, data: { confirm: 'Are you sure you really want to permanently remove this work?' }, class: "btn btn-danger work-delete" %>
 <% end %>
 
 <p id="notice"><%= notice %></p>
