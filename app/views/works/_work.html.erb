@@ -4,5 +4,5 @@
   <td><%= work['id'] %></td>
   <td><%= work['author_email'] %></td>
   <td><%= truncate( work['title'], length: 75 ) %></td>
-  <td><%= link_to 'Edit', "/works/#{work['id']}" %></td>
+  <td><%= link_to 'Edit', "/works/#{work['id']}", class: "btn btn-primary" %></td>
 </tr>

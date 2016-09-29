@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Audit History</h1>
+
+<%= render "common/nav_links" %>
+
+<table class="audits-index data-table four-col display compact">
+
+  <%= render "header" %>
+
+  <tbody>
+
+    <% @audits.each do |audit| %>
+      <%= render "audit", audit: audit %>
+    <% end %>
+
+  </tbody>
+</table>
+
+<br>

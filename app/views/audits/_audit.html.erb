@@ -1,0 +1,6 @@
+<tr>
+  <td><%= formatted_date( audit['created_at'] ) %></td>
+  <td><%= audit['user_id'] %></td>
+  <td><%= audit['work_id'] %></td>
+  <td><%= truncate( audit['what'].gsub( '\\r\\n', ', '), length: 110 ) %></td>
+</tr>
