@@ -29,6 +29,15 @@
          </td>
       </tr>
    <% } %>
+  <tr>
+    <td><strong>Audit</strong></td>
+    <td class="value" id="work_audit">
+      <% @audits.each do |audit| %>
+        <%= raw( "#{formatted_date( audit['created_at'] )}: #{audit['user_id']} => #{truncate( audit['what'], length: 96 )}" ) %><br>
+      <% end %>
+    </td>
+    <td></td>
+  </tr>
 </table>
 
 <div id="dialog-file-input" title="Upload File" class="edit-dialog" style="display: none;">
