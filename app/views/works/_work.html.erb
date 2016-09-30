@@ -1,6 +1,6 @@
 <tr>
-  <td><%= formatted_date( work['modified_date'] ) %></td>
-  <td><%= formatted_date( work['create_date'] ) %></td>
+  <td><%= localize_date_string(work['modified_date'] ) %></td>
+  <td><%= localize_date_string(work['create_date'] ) %></td>
   <td><%= work['id'] %></td>
   <td><%= work['author_email'] %></td>
   <td><%= truncate( work['title'], length: 75 ) %></td>

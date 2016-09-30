@@ -58,7 +58,7 @@ module ApplicationHelper
 			   hidden = content_tag(:input, "", { value: value.join("\t"), type: "hidden", class: "inner-value"})
 			   return hidden + raw(advisers.join( '<br>---<br>' ))
       when 'create_date', 'modified_date', 'embargo_end_date'
-         return( formatted_date( value ) )
+         return( localize_date_string( value ) )
       else
          return value
       end

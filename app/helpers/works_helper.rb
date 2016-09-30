@@ -1,23 +1,23 @@
 module WorksHelper
 
+  #
+  # is this a published work?
+  #
   def is_published( work )
     return false if work['status'].nil?
     return work['status'] == 'submitted'
   end
 
-  def formatted_date( date )
-     return '' if date.blank?
-     d = ''
-     t = ''
-     if match = date.match( /^(\d{4}-\d{2}-\d{2}).*$/ )
-        d = match.captures[ 0 ]
-     end
-
-     if match = date.match( /(\d{2}:\d{2}:\d{2}).*$/ )
-       t = match.captures[ 0 ]
-     end
-
-     return "#{d} #{t}"
+  #
+  # if we get a date with timezone identification, convert to local time
+  #
+  def localize_date_string( date )
+    return '' if date.blank?
+    begin
+       dt = Time.zone.parse( date )
+       return dt.strftime( '%Y-%m-%d %H:%M:%S' )
+    rescue => e
+    end
+    return date
   end
-
 end
