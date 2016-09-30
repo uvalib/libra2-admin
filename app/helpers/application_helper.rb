@@ -26,6 +26,8 @@ module ApplicationHelper
    def format_value(key, value)
 
       case key
+      when 'id'
+         return raw( format_id( @work ) )
       when 'admin_notes'
          return raw(value.join( '<br>---<br>' ))
       when 'keywords', 'related_links', 'sponsoring_agency'
@@ -66,6 +68,14 @@ module ApplicationHelper
 
    def format_audit( audit )
      return( "#{localize_date_string(audit['created_at'] )}|#{audit['user_id']}|#{truncate(audit['what'], length: 80 )}" )
+   end
+
+   def format_id( work )
+     if is_published( work )
+        return link_to( work['id'], work['url'],target: '_blank'  )
+     else
+        return work['id']
+     end
    end
 
   private
