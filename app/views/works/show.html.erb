@@ -33,7 +33,7 @@
     <td><strong>Audit</strong></td>
     <td class="value" id="work_audit">
       <% @audits.each do |audit| %>
-        <%= raw( "#{localize_date_string(audit['created_at'] )}: #{audit['user_id']} => #{truncate(audit['what'], length: 96 )}" ) %><br>
+        <%= raw( format_audit( audit ) ) %><br>
       <% end %>
     </td>
     <td></td>
