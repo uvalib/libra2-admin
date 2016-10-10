@@ -173,6 +173,30 @@ class Work
       end
    end
 
+   def self.publish( user, id )
+     p = { "work" => { "status" => "submitted" } }
+     status, response = Libra2::api('PUT', "works/#{id}", { user: user }, p)
+
+     if Libra2::status_ok? status
+       Rails.logger.error "==> Work.publish: returns #{status} (#{response})"
+       return nil
+     else
+       return response
+     end
+   end
+
+   def self.unpublish( user, id )
+     p = { "work" => { "status" => "pending" } }
+     status, response = Libra2::api('PUT', "works/#{id}", { user: user }, p)
+
+     if Libra2::status_ok? status
+       Rails.logger.error "==> Work.unpublish: returns #{status} (#{response})"
+       return nil
+     else
+       return response
+     end
+   end
+
    def self.destroy(user, id)
       # DELETE: http://service.endpoint/api/v1/works/:id?auth=token&user=user
       status, response = Libra2::api('DELETE', "works/#{id}", { user: user })

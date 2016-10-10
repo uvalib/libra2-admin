@@ -55,6 +55,32 @@ class WorksController < ApplicationController
     end
   end
 
+  def publish
+    respond_to do |format|
+      errors = Work.publish( current_user, params[:id] )
+      if !errors
+        format.json { render json: {}, status: :ok }
+        format.html { redirect_to action: 'show', id: params[:id], notice: 'Work was successfully published.' }
+      else
+        format.json { render json: { error: errors }, status: :unprocessable_entity }
+        format.html { redirect_to action: 'show', id: params[:id], notice: 'Error publishing work.' }
+      end
+    end
+  end
+
+  def unpublish
+    respond_to do |format|
+      errors = Work.unpublish( current_user, params[:id] )
+      if !errors
+        format.json { render json: {}, status: :ok }
+        format.html { redirect_to action: 'show', id: params[:id], notice: 'Work was successfully unpublished.' }
+      else
+        format.json { render json: { error: errors }, status: :unprocessable_entity }
+        format.html { redirect_to action: 'show', id: params[:id], notice: 'Error unpublishing work.' }
+      end
+    end
+  end
+
   # DELETE /works/1
   # DELETE /works/1.json
   def destroy

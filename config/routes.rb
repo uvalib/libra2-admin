@@ -10,6 +10,11 @@ Rails.application.routes.draw do
 		  get 'computing_id'
 	  end
   end
+
+  # publish and unpublish endpoints
+  put '/works/:id/publish' => 'works#publish'
+  put '/works/:id/unpublish' => 'works#unpublish'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :healthcheck, only: [ :index ]
   resources :version, only: [ :index ]
