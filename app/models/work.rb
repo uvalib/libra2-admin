@@ -145,10 +145,15 @@ class Work
          #puts "==> #{field} == '#{params[field]}'"
          case field
             when 'advisors'
-               p["work"][field] = params[field].split("\t")
+               # special case where we are clearing the field
+               if params[field] == "\n\n\n\n"
+                 p["work"][field] = ['']
+               else
+                 p["work"][field] = params[field].split("\t")
+               end
             when 'admin_notes'
-               # these fields requires an array passed to it.
-               p["work"][field] = [ params[field] ]
+               # these fields requires an array passed to it; add a timestamp too
+               p["work"][field] = [ "#{DateTime.now} | #{params[field]}" ]
 
             when 'keywords', 'related_links', 'sponsoring_agency'
                # special case where we are clearing the field
