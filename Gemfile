@@ -56,3 +56,4 @@ gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails'
 
 gem 'rest-client'
+gem 'bootstrap-sass'
