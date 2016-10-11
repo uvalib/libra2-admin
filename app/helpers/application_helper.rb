@@ -29,7 +29,7 @@ module ApplicationHelper
       when 'id'
          return raw( format_id( @work ) )
       when 'admin_notes'
-         return raw(value.join( '<br>---<br>' ))
+         return raw(value.reverse.join( '<br>---<br>' ))
       when 'keywords', 'related_links', 'sponsoring_agency'
          return raw(value.join( ',' ))
       when 'filesets'
