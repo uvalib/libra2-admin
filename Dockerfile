@@ -18,14 +18,15 @@ WORKDIR $APP_HOME
 RUN gem install bundler io-console --no-ri --no-rdoc
 RUN gem install \
 nio4r:1.2.1 \
-byebug:9.0.5 \
+byebug:9.0.6 \
 debug_inspector:0.0.2 \
 ffi:1.9.14 \
 json:2.0.2 \
 puma:3.6.0 \
-nokogiri:1.6.8 \
+nokogiri:1.6.8.1 \
 websocket-driver:0.6.4 \
 bigdecimal:1.2.7 \
+unf_ext:0.0.7.2 \
 --no-ri --no-rdoc
 
 # install the app and bundle
