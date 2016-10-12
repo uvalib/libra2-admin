@@ -1,4 +1,13 @@
 <tr>
+  <td>
+    <% if work['source'] == 'optional' %>
+       <span class = "label label-warning">O</span>
+    <% else %>
+       <% if work['source'] == 'sis' %>
+          <span class = "label label-danger">S</span>
+       <% end %>
+    <% end %>
+  </td>
   <td><%= localize_date_string(work['modified_date'] ) %></td>
   <td><%= localize_date_string(work['create_date'] ) %></td>
   <td><%= format_id( work ) %></td>
