@@ -20,4 +20,14 @@ module WorksHelper
     end
     return date
   end
+
+  #
+  # create label to indicate what type of work this is
+  #
+  def work_label( work_source )
+    return '<span class="label label-warning">O</span>' if work_source == 'optional'
+    return '<span class="label label-danger">S</span>' if work_source == 'sis'
+    return ''
+  end
+
 end
