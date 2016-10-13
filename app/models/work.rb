@@ -49,6 +49,7 @@ class Work
        'author_institution',
        'author_last_name',
        'degree',
+       'depositor_email',
        'embargo_end_date',
        'embargo_state',
        'filesets',
