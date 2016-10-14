@@ -16,9 +16,10 @@ Rails.application.routes.draw do
   put '/works/:id/unpublish' => 'works#unpublish'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :audits, only: [ :index ]
+  resources :exports, only: [ :index ]
   resources :healthcheck, only: [ :index ]
   resources :version, only: [ :index ]
-  resources :audits, only: [ :index ]
 
   # You can have the root of your site routed with "root"
   root 'works#draft'

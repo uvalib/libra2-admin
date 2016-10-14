@@ -1,7 +1,7 @@
 (function() {
 	"use strict";
 	function initPage() {
-		$('.data-table.seven-col').DataTable({
+		$('.data-table.works-index').DataTable({
 			"aoColumns": [
                 {"bSortable": false},
 				null,

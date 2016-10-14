@@ -1,7 +1,7 @@
 (function() {
 	"use strict";
 	function initPage() {
-		$('.data-table.four-col').DataTable({
+		$('.data-table.audits-index').DataTable({
 			"aoColumns": [
 				null,
 				null,
@@ -10,7 +10,6 @@
 			],
             "aaSorting": [ [ 0, "desc" ] ]
 		});
-
 	}
 
 	document.addEventListener("turbolinks:load", function() {
