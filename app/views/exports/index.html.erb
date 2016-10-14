@@ -4,6 +4,9 @@
 
 <%= render "common/nav_links" %>
 
+<input type="hidden" id="api-endpoint" value="<%= "#{LIBRA2API_URL}/api/v1" %>">
+<input type="hidden" id="api-token" value="<%= API_TOKEN %>">
+
 <table class="exports-index data-table display compact">
 
   <thead>
