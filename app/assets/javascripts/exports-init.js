@@ -25,7 +25,7 @@
             ev.preventDefault();
             var start_date = getDateOrToday( "work-export-start-date" );
             var end_date = getDateOrToday( "work-export-end-date");
-            getExports( "works", start_date, end_date );
+            getExports( "works/search", start_date, end_date );
         });
         $("#fileset-export").on("click", function( ev ) {
             ev.preventDefault();
