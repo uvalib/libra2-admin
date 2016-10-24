@@ -4,18 +4,22 @@ module ApplicationHelper
       data = { id: work['id'], label: key.humanize.titlecase, field: key }
       if can_edit_field?( key, work )
 
-         # handle a special case...
-         if key == 'filesets'
-           data[:label] = Work.suggested_file_label_base( work )
-           data[:help] = Work::HELP_BY_TYPE[ 'file-upload' ]
-           return content_tag(:button, "Upload File", { class: "btn btn-primary file-upload", data: data })
-         else
-            data[:type] = Work::EDITABLE_TYPE[ key ] if Work::EDITABLE_TYPE[ key ].present?
+         case key
+           when 'filesets'
+              data[:label] = Work.suggested_file_label_base( work )
+              data[:help] = Work::HELP_BY_TYPE[ 'file-upload' ]
+              return content_tag(:button, "Upload File", { class: "btn btn-primary file-upload", data: data })
 
-            data[:help] = Work::HELP_BY_TYPE[ 'default' ]
-            data[:help] = Work::HELP_BY_TYPE[ data[:type] ] if Work::HELP_BY_TYPE[ data[:type] ].present?
-            return content_tag(:button, "Edit", { class: "edit btn btn-primary", data: data }) unless key == 'admin_notes'
-            return content_tag(:button, "Add", { class: "add btn btn-primary", data: data })
+           when 'admin_notes'
+             data[:type] = Work::EDITABLE_TYPE[ key ]
+             data[:help] = Work::HELP_BY_TYPE[ data[:type] ]
+             return content_tag(:button, "Add", { class: "add btn btn-primary", data: data })
+
+           else
+              data[:type] = Work::EDITABLE_TYPE[ key ] if Work::EDITABLE_TYPE[ key ].present?
+              data[:help] = Work::HELP_BY_TYPE[ 'default' ]
+              data[:help] = Work::HELP_BY_TYPE[ data[:type] ] if Work::HELP_BY_TYPE[ data[:type] ].present?
+              return content_tag(:button, "Edit", { class: "edit btn btn-primary", data: data })
          end
       else
         # cant edit field, no edit button
