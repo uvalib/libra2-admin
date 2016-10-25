@@ -172,9 +172,9 @@ class Work
       status, response = Libra2::api('PUT', "works/#{id}", { user: user }, p)
 
       if Libra2::status_ok? status
-         Rails.logger.error "==> Work.update: returns #{status} (#{response})"
          return nil
       else
+         Rails.logger.error "==> Work.update: returns #{status} (#{response})"
          return response
       end
    end
@@ -184,9 +184,9 @@ class Work
      status, response = Libra2::api('PUT', "works/#{id}", { user: user }, p)
 
      if Libra2::status_ok? status
-       Rails.logger.error "==> Work.publish: returns #{status} (#{response})"
        return nil
      else
+       Rails.logger.error "==> Work.publish: returns #{status} (#{response})"
        return response
      end
    end
@@ -196,9 +196,9 @@ class Work
      status, response = Libra2::api('PUT', "works/#{id}", { user: user }, p)
 
      if Libra2::status_ok? status
-       Rails.logger.error "==> Work.unpublish: returns #{status} (#{response})"
        return nil
      else
+       Rails.logger.error "==> Work.unpublish: returns #{status} (#{response})"
        return response
      end
    end
@@ -208,9 +208,9 @@ class Work
       status, response = Libra2::api('DELETE', "works/#{id}", { user: user })
 
       if Libra2::status_ok? status
-         Rails.logger.error "==> Work.destroy: returns #{status} (#{response})"
          return nil
       else
+         Rails.logger.error "==> Work.destroy: returns #{status} (#{response})"
          return response
       end
    end
