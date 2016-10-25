@@ -68,15 +68,15 @@ class Work
       'admin_notes' => 'textarea-append',
       'advisors' => 'advisors',
       'author_department' => 'combo',
-      'degree' => 'combo',
+      'degree' => 'dropdown',
       'embargo_end_date' => 'date',
-      'embargo_state' => 'combo',
+      'embargo_state' => 'dropdown',
       'keywords' => 'textarea-split',
       'notes' => 'textarea',
-      'language' => 'combo',
+      'language' => 'dropdown',
       'published_date' => 'date',
       'related_links' => 'textarea-split',
-      'rights' => 'combo',
+      'rights' => 'dropdown',
       'sponsoring_agency' => 'textarea-split',
    }
 
@@ -86,7 +86,8 @@ class Work
       'textarea-split' => 'Enter the value(s) of the field, separated by commas or clear it and hit "Apply"',
       'advisors' => 'Enter a UVA Computing ID to automatically fill the remaining fields for this person.',
       'date' => 'Select the appropriate date and hit "Apply"',
-      'combo' => 'Select the appropriate value and hit "Apply"',
+      'dropdown' => 'Select the appropriate value and hit "Apply"',
+      'combo' => 'Select the appropriate value or enter a new one and hit "Apply"',
       'file-upload' => 'Select a file, update the file label as necessary and hit "Apply"'
    }
 

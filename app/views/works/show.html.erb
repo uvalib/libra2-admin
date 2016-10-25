@@ -76,16 +76,31 @@
 <% end %>
 </div>
 
-<div id="dialog-combo-input" title="Edit Field" class="edit-dialog" style="display: none;">
+<div id="dialog-dropdown-input" title="Edit Field" class="edit-dialog" style="display: none;">
 <%= form_tag() do %>
    <div class="message"></div>
-   <div><label for="user-combo-input"></label>:</div>
-   <select id="user-combo-input" class="input-field">
+   <div><label for="user-dropdown-input"></label>:</div>
+   <select id="user-dropdown-input" class="input-field">
    </select>
    <div class="field_help"></div>
    <!-- Allow form submission with keyboard without duplicating the dialog button -->
    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 <% end %>
+</div>
+
+<div id="dialog-combo-input" title="Edit Field" class="edit-dialog" style="display: none;">
+  <%= form_tag() do %>
+      <div class="message"></div>
+      <div><label for="user-combo-input"></label>:</div>
+      <div class="select-editable">
+      <select id="user-combo-input" class="input-field" onchange="this.nextElementSibling.value=this.value">
+      </select>
+      <input id="user-combo-edit" type="text" value="" />
+      </div>
+      <div class="field_help"></div>
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+  <% end %>
 </div>
 
 <div id="dialog-date-input" title="Edit Field" class="edit-dialog" style="display: none;">

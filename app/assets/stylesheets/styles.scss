@@ -100,7 +100,7 @@ table.work {
 }
 
 .field_help {
-	width: 220px;
+	//width: 220px;
 	font-style: italic;
 	color: #aaaaaa;
 }
@@ -113,7 +113,7 @@ table.work {
 .edit-dialog .field_help {
   padding-top: 15px;
   font-size: small;
-  width: 400px;
+  //width: 400px;
 }
 
 .edit-dialog #file-label {
@@ -146,8 +146,37 @@ button.remove-adviser {
 	}
 }
 
-#user-combo-input {
+#user-combo-input, #user-dropdown-input {
   min-width: 600px;
+}
+
+.select-editable {
+  position:relative;
+  background-color:white;
+  border:solid grey 1px;
+  width:602px;
+  height:18px;
+}
+.select-editable select {
+  position:absolute;
+  top:0px;
+  left:0px;
+  font-size:14px;
+  border:none;
+  width:598px;
+  margin:0;
+}
+.select-editable input {
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:580px;
+  padding:1px;
+  font-size:12px;
+  border:none;
+}
+.select-editable select:focus, .select-editable input:focus {
+  outline:none;
 }
 
 .dataTables_wrapper {

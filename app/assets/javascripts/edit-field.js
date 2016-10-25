@@ -77,7 +77,8 @@
 			"text": initDialog("#dialog-text-input", 450, 350),
 			"textarea": initDialog("#dialog-textarea-input", 450, 650),
 			"advisors": initDialog("#dialog-advisors-input", 550, 650),
-			"combo": initDialog("#dialog-combo-input", 650, 300),
+			"dropdown": initDialog("#dialog-dropdown-input", 650, 300),
+            "combo": initDialog("#dialog-combo-input", 650, 300),
             "date": initDialog("#dialog-date-input", 450, 350)
 		};
 
@@ -112,8 +113,9 @@
 			field = parent.find(".value");
 			var val = field.text();
 			var hiddenField = field.find('input[type="hidden"]');
-			if (hiddenField.length > 0)
-				val = hiddenField.val();
+			if (hiddenField.length > 0) {
+                val = hiddenField.val();
+            }
 
 			var dlg = $("#dialog-" + type + "-input");
 
@@ -124,7 +126,7 @@
             help.text( helpText );
 
 			input = dlg.find("#user-" + type + "-input");
-			if (type === "combo") {
+			if( (type === "dropdown") || (type === "combo" ) ) {
 				// remove the old options and replace them with the new options.
 				input.html("");
 				var options = window.selectOptions[key];
@@ -139,6 +141,12 @@
 					}
 				}
 			}
+
+            if( type === "combo" ) {
+                input = dlg.find("#user-" + type + "-edit");
+                input.val( val );
+            }
+
 			if (type === 'advisors') {
 				window.setInitialAdviserData(input, val);
 			} else if (!append)
