@@ -25,8 +25,9 @@ module WorksHelper
   # create label to indicate what type of work this is
   #
   def work_label( work_source )
-    return '<span class="label label-warning">O</span>' if work_source == 'optional'
-    return '<span class="label label-info">S</span>' if work_source == 'sis'
+    return '<span class="label label-warning">O</span>' if work_source.start_with? 'optional'
+    return '<span class="label label-info">S</span>' if work_source.start_with? 'sis'
+    return '<span class="label label-success">L</span>' if work_source.start_with? 'libra-oa'
     return ''
   end
 
