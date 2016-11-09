@@ -43,9 +43,10 @@ module ApplicationHelper
 
             name = content_tag(:div, "File: #{file["source_name"]}")
             label = content_tag(:div, "Display: #{file["file_name"]}")
+            uploaded = content_tag(:div, "Uploaded: #{localize_date_string( file["date_uploaded"] )}")
             download = link_to("Download", file["file_url"]+"?auth=#{API_TOKEN}")
             delete = content_tag(:div, link_to('Delete', "/work_files/#{file["id"]}?work=#{@work['id']}", method: :delete, data: { confirm: 'Are you sure you really want to permanently remove this file?' }, class: "btn btn-primary file-delete"), {})
-            right = content_tag(:div, download + name + label + delete, { class: "right" })
+            right = content_tag(:div, download + name + label + uploaded + delete, { class: "right" })
 
             html += content_tag(:div, raw(left+right), { class: "media-box"})
          }
