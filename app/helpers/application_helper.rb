@@ -32,6 +32,8 @@ module ApplicationHelper
       case key
       when 'id'
          return raw( format_id( @work ) )
+        when 'notes', 'abstract'
+          return raw( value.gsub( "\n", '<br>' ) )
       when 'admin_notes'
          return raw(value.reverse.join( '<br>---<br>' ))
       when 'keywords', 'related_links', 'sponsoring_agency'
