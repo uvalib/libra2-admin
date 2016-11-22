@@ -68,7 +68,7 @@ class Work
       'admin_notes' => 'textarea-append',
       'advisors' => 'advisors',
       'author_department' => 'combo',
-      'degree' => 'dropdown',
+      'degree' => 'combo',
       'embargo_end_date' => 'date',
       'embargo_state' => 'dropdown',
       'keywords' => 'textarea-split',
