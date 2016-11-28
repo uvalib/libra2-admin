@@ -260,11 +260,16 @@ class Work
      first_name = work['author_first_name'].split( ' ' )[ 0 ] unless work['author_first_name'].blank?
      degree = work['degree'].split( ' ' )[ 0 ] unless work['degree'].blank?
 
-     # construct the template
-     return "#{next_ix}_#{last_name}_#{first_name}_#{year}_#{degree}"
+     # construct the template filtering out any suspect characters
+     return self.label_filter( "#{next_ix}_#{last_name}_#{first_name}_#{year}_#{degree}" )
    end
 
   private
+
+  def self.label_filter( label )
+     return '' if label.blank?
+     return label.gsub( /[^0-9,a-z,A-Z,-,_]/, '' )
+  end
 
   def self.get_options( which )
      status, response = Libra2::api( 'GET', "options/#{which}" )
