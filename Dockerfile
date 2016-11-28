@@ -10,30 +10,21 @@ RUN addgroup webservice && adduser webservice -G webservice -D
 ENV TZ=EST5EDT
 RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+# Add necessary gems
+RUN gem install bundler io-console --no-ri --no-rdoc
+
+# Copy the Gemfile into the image and temporarily set the working directory to where they are.
+WORKDIR /tmp
+ADD Gemfile Gemfile
+RUN bundle install
+
 # Specify home 
 ENV APP_HOME /libra2-admin
 WORKDIR $APP_HOME
 
-# Add necessary assets and gems that require native extensions
-RUN gem install bundler io-console --no-ri --no-rdoc
-RUN gem install \
-nio4r:1.2.1 \
-byebug:9.0.6 \
-debug_inspector:0.0.2 \
-ffi:1.9.14 \
-json:2.0.2 \
-puma:3.6.2 \
-nokogiri:1.6.8.1 \
-websocket-driver:0.6.4 \
-bigdecimal:1.2.7 \
-unf_ext:0.0.7.2 \
---no-ri --no-rdoc
-
 # install the app and bundle
 COPY . $APP_HOME
-RUN rm $APP_HOME/Gemfile.lock
-RUN bundle install
-RUN rake assets:precompile
+RUN rm $APP_HOME/Gemfile.lock && rake assets:precompile
 
 # Update permissions
 RUN chown -R webservice $APP_HOME && chgrp -R webservice $APP_HOME
@@ -43,7 +34,7 @@ USER webservice
 
 # define port and startup script
 EXPOSE 3000
-CMD /bin/bash -l -c "scripts/entry.sh"
+CMD scripts/entry.sh
 
 # move in the profile
 COPY data/container_bash_profile /home/webservice/.profile
