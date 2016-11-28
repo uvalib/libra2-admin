@@ -22,7 +22,7 @@ byebug:9.0.6 \
 debug_inspector:0.0.2 \
 ffi:1.9.14 \
 json:2.0.2 \
-puma:3.6.1 \
+puma:3.6.2 \
 nokogiri:1.6.8.1 \
 websocket-driver:0.6.4 \
 bigdecimal:1.2.7 \
