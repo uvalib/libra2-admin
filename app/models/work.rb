@@ -268,7 +268,7 @@ class Work
 
   def self.label_filter( label )
      return '' if label.blank?
-     return label.gsub( /[^0-9,a-z,A-Z,-,_]/, '' )
+     return label.gsub( /[^0-9a-zA-Z-_]/, '' )
   end
 
   def self.get_options( which )
