@@ -74,7 +74,7 @@ module ApplicationHelper
    end
 
    def format_audit( audit )
-     return( "#{localize_date_string(audit['created_at'] )}|#{audit['user_id']}|#{truncate(audit['what'], length: 80 )}" )
+     return( "#{localize_date_string(audit['created_at'] )}|#{audit['user_id']}|#{truncate(audit['what'].gsub( '\\r\\n', ', ').gsub( '\\n', ', '), length: 80 )}" )
    end
 
    def format_id( work )
