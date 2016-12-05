@@ -4,7 +4,7 @@
    </ul>
 </div>
 
-<h1 class="work-title">Work: <%= @work['id'] %> (title "<%= @work['title'] %>")</h1>
+<h1 class="work-title">Work: <%= @work['id'] %> (<%= @work['title'].html_safe %>)</h1>
 <% if is_published( @work ) %>
    <%= link_to 'Unpublish', "/works/#{@work['id']}/unpublish", method: :put, data: { confirm: 'Are you sure you want to unpublish this work?' }, class: "btn btn-warning work-unpublish" %>
 <% else %>
