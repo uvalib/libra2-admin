@@ -29,9 +29,11 @@
 			var html = "";
 			for (var i = 0; i < advisers.length; i++) {
 				var adviser = advisers[i].split("\n");
-				var block = adviserTemplate.html();
-				block = block.replace("$id$",adviser[0]).replace("$first_name$",adviser[1]).replace("$last_name$",adviser[2]).replace("$department$",adviser[3]).replace("$institution$",adviser[4]);
-				html += block;
+				if( adviser.length == 6 ) {
+                    var block = adviserTemplate.html();
+                    block = block.replace("$id$", adviser[1]).replace("$first_name$", adviser[2]).replace("$last_name$", adviser[3]).replace("$department$", adviser[4]).replace("$institution$", adviser[5]);
+                    html += block;
+                }
 			}
 			input.html(html);
 		};
@@ -42,6 +44,7 @@
 			for (var i = 0; i < advisers.length; i++) {
 				var adviser = $(advisers[i]);
 				var item = [];
+				item.push( i );
 				item.push(adviser.find(".contributor_computing_id").val());
 				item.push(adviser.find(".contributor_first_name").val());
 				item.push(adviser.find(".contributor_last_name").val());
@@ -57,9 +60,18 @@
 			var advisers = window.getAdviserData().split("\t");
 			for (var i = 0; i < advisers.length; i++) {
 				var adviser = advisers[i].split("\n");
-				html.push("<span class='adviser-label'>Computing ID:</span>" + adviser[0] + "<br><span class='adviser-label'>First Name:</span>" + adviser[1] + "<br><span class='adviser-label'>Last Name:</span>" + adviser[2] + "<br><span class='adviser-label'>Department:</span>" + adviser[3] + "<br><span class='adviser-label'>Institution:</span>" + adviser[4]);
+				if( adviser.length != 6  ){
+				    return '';
+                }
+				html.push("<span class='adviser-label'>Computing ID:</span>" + adviser[1] +
+                          "<br><span class='adviser-label'>First Name:</span>" + adviser[2] +
+                          "<br><span class='adviser-label'>Last Name:</span>" + adviser[3] +
+                          "<br><span class='adviser-label'>Department:</span>" + adviser[4] +
+                          "<br><span class='adviser-label'>Institution:</span>" + adviser[5]);
 			}
-			return html.join( '<br>---<br>');
+
+            var hidden = "<input value=\"" + advisers.join("\t") + "\" type=\"hidden\", class=\"inner-value\">";
+			return hidden + html.join( '<br>---<br>');
 		};
 	}
 
