@@ -31,7 +31,7 @@ module ApplicationHelper
 
       case key
       when 'id'
-         return raw( format_id( @work ) )
+         return raw( "#{format_id( @work )} #{format_direct( @work )}" )
       when 'notes', 'abstract'
         return raw( value.gsub( "\n", '<br>' ) )
       when 'title'
@@ -87,9 +87,17 @@ module ApplicationHelper
 
    def format_id( work )
      if is_published( work )
-        return link_to( work['id'], work['url'],target: '_blank'  )
+        return link_to( work['id'], work['url'], target: '_blank'  )
      else
         return work['id']
+     end
+   end
+
+   def format_direct( work )
+     if is_published( work )
+       return link_to( '(direct)', Libra2.hosted_public_url( work['id'] ), target: '_blank'  )
+     else
+       return work['id']
      end
    end
 

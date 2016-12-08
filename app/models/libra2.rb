@@ -36,6 +36,10 @@ class Libra2
 		return "#{LIBRA2UPLOAD_URL}/#{api_namespace}/files?user=#{user}"
 	end
 
+	def self.hosted_public_url( id )
+		return "#{LIBRA2API_URL}/#{public_view}/#{id}"
+	end
+
 	def self.check_libra2_endpoint
 		return healthcheck( LIBRA2API_URL )
 	end
@@ -50,8 +54,12 @@ class Libra2
 
   private
 
-  def self.api_namespace
-	   return 'api/v1'
+  def self.public_view
+	   return 'public_view'
+	end
+
+	def self.api_namespace
+		return 'api/v1'
 	end
 
   def self.content_type_header
