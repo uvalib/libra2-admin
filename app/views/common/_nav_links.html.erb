@@ -1,6 +1,17 @@
-<%= link_to("Draft Works", "/works/draft") %><br>
-<%= link_to("Published Works", "/works/submitted") %><br>
-<%= link_to("Latest Works (last 7 days)", "/works/latest") %><br>
-<%= link_to("All Works", "/works/all") %><br>
-<%= link_to("Audit History", "/audits") %><br>
-<%= link_to("Exports", "/exports") %><br>
+<fieldset>
+  <label for="worktype">Select view</label>
+  <select name="worktype" id="worktype" ONCHANGE="location = this.options[this.selectedIndex].value;">
+    <option selected="" value="/works/draft">Draft Works</option>
+    <option selected="" value="/works/submitted">Published Works</option>
+    <option selected="" value="/works/latest">Latest Works (last 7 days)</option>
+    <option selected="" value="/works/all">All Works</option>
+    <option selected="" value="/audits">Audit History</option>
+    <option selected="" value="/exports">Exports</option>
+  </select>
+</fieldset>
+
+<script>
+    $( function() {
+        $( "#worktype" ).val( window.location.pathname );
+    } );
+</script>

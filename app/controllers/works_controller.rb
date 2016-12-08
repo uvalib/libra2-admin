@@ -7,7 +7,6 @@ class WorksController < ApplicationController
   # GET /works.json
   def all
     @works = Work.all
-    @title = 'All Works'
     render :index
   end
 
@@ -15,7 +14,6 @@ class WorksController < ApplicationController
   # GET /works/latest.json
   def latest
     @works = Work.latest
-    @title = 'Latest Works (last 7 days)'
     render :index
   end
 
@@ -23,7 +21,6 @@ class WorksController < ApplicationController
   # GET /works/draft.json
   def draft
     @works = Work.draft
-    @title = 'Draft Works'
     render :index
   end
 
@@ -31,7 +28,6 @@ class WorksController < ApplicationController
   # GET /works/submitted.json
   def submitted
     @works = Work.submitted
-    @title = 'Published Works'
     render :index
   end
 
