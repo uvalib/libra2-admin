@@ -132,7 +132,9 @@ class Work
    def self.search(params)
       status, response = Libra2::api('GET', "works/search", params)
       if Libra2::status_ok? status
-         return response['works']
+         return response['works'] if response['works']
+         Rails.logger.error "==> Work.search: returns empty response (#{response})"
+         return []
       else
          Rails.logger.error "==> Work.search: returns #{status} (#{response})"
          return []
