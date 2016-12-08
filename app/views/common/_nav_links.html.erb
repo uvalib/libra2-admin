@@ -12,6 +12,10 @@
 
 <script>
     $( function() {
-        $( "#worktype" ).val( window.location.pathname );
+        var loc = window.location.pathname;
+        if( loc === '/' ) {
+            loc = '/works/draft'
+        }
+        $( "#worktype" ).val( loc );
     } );
 </script>
