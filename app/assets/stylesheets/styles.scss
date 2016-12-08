@@ -233,3 +233,22 @@ button.remove-adviser {
 		margin-left: 100px;
 	}
 }
+
+.what .tooltiptext {
+  visibility: hidden;
+  width: 400px;
+  background-color: #002F6C;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 3px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  margin-left: -350px;
+}
+
+.what:hover .tooltiptext {
+  visibility: visible;
+}

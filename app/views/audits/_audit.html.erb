@@ -1,6 +1,7 @@
 <tr>
-  <td><%= localize_date_string(audit['created_at'] ) %></td>
-  <td><%= audit['user_id'] %></td>
-  <td><%= audit['work_id'] %></td>
-  <td><%= truncate( audit['what'].gsub( '\\r\\n', ', '), length: 110 ) %></td>
+  <td class="created_at"><%= localize_date_string(audit['created_at'] ) %></td>
+  <td class="user_id"><%= audit['user_id'] %></td>
+  <td class="work_id"><%= audit['work_id'] %></td>
+  <td class="what"><%= truncate( viewable_audit_line( audit['what'] ), length: 142 ) %>
+    <span class="tooltiptext"><%= viewable_audit_line( audit['what'] ) %></span></td>
 </tr>
