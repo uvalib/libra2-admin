@@ -57,17 +57,20 @@ module ApplicationHelper
          return content_tag(:div, raw(html), { class: "file-sets" })
       when 'advisors'
          advisers = []
-         value.each { |adviser|
-				fields = adviser.split("\n")
-        fields.push('') if fields.length == 4 # if the last item is empty, the split command will miss it.
-        fields.push('') if fields.length == 5 # if the last item is empty, the split command will miss it.
+         # advisers are tagged with a numeric index so sorting them ensures they are presented in the correct order
+         value.sort!
 
-        if fields.length == 6
-					advisers.push("<span class='adviser-label'>Computing ID:</span>#{fields[1]}<br><span class='adviser-label'>First Name:</span>#{fields[2]}<br><span class='adviser-label'>Last Name:</span>#{fields[3]}<br><span class='adviser-label'>Department:</span>#{fields[4]}<br><span class='adviser-label'>Institution:</span>#{fields[5]}")
-				else
-					# this should only happen if there were an error somewhere in saving an adviser.
-          advisers.push(adviser.gsub("\n", "<br>"))
-				end
+         value.each { |adviser|
+				 fields = adviser.split("\n")
+         fields.push('') if fields.length == 4 # if the last item is empty, the split command will miss it.
+         fields.push('') if fields.length == 5 # if the last item is empty, the split command will miss it.
+
+         if fields.length == 6
+				    advisers.push("<span class='adviser-label'>Computing ID:</span>#{fields[1]}<br><span class='adviser-label'>First Name:</span>#{fields[2]}<br><span class='adviser-label'>Last Name:</span>#{fields[3]}<br><span class='adviser-label'>Department:</span>#{fields[4]}<br><span class='adviser-label'>Institution:</span>#{fields[5]}")
+				 else
+					  # this should only happen if there were an error somewhere in saving an adviser.
+            advisers.push(adviser.gsub("\n", "<br>"))
+				 end
          }
 			   hidden = content_tag(:input, "", { value: value.join("\t"), type: "hidden", class: "inner-value"})
 			   return hidden + raw(advisers.join( '<br>---<br>' ))
