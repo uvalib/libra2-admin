@@ -3,10 +3,13 @@ Rails.application.routes.draw do
 	resources :work_files, only: [:create, :update, :destroy]
   resources :works, only: [:show, :update, :destroy] do
 	  collection do
-		  get 'all'
-      get 'latest'
       get 'draft'
 		  get 'submitted'
+      get 'latest'
+      get 'all'
+      get 'sis_only'
+      get 'optional_only'
+      get 'libra_only'
 		  get 'computing_id'
 	  end
   end

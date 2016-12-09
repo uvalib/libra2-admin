@@ -31,6 +31,27 @@ class WorksController < ApplicationController
     render :index
   end
 
+  # GET /works/sis_only
+  # GET /works/sis_only.json
+  def sis_only
+    @works = Work.sis_only
+    render :index
+  end
+
+  # GET /works/optional_only
+  # GET /works/optional_only.json
+  def optional_only
+    @works = Work.optional_only
+    render :index
+  end
+
+  # GET /works/libra_only
+  # GET /works/libra_only.json
+  def libra_only
+    @works = Work.libra_only
+    render :index
+  end
+
   # GET /works/1
   # GET /works/1.json
   def show

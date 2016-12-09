@@ -129,6 +129,18 @@ class Work
       return search( { status: 'submitted' } )
    end
 
+   def self.sis_only
+     return search( { work_source: 'sis' } )
+   end
+
+   def self.optional_only
+     return search( { work_source: 'optional' } )
+   end
+
+   def self.libra_only
+     return search( { work_source: 'libra' } )
+   end
+
    def self.search(params)
       status, response = Libra2::api('GET', "works/search", params)
       if Libra2::status_ok? status
