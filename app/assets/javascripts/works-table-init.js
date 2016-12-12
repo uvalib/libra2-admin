@@ -2,6 +2,7 @@
 	"use strict";
 	function initPage() {
 		$('.data-table.works-index').DataTable({
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 			"aoColumns": [
                 {"bSortable": false},
 				null,
