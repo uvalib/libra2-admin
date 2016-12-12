@@ -1,6 +1,6 @@
 <fieldset>
   <label for="worktype">Select view</label>
-  <select name="worktype" id="worktype" ONCHANGE="location = this.options[this.selectedIndex].value;">
+  <select name="worktype" id="worktype" ONCHANGE="Turbolinks.visit( this.options[this.selectedIndex].value );">
     <option selected="" value="/works/draft">Draft Works</option>
     <option selected="" value="/works/submitted">Published Works</option>
     <option selected="" value="/works/latest">Latest Works (last 7 days)</option>
