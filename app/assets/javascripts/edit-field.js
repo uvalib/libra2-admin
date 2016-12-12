@@ -117,7 +117,6 @@
                 val = hiddenField.val();
             }
 
-            alert( val );
 			var dlg = $("#dialog-" + type + "-input");
 
             var label = dlg.find('label[for="user-' + type + '-input"]');
