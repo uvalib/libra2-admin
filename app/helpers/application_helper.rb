@@ -31,11 +31,15 @@ module ApplicationHelper
 
       case key
       when 'id'
-         return raw( "#{format_id( @work )} #{format_direct( @work )}" )
-      when 'notes', 'abstract'
-        return raw( value.gsub( "\n", '<br>' ) )
+        return raw( format_id( @work ) )
+      when 'notes'
+        return raw( simple_format( value ) )
+      when 'abstract'
+        return raw( simple_format( value ) )
+      #  return raw( unescape_field( simple_format( value ) ) )
       when 'title'
         return raw( value )
+      #  return raw( unescape_field( value ) )
       when 'admin_notes'
          return raw(value.reverse.join( '<br>---<br>' ))
       when 'keywords', 'related_links', 'sponsoring_agency'
@@ -93,11 +97,11 @@ module ApplicationHelper
      end
    end
 
-   def format_direct( work )
+   def format_local_link(work )
      if is_published( work )
-       return link_to( '(direct)', Libra2.hosted_public_url( work['id'] ), target: '_blank'  )
+       return link_to( 'direct link', Libra2.hosted_public_url( work['id'] ), target: '_blank'  )
      else
-       return work['id']
+       return ''
      end
    end
 
@@ -117,6 +121,11 @@ module ApplicationHelper
     end
 
     return true
+  end
+
+  def unescape_field( field )
+    return '' if field.blank?
+    return CGI.unescapeHTML( String.new field.to_s )
   end
 
 end

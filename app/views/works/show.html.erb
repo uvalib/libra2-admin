@@ -25,7 +25,11 @@
          <td><strong><%= field.humanize.titlecase %></strong></td>
          <td class="value" id="<%= "work_#{field.underscore}" %>"><%= format_value( field, @work[field]) %></td>
          <td>
-            <%= edit_button( field, @work ) %>
+           <% if field == 'id' %>
+              <%= raw( "#{format_local_link( @work )}" ) %>
+           <% else %>
+              <%= edit_button( field, @work ) %>
+           <% end %>
          </td>
       </tr>
    <% } %>
