@@ -137,6 +137,10 @@ class Work
      return search( { work_source: 'optional' } )
    end
 
+   def self.ingest_only
+     return search( { work_source: 'ingest' } )
+   end
+
    def self.libra_only
      return search( { work_source: 'libra' } )
    end

@@ -45,6 +45,13 @@ class WorksController < ApplicationController
     render :index
   end
 
+  # GET /works/ingest_only
+  # GET /works/ingest_only.json
+  def ingest_only
+    @works = Work.ingest_only
+    render :index
+  end
+
   # GET /works/libra_only
   # GET /works/libra_only.json
   def libra_only

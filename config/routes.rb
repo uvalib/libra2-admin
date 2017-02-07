@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get 'all'
       get 'sis_only'
       get 'optional_only'
+      get 'ingest_only'
       get 'libra_only'
 		  get 'computing_id'
 	  end
