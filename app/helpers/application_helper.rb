@@ -35,11 +35,9 @@ module ApplicationHelper
       when 'notes'
         return raw( simple_format( value ) )
       when 'abstract'
-        return raw( simple_format( value ) )
-      #  return raw( unescape_field( simple_format( value ) ) )
+        return raw( unescape_field( simple_format( value ) ) )
       when 'title'
-        return raw( value )
-      #  return raw( unescape_field( value ) )
+        return raw( unescape_field( value ) )
       when 'admin_notes'
          return raw(value.reverse.join( '<br>---<br>' ))
       when 'keywords', 'related_links', 'sponsoring_agency'
