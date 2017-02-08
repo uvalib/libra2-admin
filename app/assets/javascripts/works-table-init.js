@@ -12,7 +12,7 @@
                 null,
 				{"bSortable": false}
 			],
-            "aaSorting": [ [ 0, "desc" ], [ 1, "desc" ] ]
+            "aaSorting": [ [ 1, "desc" ], [ 2, "desc" ] ]
 		});
 
 	}
