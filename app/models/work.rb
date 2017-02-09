@@ -10,6 +10,7 @@ class Work
       'create_date',
       'modified_date',
       'published_date',
+      'source',
 
       # can be edited by depositor
       'title',
@@ -91,6 +92,12 @@ class Work
       'file-upload' => 'Select a file, update the file label as necessary and hit "Apply"'
    }
 
+   # taken from generic work definitions
+   SOURCE_SIS = 'sis'.freeze
+   SOURCE_OPTIONAL = 'optional'.freeze
+   SOURCE_LEGACY = 'libra'.freeze
+   SOURCE_INGEST = 'ingest'.freeze
+
    def self.all
       status, response = Libra2::api('GET', 'works')
       if Libra2::status_ok? status
@@ -130,19 +137,19 @@ class Work
    end
 
    def self.sis_only
-     return search( { work_source: 'sis' } )
+     return search( { work_source: SOURCE_SIS } )
    end
 
    def self.optional_only
-     return search( { work_source: 'optional' } )
+     return search( { work_source: SOURCE_OPTIONAL } )
    end
 
    def self.ingest_only
-     return search( { work_source: 'ingest' } )
+     return search( { work_source: SOURCE_INGEST } )
    end
 
    def self.libra_only
-     return search( { work_source: 'libra' } )
+     return search( { work_source: SOURCE_LEGACY } )
    end
 
    def self.search(params)

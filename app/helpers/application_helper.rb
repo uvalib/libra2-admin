@@ -78,6 +78,14 @@ module ApplicationHelper
 			   return hidden + raw(advisers.join( '<br>---<br>' ))
       when 'create_date', 'modified_date', 'embargo_end_date'
          return( localize_date_string( value ) )
+        when 'source'
+          toks = value.split( ':' )
+          return value if toks.length < 2
+          return "#{Work::SOURCE_SIS.upcase.strip} (ID: #{toks[ 1 ]})" if value.start_with?( Work::SOURCE_SIS )
+          return "#{Work::SOURCE_OPTIONAL.titleize.strip} (ID: #{toks[ 1 ]})" if value.start_with?( Work::SOURCE_OPTIONAL )
+          return "#{Work::SOURCE_LEGACY.titleize.strip} (ID: #{toks[ 1 ]})" if value.start_with?( Work::SOURCE_LEGACY )
+          return "#{Work::SOURCE_INGEST.titleize.strip} (File: #{toks[ 1 ]})" if value.start_with?( Work::SOURCE_INGEST )
+          return value
       else
          return value
       end
