@@ -24,7 +24,6 @@
         $("#work-export").on("click", function( ev ) {
             ev.preventDefault();
             var include_pending = $("#include_pending").is(':checked');
-            alert( include_pending );
             var start_date = getDateOrBeginingOfTime( "work-export-start-date" );
             var end_date = getDateOrToday( "work-export-end-date");
             var constraints = "create_date=" + start_date + ":" + end_date;
