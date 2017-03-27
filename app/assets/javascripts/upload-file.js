@@ -20,7 +20,7 @@
 
 		function uploadComplete(evt) {
 			console.log("complete: " + evt.currentTarget.status + ", response: " + this.response );
-            var jobj = JSON.parse( this.response )
+            var jobj = JSON.parse( this.response );
             if( jobj.status == 200 ) {
                 var label = fileLabel.val( );
                 $.ajax("/work_files", {

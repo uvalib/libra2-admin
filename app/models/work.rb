@@ -173,7 +173,7 @@ class Work
          case field
             when 'advisors'
                # special case where we are clearing the field
-               if params[field] == "\n\n\n\n"
+               if params[field] == "\n\n\n\n\n" || params[field].blank?
                  p["work"][field] = ['']
                else
                  p["work"][field] = params[field].split("\t")

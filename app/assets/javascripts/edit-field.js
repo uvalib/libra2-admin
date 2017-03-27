@@ -36,11 +36,13 @@
 		function submitChange() {
 			message.hide();
 			var data = {};
-			if (key === 'advisors')
-				data["work["+key+"]"] = window.getAdviserData();
-			else
-				data["work["+key+"]"] = input.val();
+			if (key === 'advisors') {
+                data["work[" + key + "]"] = window.getAdviserData();
+            } else {
+                data["work[" + key + "]"] = input.val();
+            }
 
+			alert( JSON.stringify( data ) );
 			$.ajax("/works/"+workId+".json", {
 				method: "PATCH",
 				data: data,
