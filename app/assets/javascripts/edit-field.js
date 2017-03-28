@@ -42,7 +42,6 @@
                 data["work[" + key + "]"] = input.val();
             }
 
-			alert( JSON.stringify( data ) );
 			$.ajax("/works/"+workId+".json", {
 				method: "PATCH",
 				data: data,
