@@ -1,6 +1,6 @@
 <tr>
   <td><%= raw( work_label( work['source'] ) ) %></td>
-  <td><%= localize_date_string( work['create_date'] ) %></td>
+  <td><%= work['create_date'] %></td>
   <td><%= localize_date_string( work['modified_date'] ) %></td>
   <td><%= format_id( work ) %></td>
   <td><%= work['author_email'] %></td>

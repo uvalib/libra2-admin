@@ -76,7 +76,7 @@ module ApplicationHelper
          }
 			   hidden = content_tag(:input, "", { value: value.join("\t"), type: "hidden", class: "inner-value"})
 			   return hidden + raw(advisers.join( '<br>---<br>' ))
-      when 'create_date', 'modified_date', 'embargo_end_date'
+      when 'modified_date', 'embargo_end_date'
          return( localize_date_string( value ) )
         when 'source'
           toks = value.split( ':' )
