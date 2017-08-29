@@ -16,6 +16,7 @@ RUN gem install bundler io-console --no-ri --no-rdoc
 # Copy the Gemfile into the image and temporarily set the working directory to where they are.
 WORKDIR /tmp
 ADD Gemfile Gemfile
+ADD Gemfile.lock Gemfile.lock
 RUN bundle install
 
 # Specify home 
