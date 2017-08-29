@@ -1,5 +1,15 @@
 class Libra2
 
+  # http request timeouts in seconds
+  HTTP_DEFAULT_TIMEOUT ||= 30
+  HTTP_GET_TIMEOUT ||= 300
+
+  include HTTParty
+
+  #debug_output $stdout
+  default_timeout HTTP_DEFAULT_TIMEOUT
+  headers 'Content-Type' => 'application/json'
+
 	def self.api(method, address, data = {}, payload = {})
 
 		url = "#{LIBRA2API_URL}/#{api_namespace}/#{address}?auth=#{API_TOKEN}"
@@ -9,16 +19,19 @@ class Libra2
 		url = "#{url}&#{arr}" if arr.length > 0
     Rails.logger.info "==> #{method} #{url} #{payload.inspect}"
     timer = TimingBehavior.new( url ).start
+    timeout = HTTP_DEFAULT_TIMEOUT
+
 		begin
 			case method
-			when 'GET'
-				response = HTTParty.get(url, headers: content_type_header )
+      when 'GET'
+         timeout = HTTP_GET_TIMEOUT
+				 response = self.get( url, { timeout: timeout } )
 			when 'POST'
-				response = HTTParty.post(url, body: JSON.dump(payload), headers: content_type_header )
+				response = self.post( url, body: JSON.dump(payload) )
 			when 'PUT'
-				response = HTTParty.put(url, body: JSON.dump(payload), headers: content_type_header )
+				response = self.put( url, body: JSON.dump(payload) )
 			when 'DELETE'
-				response = HTTParty.delete(url, headers: content_type_header )
+				response = self.delete( url )
 			else
 				return :internal_error, 'Unrecognized method'
 			end
@@ -26,6 +39,8 @@ class Libra2
       timer.log_completed( "(status #{response.code})")
 		  return response.code, response if status_ok?( response.code )
 		  return response.code, response.message
+    rescue Net::ReadTimeout
+      return :internal_error, "Timeout after #{timeout} seconds"
 		rescue => ex
 			return :internal_error, "Endpoint returns #{ex}"
 		end
@@ -62,16 +77,12 @@ class Libra2
 		return 'api/v1'
 	end
 
-  def self.content_type_header
-	   return { 'Content-Type' => 'application/json' }
-	end
-
   def self.healthcheck( endpoint )
 
 		begin
       url = "#{endpoint}/healthcheck"
       timer = TimingBehavior.new( url ).start
-			response = HTTParty.get( url )
+			response = self.get( url )
       timer.log_completed( "(status #{response.code})")
 
 			if status_ok?( response.code )
@@ -79,6 +90,8 @@ class Libra2
 			else
 				return false, "Endpoint returns #{response.code}"
 			end
+    rescue Net::ReadTimeout
+      return false, "Timeout after #{HTTP_DEFAULT_TIMEOUT} seconds"
 		rescue => ex
 			return false, "Endpoint returns #{ex}"
 		end
