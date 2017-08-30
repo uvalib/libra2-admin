@@ -252,3 +252,15 @@ button.remove-adviser {
 .what:hover .tooltiptext {
   visibility: visible;
 }
+
+footer {
+  height: 35px;
+  background: #002F6C;
+
+  .build-version {
+    float: right;
+    padding-top: 7px;
+    padding-right: 20px;
+    color: #9DB0CE;
+  }
+}
