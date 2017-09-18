@@ -39,7 +39,10 @@ module ApplicationHelper
       when 'title'
         return raw( unescape_field( value ) )
       when 'admin_notes'
-         return raw(value.reverse.join( '<br>---<br>' ))
+         # sort and split the leading timestamp
+         formatted = value.sort.map { |v| v.include?( "|") ? v.split( "|", 2 )[ 1 ].strip : v }
+         # format for display
+         return raw(formatted.join( '<br>---<br>' ))
       when 'keywords', 'related_links', 'sponsoring_agency'
          return raw(value.join( ',' ))
       when 'filesets'
