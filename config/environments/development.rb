@@ -48,4 +48,13 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # logging to standard out for development
+  logger           = ActiveSupport::Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+  config.logger = ActiveSupport::TaggedLogging.new(logger)
+
+  # pull environment variables when running in the debugger
+  #ENV.update(eval(`sh -c 'source libra_etd_admin_env.ksh && ruby -e "p ENV"'`) || {})
+
 end
