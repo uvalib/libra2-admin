@@ -2,7 +2,7 @@ class WorkFile
 
 	def self.create( user, file_id, work_id, label )
 		#PUT: http://service.endpoint/api/v1/filesets?auth=token&user=user&file=file_id&work=work_id&label=label
-		status, response = Libra2::api( 'PUT', "filesets", { user: user, file: file_id, work: work_id, label: label })
+		status, response = Libra2::api( 'POST', "filesets", { user: user, file: file_id, work: work_id, label: label })
 		if Libra2::status_ok? status
 			return nil
 		else
