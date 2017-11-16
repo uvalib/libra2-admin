@@ -27,6 +27,19 @@ module ApplicationHelper
       end
    end
 
+   def edit_file(file)
+     data = { file_id: file['id'],
+              id: @work['id'],
+              field: 'file_label',
+              type:  Work::EDITABLE_TYPE[ 'file_label' ],
+              label:  "File Label",
+              help: Work::HELP_BY_TYPE[ 'file-edit' ]
+     }
+     value = hidden_field_tag(:value, file['file_name'], class: 'file_label')
+     return value + content_tag(:button, "Edit", { class: "edit btn btn-primary text-edit file_label", data: data })
+
+   end
+
    def format_value(key, value)
 
       case key
@@ -51,11 +64,12 @@ module ApplicationHelper
             left = content_tag(:img, "", { src: file["thumb_url"]+"?auth=#{API_TOKEN}", class: "left"})
 
             name = content_tag(:div, "File: #{file["source_name"]}")
-            label = content_tag(:div, "Display: #{file["file_name"]}")
+            label = content_tag(:div, "Display: #{file["file_name"]}", class: 'file_label')
             uploaded = content_tag(:div, "Uploaded: #{localize_date_string( file["date_uploaded"] )}")
             download = link_to("Download", file["file_url"]+"?auth=#{API_TOKEN}")
+            edit = edit_file(file)
             delete = content_tag(:div, link_to('Delete', "/work_files/#{file["id"]}?work=#{@work['id']}", method: :delete, data: { confirm: 'Are you sure you really want to permanently remove this file?' }, class: "btn btn-primary file-delete"), {})
-            right = content_tag(:div, download + name + label + uploaded + delete, { class: "right" })
+            right = content_tag(:div, download + name + label + uploaded + edit + delete, { class: "right" })
 
             html += content_tag(:div, raw(left+right), { class: "media-box"})
          }

@@ -1,18 +1,18 @@
 Rails.application.routes.draw do
 
-	resources :work_files, only: [:create, :update, :destroy]
+  resources :work_files, only: [:create, :update, :destroy]
   resources :works, only: [:show, :update, :destroy] do
-	  collection do
+    collection do
       get 'draft'
-		  get 'submitted'
+      get 'submitted'
       get 'latest'
       get 'all'
       get 'sis_only'
       get 'optional_only'
       get 'ingest_only'
       get 'libra_only'
-		  get 'computing_id'
-	  end
+      get 'computing_id'
+    end
   end
 
   # publish and unpublish endpoints

@@ -62,6 +62,7 @@ class Work
        'rights',
        'sponsoring_agency',
        'title',
+       'file_label'
    ]
 
    EDITABLE_TYPE = {
@@ -79,6 +80,7 @@ class Work
       'related_links' => 'textarea-split',
       'rights' => 'dropdown',
       'sponsoring_agency' => 'textarea-split',
+      'file_label' => 'text',
    }
 
    HELP_BY_TYPE = {
@@ -89,7 +91,8 @@ class Work
       'date' => 'Select the appropriate date and hit "Apply"',
       'dropdown' => 'Select the appropriate value and hit "Apply"',
       'combo' => 'Select the appropriate value or enter a new one and hit "Apply"',
-      'file-upload' => 'Select a file, update the file label as necessary and hit "Apply"'
+      'file-upload' => 'Select a file, update the file label as necessary and hit "Apply"',
+      'file-edit' => 'Update the file label and hit "Apply"'
    }
 
    # taken from generic work definitions
@@ -190,6 +193,7 @@ class Work
                   # these fields are received as a comma separated string and split to an array
                   p["work"][field] = params[field].split( ',' ).map { |s| s.strip }
                end
+
             else
                # everything else...
                p["work"][field] = params[field]
