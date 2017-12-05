@@ -1,4 +1,4 @@
-FROM alpine:3.6
+FROM alpine:3.7
 
 # Add necessary packages
 RUN apk --update add bash tzdata ruby ruby-dev build-base nodejs sqlite-dev zlib-dev libxml2-dev libxslt-dev libffi-dev ca-certificates
@@ -11,8 +11,7 @@ ENV TZ=EST5EDT
 RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Add necessary gems
-RUN gem install bundler io-console --no-ri --no-rdoc
-
+RUN gem install bundler io-console --no-ri --no-rdoc && gem install nokogiri -v 1.8.0 --no-ri --no-rdoc -- --use-system-libraries
 # Copy the Gemfile into the image and temporarily set the working directory to where they are.
 WORKDIR /tmp
 ADD Gemfile Gemfile
