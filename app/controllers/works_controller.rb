@@ -1,8 +1,6 @@
 class WorksController < ApplicationController
   require_dependency 'user_info_client'
 
-  before_action :set_work, only: [:show]
-
   # GET /works
   # GET /works.json
   def all
@@ -62,6 +60,8 @@ class WorksController < ApplicationController
   # GET /works/1
   # GET /works/1.json
   def show
+    @work = Work.find( params[:id] )
+    @audits = Audit.work( params[:id] )
     @file_upload_url = Libra2.file_upload_url(current_user)
   end
 
@@ -139,12 +139,6 @@ class WorksController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_work
-     @work = Work.find( params[:id] )
-     @audits = Audit.work( params[:id] )
-  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def work_params
