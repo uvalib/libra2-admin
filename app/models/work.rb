@@ -102,8 +102,8 @@ class Work
    SOURCE_INGEST = 'ingest'.freeze
 
    def self.all
-      status, response = Libra2::api('GET', 'works')
-      if Libra2::status_ok? status
+      status, response = RestEndpoint::api('GET', 'works')
+      if RestEndpoint::status_ok? status
          return response['works'] if response['works']
          Rails.logger.error "==> Work.all: returns empty response (#{response})"
          return []
@@ -114,8 +114,8 @@ class Work
    end
 
    def self.find(id)
-      status, response = Libra2::api('GET', "works/#{id}")
-      if Libra2::status_ok? status
+      status, response = RestEndpoint::api('GET', "works/#{id}")
+      if RestEndpoint::status_ok? status
          if response['works'] && response['works'].length > 0
             return response['works'][0]
          else
@@ -156,8 +156,8 @@ class Work
    end
 
    def self.search(params)
-      status, response = Libra2::api('GET', "works/search", params)
-      if Libra2::status_ok? status
+      status, response = RestEndpoint::api('GET', "works/search", params)
+      if RestEndpoint::status_ok? status
          return response['works'] if response['works']
          Rails.logger.error "==> Work.search: returns empty response (#{response})"
          return []
@@ -199,9 +199,9 @@ class Work
                p["work"][field] = params[field]
          end
       }
-      status, response = Libra2::api('PUT', "works/#{id}", { user: user }, p)
+      status, response = RestEndpoint::api('PUT', "works/#{id}", {user: user }, p)
 
-      if Libra2::status_ok? status
+      if RestEndpoint::status_ok? status
          return nil
       else
          Rails.logger.error "==> Work.update: returns #{status} (#{response})"
@@ -211,9 +211,9 @@ class Work
 
    def self.publish( user, id )
      p = { "work" => { "status" => "submitted" } }
-     status, response = Libra2::api('PUT', "works/#{id}", { user: user }, p)
+     status, response = RestEndpoint::api('PUT', "works/#{id}", {user: user }, p)
 
-     if Libra2::status_ok? status
+     if RestEndpoint::status_ok? status
        return nil
      else
        Rails.logger.error "==> Work.publish: returns #{status} (#{response})"
@@ -223,9 +223,9 @@ class Work
 
    def self.unpublish( user, id )
      p = { "work" => { "status" => "pending" } }
-     status, response = Libra2::api('PUT', "works/#{id}", { user: user }, p)
+     status, response = RestEndpoint::api('PUT', "works/#{id}", {user: user }, p)
 
-     if Libra2::status_ok? status
+     if RestEndpoint::status_ok? status
        return nil
      else
        Rails.logger.error "==> Work.unpublish: returns #{status} (#{response})"
@@ -235,9 +235,9 @@ class Work
 
    def self.destroy(user, id)
       # DELETE: http://service.endpoint/api/v1/works/:id?auth=token&user=user
-      status, response = Libra2::api('DELETE', "works/#{id}", { user: user })
+      status, response = RestEndpoint::api('DELETE', "works/#{id}", {user: user })
 
-      if Libra2::status_ok? status
+      if RestEndpoint::status_ok? status
          return nil
       else
          Rails.logger.error "==> Work.destroy: returns #{status} (#{response})"
@@ -301,8 +301,8 @@ class Work
   end
 
   def self.get_options( which )
-     status, response = Libra2::api( 'GET', "options/#{which}" )
-     if Libra2::status_ok? status
+     status, response = RestEndpoint::api('GET', "options/#{which}" )
+     if RestEndpoint::status_ok? status
         return response['options']
      else
         Rails.logger.error "==> Work.#{which}_options: returns #{status} (#{response})"

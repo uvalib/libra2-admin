@@ -1,4 +1,4 @@
-class Libra2
+class RestEndpoint
 
   # http request timeouts in seconds
   HTTP_DEFAULT_TIMEOUT ||= 30
@@ -12,7 +12,7 @@ class Libra2
 
   def self.api(method, address, data = {}, payload = {})
 
-    url = "#{LIBRA2API_URL}/#{api_namespace}/#{address}?auth=#{API_TOKEN}"
+    url = "#{LIBRA_ETD_API_URL}/#{api_namespace}/#{address}?auth=#{API_TOKEN}"
     arr = data.to_a
     arr = arr.map { |pair| "#{pair[0]}=#{pair[1]}"}
     arr = arr.join("&")
@@ -48,15 +48,15 @@ class Libra2
   end
 
   def self.file_upload_url(user)
-    return "#{LIBRA2_URL}/#{api_namespace}/files?user=#{user}"
+    return "#{LIBRA_ETD_URL}/#{api_namespace}/files?user=#{user}"
   end
 
   def self.hosted_public_url( id )
-    return "#{LIBRA2_URL}/#{public_view}/#{id}"
+    return "#{LIBRA_ETD_URL}/#{public_view}/#{id}"
   end
 
-  def self.check_libra2_endpoint
-    return healthcheck( LIBRA2API_URL )
+  def self.check_libraetd_endpoint
+    return healthcheck(LIBRA_ETD_API_URL )
   end
 
   def self.check_userinfo_endpoint

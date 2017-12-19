@@ -62,7 +62,7 @@ class WorksController < ApplicationController
   def show
     @work = Work.find( params[:id] )
     @audits = Audit.work( params[:id] )
-    @file_upload_url = Libra2.file_upload_url(current_user)
+    @file_upload_url = RestEndpoint.file_upload_url(current_user)
   end
 
   # PATCH/PUT /works/1

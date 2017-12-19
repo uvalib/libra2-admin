@@ -17,11 +17,11 @@ class HealthcheckController < ApplicationController
   # the response
   class HealthCheckResponse
 
-    attr_accessor :libra2
+    attr_accessor :libraetd
     attr_accessor :userinfo
 
     def is_healthy?
-      libra2.healthy && userinfo.healthy
+      libraetd.healthy && userinfo.healthy
     end
   end
 
@@ -39,11 +39,11 @@ class HealthcheckController < ApplicationController
     status = {}
 
     # check the deposit registration endpoint
-    rc, message = Libra2.check_libra2_endpoint
-    status[ :libra2 ] = Health.new( rc, message )
+    rc, message = RestEndpoint.check_libraetd_endpoint
+    status[ :libraetd ] = Health.new( rc, message )
 
     # check the user information endpoint
-    rc, message = Libra2.check_userinfo_endpoint
+    rc, message = RestEndpoint.check_userinfo_endpoint
     status[ :userinfo ] = Health.new( rc, message )
 
     return( status )
@@ -51,7 +51,7 @@ class HealthcheckController < ApplicationController
 
   def make_response( health_status )
     r = HealthCheckResponse.new
-    r.libra2 = health_status[ :libra2 ]
+    r.libraetd = health_status[ :libraetd ]
     r.userinfo = health_status[ :userinfo ]
 
     return( r )
