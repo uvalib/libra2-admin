@@ -1,5 +1,5 @@
 <tr>
-  <td class="created_at"><%= localize_date_string(audit['created_at'] ) %></td>
+  <td class="created_at"><%= audit['created_at'] %></td>
   <td class="user_id"><%= audit['user_id'] %></td>
   <td class="work_id"><%= audit['work_id'] %></td>
   <td class="what"><%= truncate( viewable_audit_line( audit['what'] ), length: 142 ) %>

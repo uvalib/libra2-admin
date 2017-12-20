@@ -65,7 +65,7 @@ module ApplicationHelper
 
             name = content_tag(:div, "File: #{file["source_name"]}")
             label = content_tag(:div, "Display: #{file["file_name"]}", class: 'file_label')
-            uploaded = content_tag(:div, "Uploaded: #{localize_date_string( file["date_uploaded"] )}")
+            uploaded = content_tag(:div, "Uploaded: #{file["date_uploaded"]}")
             download = link_to("Download", file["file_url"]+"?auth=#{API_TOKEN}")
             edit = edit_file(file)
             delete = content_tag(:div, link_to('Delete', "/work_files/#{file["id"]}?work=#{@work['id']}", method: :delete, data: { confirm: 'Are you sure you really want to permanently remove this file?' }, class: "btn btn-primary file-delete"), {})
@@ -94,7 +94,7 @@ module ApplicationHelper
 			   hidden = content_tag(:input, "", { value: value.join("\t"), type: "hidden", class: "inner-value"})
 			   return hidden + raw(advisers.join( '<br>---<br>' ))
       when 'modified_date', 'embargo_end_date'
-         return( localize_date_string( value ) )
+         return( value )
         when 'source'
           toks = value.split( ':' )
           return value if toks.length < 2
@@ -109,7 +109,7 @@ module ApplicationHelper
    end
 
    def format_audit( audit )
-     return( "#{localize_date_string(audit['created_at'] )}|#{audit['user_id']}|#{truncate(audit['what'].gsub( '\\r\\n', ', ').gsub( '\\n', ', '), length: 80 )}" )
+     return( "#{audit['created_at']}|#{audit['user_id']}|#{truncate(audit['what'].gsub( '\\r\\n', ', ').gsub( '\\n', ', '), length: 80 )}" )
    end
 
    def format_id( work )
