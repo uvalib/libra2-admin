@@ -8,7 +8,7 @@ echo "building on $DOCKER_HOST"
 echo "*****************************************"
 
 # set the definitions
-INSTANCE=libra2-admin
+INSTANCE=libra-etd-admin
 NAMESPACE=uvadave
 
 # pull base image to ensure we have the latest
