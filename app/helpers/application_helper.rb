@@ -46,9 +46,9 @@ module ApplicationHelper
       when 'id'
         return raw( format_id( @work ) )
       when 'notes'
-        return raw( simple_format( value ) )
+        return raw( unescape_field( value ) )
       when 'abstract'
-        return raw( unescape_field( simple_format( value ) ) )
+        return raw( unescape_field( value ) )
       when 'title'
         return raw( unescape_field( value ) )
       when 'admin_notes'
