@@ -15,6 +15,15 @@ module ApplicationHelper
              data[:help] = Work::HELP_BY_TYPE[ data[:type] ]
              return content_tag(:button, "Add", { class: "add btn btn-primary", data: data })
 
+           when 'notes', 'title', 'abstract'
+
+              data[:type] = Work::EDITABLE_TYPE[ key ] if Work::EDITABLE_TYPE[ key ].present?
+              data[:help] = Work::HELP_BY_TYPE[ 'default' ]
+              data[:help] = Work::HELP_BY_TYPE[ data[:type] ] if Work::HELP_BY_TYPE[ data[:type] ].present?
+              # keep an unformatted version for text fields
+              hidden = hidden_field_tag("#{key}_value", unescape_field(work[key]))
+              return hidden + content_tag(:button, "Edit", { class: "edit btn btn-primary", data: data })
+
            else
               data[:type] = Work::EDITABLE_TYPE[ key ] if Work::EDITABLE_TYPE[ key ].present?
               data[:help] = Work::HELP_BY_TYPE[ 'default' ]
@@ -46,11 +55,11 @@ module ApplicationHelper
       when 'id'
         return raw( format_id( @work ) )
       when 'notes'
-        return raw( unescape_field( value ) )
+        return raw( simple_format(unescape_field( value ) ) )
       when 'abstract'
-        return raw( unescape_field( value ) )
+        return raw( simple_format( unescape_field( value ) ) )
       when 'title'
-        return raw( unescape_field( value ) )
+        return raw( simple_format( unescape_field( value ) ) )
       when 'admin_notes'
          # sort and split the leading timestamp
          formatted = value.sort.map { |v| v.include?( "|") ? v.split( "|", 2 )[ 1 ].strip : v }
