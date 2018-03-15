@@ -124,7 +124,7 @@
       // formatting, the raw value is placed in a hidden input, so use that instead.
       field = parent.find(".value");
       var val = field.html();
-      var hiddenField = field.find('input[type="hidden"]');
+      var hiddenField = parent.find('input[type="hidden"]');
       if (hiddenField.length > 0) {
         val = hiddenField.val();
       }
