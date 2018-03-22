@@ -84,24 +84,25 @@ module ApplicationHelper
          }
          return content_tag(:div, raw(html), { class: "file-sets" })
       when 'advisors'
-         advisers = []
-         # advisers are tagged with a numeric index so sorting them ensures they are presented in the correct order
+         advisors = []
+         # advisors are tagged with a numeric index so sorting them ensures they are presented in the correct order
          value.sort!
 
-         value.each { |adviser|
-				 fields = adviser.split("\n")
-         fields.push('') if fields.length == 4 # if the last item is empty, the split command will miss it.
-         fields.push('') if fields.length == 5 # if the last item is empty, the split command will miss it.
+         value.each do |advisor|
+           fields = advisor.split("\n")
+           fields.push('') if fields.length == 4 # if the last item is empty, the split command will miss it.
+           fields.push('') if fields.length == 5 # if the last item is empty, the split command will miss it.
 
-         if fields.length == 6
-				    advisers.push("<span class='adviser-label'>Computing ID:</span>#{fields[1]}<br><span class='adviser-label'>First Name:</span>#{fields[2]}<br><span class='adviser-label'>Last Name:</span>#{fields[3]}<br><span class='adviser-label'>Department:</span>#{fields[4]}<br><span class='adviser-label'>Institution:</span>#{fields[5]}")
-				 else
-					  # this should only happen if there were an error somewhere in saving an adviser.
-            advisers.push(adviser.gsub("\n", "<br>"))
-				 end
-         }
-			   hidden = content_tag(:input, "", { value: value.join("\t"), type: "hidden", class: "inner-value"})
-			   return hidden + raw(advisers.join( '<br>---<br>' ))
+           if fields.length == 6
+              advisors.push("<div><span class='advisor-label'>Computing ID:</span>#{fields[1]}<br><span class='advisor-label'>First Name:</span>#{fields[2]}<br><span class='advisor-label'>Last Name:</span>#{fields[3]}<br><span class='advisor-label'>Department:</span>#{fields[4]}<br><span class='advisor-label'>Institution:</span>#{fields[5]}</div>")
+           else
+              # this should only happen if there were an error somewhere in saving an advisor.
+              advisors.push(advisor.gsub("\n", "<br>"))
+           end
+         end
+         hidden = content_tag(:input, "", { value: value.join("\t").html_safe, type: "hidden", class: "inner-value"})
+         return hidden + raw("<br>" + advisors.join( '<br>---<br>' ))
+
       when 'modified_date', 'embargo_end_date'
          return( value )
         when 'source'

@@ -26,7 +26,7 @@
       } else if( split === true ) {
         field.text(val.split(",").join(","));
       } else if (key === 'advisors') {
-        val = window.getAdviserDataFormatted();
+        val = window.getAdvisorDataFormatted();
         field.html(val);
       } else if (key === 'file_label') {
         var fields = $(field.context.parentElement).find('.file_label')
@@ -43,7 +43,7 @@
       var data = {};
       var path = "/works/"+workId+".json";
       if (key === 'advisors') {
-        data["work[" + key + "]"] = window.getAdviserData();
+        data["work[" + key + "]"] = window.getAdvisorData();
       } else if (key === 'file_label') {
         data["work_file"] = {label: input.val(), work_id: workId};
         // File updates have a different path
@@ -124,7 +124,7 @@
       // formatting, the raw value is placed in a hidden input, so use that instead.
       field = parent.find(".value");
       var val = field.html();
-      var hiddenField = button.siblings('input[type="hidden"]');
+      var hiddenField = parent.find('input[type="hidden"]');
       if (hiddenField.length > 0) {
         val = hiddenField.val();
       }
@@ -160,7 +160,7 @@
       }
 
       if (type === 'advisors') {
-        window.setInitialAdviserData(input, val);
+        window.setInitialAdvisorData(input, val);
       } else if (!append)
         input.val(val);
 
