@@ -34,6 +34,7 @@
         fields.siblings('input').val(val)
       } else {
         field.text(val);
+        $(field).parents('tr').find('input[type="hidden"]').val(val)
       }
       dialog.dialog( "close" );
     }
