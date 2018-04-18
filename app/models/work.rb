@@ -281,7 +281,10 @@ class Work
      next_ix = work['filesets'].length + 1
      last_name = 'last'
      first_name = 'first'
-     year = Time.now.year
+
+     date_string = work['published_date'].blank? ? work['create_date'].year : work['published_date']
+     year = Date.parse(date_string).year rescue Time.now.year
+
      degree = 'degree'
 
      # update if we can
