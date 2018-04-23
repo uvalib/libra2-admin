@@ -282,7 +282,7 @@ class Work
      last_name = 'last'
      first_name = 'first'
 
-     date_string = work['published_date'].blank? ? work['create_date'].year : work['published_date']
+     date_string = work['published_date'].blank? ? work['create_date'] : work['published_date']
      year = Date.parse(date_string).year rescue Time.now.year
 
      degree = 'degree'
