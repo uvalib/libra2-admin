@@ -125,9 +125,9 @@
       // formatting, the raw value is placed in a hidden input, so use that instead.
       field = parent.find(".value");
       var val = field.html();
-      var hiddenField = parent.find('input[type="hidden"]');
-      if (hiddenField.length > 0) {
-        val = hiddenField.val();
+      var hiddenFieldVal = $(this).parent().find('input[type="hidden"]').val() || parent.find('input[type="hidden"]').val();
+      if (hiddenFieldVal) {
+        val = hiddenFieldVal;
       }
 
       var dlg = $("#dialog-" + type + "-input");
