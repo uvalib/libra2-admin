@@ -282,7 +282,18 @@ class Work
      last_name = 'last'
      first_name = 'first'
 
-     date_string = work['published_date'].blank? ? work['create_date'] : work['published_date']
+     date_string =
+       if work['published_date'].blank?
+         work['create_date']
+       else
+         four_digit_year = work['published_date'].match(/\d{4}/).to_s
+         if four_digit_year
+           Date.strptime(four_digit_year, '%Y').to_s
+         else
+          work['published_date']
+         end
+       end
+
      year = Date.parse(date_string).year rescue Time.now.year
 
      degree = 'degree'
