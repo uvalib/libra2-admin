@@ -48,6 +48,7 @@ gem 'httparty'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # for alpine Linux
+gem 'etc'
 gem 'json'
 gem 'bigdecimal'
 
