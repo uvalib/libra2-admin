@@ -150,7 +150,7 @@ module ApplicationHelper
 
     # if we are not published them some fields cannot be edited
     if is_published( work ) == false
-       return false if [ 'embargo_end_date', 'embargo_state', 'published_date' ].include?( field )
+       return false if [ 'published_date' ].include?( field )
     end
 
     return true
