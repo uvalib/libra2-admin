@@ -33,6 +33,7 @@ class Work
       'depositor_email',
       'embargo_state',
       'embargo_end_date',
+      'embargo_period',
       'admin_notes',
       'filesets'
    ]
@@ -53,6 +54,7 @@ class Work
        'depositor_email',
        'embargo_end_date',
        'embargo_state',
+       'embargo_period',
        'filesets',
        'keywords',
        'language',
@@ -73,6 +75,7 @@ class Work
       'degree' => 'combo',
       'embargo_end_date' => 'date',
       'embargo_state' => 'dropdown',
+      'embargo_period' => 'dropdown',
       'keywords' => 'textarea-split',
       'notes' => 'textarea',
       'language' => 'dropdown',
@@ -271,7 +274,13 @@ class Work
 
    def self.embargo_options
      Rails.cache.fetch( "options/embargo_options", expires_in: 30.minutes ) do
-       get_options( 'embargos' )
+       get_options( 'embargos' )['state_options']
+     end
+   end
+
+   def self.embargo_period_options
+     Rails.cache.fetch( "options/embargo_period_options", expires_in: 30.minutes ) do
+       get_options( 'embargos' )['period_options']
      end
    end
 

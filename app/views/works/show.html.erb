@@ -138,6 +138,7 @@
       author_department: <%= raw(Work::department_options.to_json) %>,
       degree: <%= raw(Work::degree_options.to_json) %>,
       embargo_state: <%= raw(Work::embargo_options.to_json) %>,
+      embargo_period: <%= raw(Work::embargo_period_options.to_json) %>,
       language: <%= raw(Work::language_options.to_json) %>,
       rights: <%= raw(Work::rights_options.to_json) %>
    };
