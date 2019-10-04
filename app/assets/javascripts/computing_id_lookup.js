@@ -12,13 +12,26 @@
         var elFirstName = outerForm.find(".contributor_first_name");
         var elLastName = outerForm.find(".contributor_last_name");
         var elDepartment = outerForm.find(".contributor_department");
+        var elDepartmentOptions = elDepartment.siblings('.department-options')
         var elInstitution = outerForm.find(".contributor_institution");
+
+        elDepartment.attr('placeholder', '')
+        elDepartmentOptions.empty();
+
         if (resp.cid) {
           // The computing id was found if the object returned is not empty.
           elFirstName.val(resp.first_name);
           elLastName.val(resp.last_name);
-          elDepartment.val(resp.department[0]);
           elInstitution.val(resp.institution);
+
+          if(resp.department && resp.department.length > 1){
+            elDepartment.attr('placeholder', 'Enter or copy from below')
+            var departments = resp.department.join('</br>')
+            elDepartmentOptions.html( departments );
+          } else {
+            elDepartment.val(resp.department[0]);
+          }
+
         } else {
           elFirstName.val("");
           elLastName.val("");
