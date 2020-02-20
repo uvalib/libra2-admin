@@ -124,7 +124,12 @@ module ApplicationHelper
 
    def format_id( work )
      if is_published( work )
-        return link_to( work['id'], work['url'], target: '_blank'  )
+       if work['url'].present?
+        link_to( work['id'], work['url'], target: '_blank'  )
+       else
+         # DOI submission failed
+         "#{work['id']} (Submitted with no DOI)"
+       end
      else
         return work['id']
      end
@@ -132,7 +137,7 @@ module ApplicationHelper
 
    def format_local_link(work )
      if is_published( work )
-       return link_to('direct link', RestEndpoint.hosted_public_url(work['id'] ), target: '_blank'  )
+       link_to('direct link', RestEndpoint.hosted_public_url(work['id'] ), target: '_blank'  )
      else
        return ''
      end
