@@ -60,3 +60,6 @@ gem 'rest-client'
 gem 'bootstrap-sass'
 
 gem 'prometheus-client'
+
+# service auth
+gem 'jwt'

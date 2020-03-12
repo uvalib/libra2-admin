@@ -9,10 +9,14 @@ module ServiceClient
      end
 
      #
-     # basic helper
+     # basic helpers
      #
      def ok?( status )
        return( status == 200 || status == 201 )
+     end
+
+     def authtoken
+       jwt_auth_token( configuration[ :secret ] )
      end
 
      #
@@ -141,6 +145,20 @@ module ServiceClient
        puts "#{ex.class}: #{ex}" if ex.nil? == false
 
      end
+
+     # create a time limited JWT for service authentication
+     def jwt_auth_token( secret )
+
+       # expire in 5 minutes
+       exp = Time.now.to_i + 5 * 60
+
+       # just a standard claim
+       exp_payload = { exp: exp }
+
+       return JWT.encode exp_payload, secret, 'HS256'
+
+     end
+
    end
 
 end

@@ -87,6 +87,7 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.2.0)
+    jwt (2.2.1)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -208,6 +209,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   json
+  jwt
   listen (~> 3.0.5)
   normalize-rails
   prometheus-client
