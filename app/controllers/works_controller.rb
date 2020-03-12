@@ -127,11 +127,11 @@ class WorksController < ApplicationController
     respond_to do |wants|
       wants.json {
         status, resp = ServiceClient::UserInfoClient.instance.get_by_id( params[:id] )
-        if status == 404
-          resp = { }
-        else
+        if status == 200
           resp[:institution] = "University of Virginia"
           resp[:index] = params[:index]
+        else
+          resp = { }
         end
         render json: resp, status: :ok
       }
