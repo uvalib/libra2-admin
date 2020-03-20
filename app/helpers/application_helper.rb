@@ -1,3 +1,6 @@
+#require_dependency 'app/helpers/token_helper'
+include TokenHelper
+
 module ApplicationHelper
 
    def edit_button( key, work )
@@ -70,12 +73,12 @@ module ApplicationHelper
       when 'filesets'
          html = ""
          value.each { |file|
-            left = content_tag(:img, "", { src: file["thumb_url"]+"?auth=#{API_TOKEN}", class: "left"})
+            left = content_tag(:img, "", { src: file["thumb_url"]+"?auth=#{TokenHelper.page_auth_token}", class: "left"})
 
             name = content_tag(:div, "File: #{file["source_name"]}")
             label = content_tag(:div, "Display: #{file["file_name"]}", class: 'file_label')
             uploaded = content_tag(:div, "Uploaded: #{file["date_uploaded"]}")
-            download = link_to("Download", file["file_url"]+"?auth=#{API_TOKEN}")
+            download = link_to("Download", file["file_url"]+"?auth=#{TokenHelper.page_auth_token}")
             edit = edit_file(file)
             delete = content_tag(:div, link_to('Delete', "/work_files/#{file["id"]}?work=#{@work['id']}", method: :delete, data: { confirm: 'Are you sure you really want to permanently remove this file?' }, class: "btn btn-primary file-delete"), {})
             right = content_tag(:div, download + name + label + uploaded + edit + delete, { class: "right" })

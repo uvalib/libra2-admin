@@ -1,3 +1,6 @@
+require_dependency 'app/helpers/token_helper'
+include TokenHelper
+
 class RestEndpoint
 
   # http request timeouts in seconds
@@ -12,7 +15,7 @@ class RestEndpoint
 
   def self.api(method, address, data = {}, payload = {})
 
-    url = "#{LIBRA_ETD_API_URL}/#{api_namespace}/#{address}?auth=#{API_TOKEN}"
+    url = "#{LIBRA_ETD_API_URL}/#{api_namespace}/#{address}?auth=#{TokenHelper.service_auth_token}"
     arr = data.to_a
     arr = arr.map { |pair| "#{pair[0]}=#{pair[1]}"}
     arr = arr.join("&")
@@ -56,11 +59,11 @@ class RestEndpoint
   end
 
   def self.check_libraetd_endpoint
-    return healthcheck(LIBRA_ETD_API_URL )
+    return healthcheck(LIBRA_ETD_API_URL)
   end
 
   def self.check_userinfo_endpoint
-    return healthcheck( USERINFO_URL )
+    return healthcheck(USERINFO_URL)
   end
 
   def self.status_ok?( status )
