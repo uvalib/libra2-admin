@@ -1,6 +1,12 @@
+#if [ -z "$DOCKER_HOST" ]; then
+#   echo "ERROR: no DOCKER_HOST defined"
+#   exit 1
+#fi
+
 if [ -z "$DOCKER_HOST" ]; then
-   echo "ERROR: no DOCKER_HOST defined"
-   exit 1
+   DOCKER_TOOL=docker
+else
+   DOCKER_TOOL=docker-17.04.0
 fi
 
 # set the definitions
@@ -16,4 +22,4 @@ OPTREG_CNAME=optregdev.lib.virginia.edu
 
 DOCKER_ENV="-e API_TOKEN=$API_TOKEN -e LIBRA2API_URL=$LIBRA2API_URL -e LIBRA2_URL=$LIBRA2_URL -e OPTREG_CNAME=$OPTREG_DEV_CNAME -e USERINFO_URL=$USERINFO_URL"
 
-docker run -t -i -p 8222:3000 $DOCKER_ENV $NAMESPACE/$INSTANCE /bin/bash -l
+$DOCKER_TOOL run -t -i -p 8222:3000 $DOCKER_ENV $NAMESPACE/$INSTANCE /bin/bash -l
