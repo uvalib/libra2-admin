@@ -6,6 +6,7 @@ class RestEndpoint
   # http request timeouts in seconds
   HTTP_DEFAULT_TIMEOUT ||= 30
   HTTP_GET_TIMEOUT ||= 300
+  HTTP_HEALTH_CHECK_TIMEOUT ||= 10
 
   include HTTParty
 
@@ -85,7 +86,8 @@ class RestEndpoint
     begin
       url = "#{endpoint}/healthcheck"
       timer = TimingBehavior.new( url ).start
-      response = self.get( url )
+      timeout = HTTP_HEALTH_CHECK_TIMEOUT
+      response = self.get( url, { timeout: timeout } )
       timer.log_completed( "(status #{response.code})")
 
       if status_ok?( response.code )
@@ -94,7 +96,7 @@ class RestEndpoint
         return false, "Endpoint returns #{response.code}"
       end
     rescue Net::ReadTimeout
-      return false, "Timeout after #{HTTP_DEFAULT_TIMEOUT} seconds"
+      return false, "Timeout after #{timeout} seconds"
     rescue => ex
       return false, "Endpoint returns #{ex}"
     end
