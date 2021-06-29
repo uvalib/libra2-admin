@@ -1,7 +1,7 @@
 FROM alpine:3.13
 
 # Add necessary packages
-RUN apk --update add bash tzdata ruby ruby-dev build-base nodejs sqlite-dev zlib-dev libxml2-dev libxslt-dev libffi-dev ca-certificates curl
+RUN apk --update add bash tzdata ruby ruby-dev build-base nodejs sqlite-dev zlib-dev libxml2-dev libxslt-dev libffi-dev ca-certificates curl && rm -fr /var/cache/apk/*
 
 # Create the run user and group
 RUN addgroup --gid 18570 sse && adduser --uid 1984 docker -G sse -D
@@ -44,3 +44,7 @@ RUN test -n "$BUILD_TAG" && touch $APP_HOME/buildtag.build-$BUILD_TAG || touch $
 
 # Specify the user
 USER docker
+
+#
+# end of file
+#
