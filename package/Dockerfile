@@ -1,6 +1,7 @@
 FROM alpine:3.13
 
 # Add necessary packages
+# ruby-dev for alpine 3.1.3 installs ruby-2.7.3
 RUN apk --update add bash tzdata ruby ruby-dev build-base nodejs sqlite-dev zlib-dev libxml2-dev libxslt-dev libffi-dev ca-certificates curl && rm -fr /var/cache/apk/*
 
 # Create the run user and group
@@ -13,7 +14,7 @@ RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # Add necessary gems
 RUN gem install bundler -v 1.17.3 --no-document && gem install io-console --no-document
 
-# Specify home 
+# Specify home
 ENV APP_HOME /libra2-admin
 WORKDIR $APP_HOME
 
