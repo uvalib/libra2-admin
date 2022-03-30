@@ -111,7 +111,8 @@ GEM
       racc (~> 1.4)
     normalize-rails (8.0.1)
     prometheus-client (2.1.0)
-    puma (3.12.6)
+    puma (4.3.12)
+      nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-test (0.6.3)
@@ -213,7 +214,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   normalize-rails
   prometheus-client
-  puma (~> 3.0)
+  puma (~> 4.3)
   rails (~> 5.0.1)
   rest-client
   sass-rails (~> 5.0)
