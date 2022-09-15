@@ -12,7 +12,6 @@ phases:
   install:
     runtime-versions:
       golang: 1.x
-      ruby: 2.6
 #    commands:
 
   pre_build:
