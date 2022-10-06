@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/ruby:2.7.5-alpine3.15
+FROM public.ecr.aws/docker/library/ruby:2.7.6-alpine3.16
 
 # Add necessary packages
 RUN apk --update add bash tzdata build-base nodejs sqlite-dev zlib-dev libxml2-dev libxslt-dev libffi-dev ca-certificates curl && rm -fr /var/cache/apk/*
