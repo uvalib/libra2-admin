@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/ruby:2.7.7-alpine3.16
+FROM public.ecr.aws/docker/library/ruby:2.7.8-alpine3.16
 
 # Add necessary packages
 RUN apk --update add bash tzdata build-base nodejs sqlite-dev zlib-dev libxml2-dev libxslt-dev libffi-dev ca-certificates curl && rm -fr /var/cache/apk/*
@@ -11,7 +11,7 @@ ENV TZ=UTC
 RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Add necessary gems
-RUN gem install bundler -v 1.17.3 --no-document && gem install io-console --no-document
+RUN gem install bundler -v 2.4.13 --no-document && gem install io-console --no-document
 
 # Specify home
 ENV APP_HOME /libra2-admin
